@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
 import { ReactiveFormsModule }   from '@angular/forms';
 
@@ -36,6 +37,7 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     IconsProviderModule,
     NzLayoutModule,
+    NzFormModule,
     NzMenuModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([])
