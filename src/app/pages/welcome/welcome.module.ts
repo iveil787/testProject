@@ -11,6 +11,7 @@ import {NzFormModule} from "ng-zorro-antd/form";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
     NzFormModule,
     NzInputModule,
     NzSelectModule,
-    NzCheckboxModule
+    NzCheckboxModule,
+    NzDatePickerModule
   ],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent]

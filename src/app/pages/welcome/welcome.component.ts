@@ -70,14 +70,22 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
     this.myForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
+      login: [null, [Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]],
-      phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
-      website: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
-      agree: [false]
+      userName: [null, [Validators.required], ],
+      userSurname: [null, [Validators.required]],
+      userPatronymic: [null, [Validators.required]],
+      userDateBirth: [null],
+      studyGroup: [null, [Validators.required]],
+      // nickname: [null, [Validators.required]],
+      // nickname: [null, [Validators.required]],
+      // nickname: [null, [Validators.required]],
+      // phoneNumberPrefix: ['+86'],
+      // phoneNumber: [null, [Validators.required]],
+      // website: [null, [Validators.required]],
+      // captcha: [null, [Validators.required]],
+      // agree: [false]
     });
   }
 

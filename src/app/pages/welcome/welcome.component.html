@@ -1,4 +1,3 @@
-
 <!--Старая форма-->
 <!--<form [formGroup]="myForm" nz-form [formGroup]="myForm" class="login-form"-->
 <!--      novalidate-->
@@ -42,10 +41,24 @@
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
-      <input nz-input formControlName="email" id="email" />
+      <input nz-input formControlName="email" id="email"  nz-input placeholder="E-mail" />
     </nz-form-control>
   </nz-form-item>
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
+
+
+  <!--============login=====================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
+  <nz-form-item>
+    <nz-form-label
+      [nzSm]="6" [nzXs]="24" nzFor="login" nzRequired >
+      <span>Login</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your login!">
+      <input nz-input id="login" formControlName="login" nz-input placeholder="login" />
+    </nz-form-control>
+  </nz-form-item>
+
+    <!--=================================password"++++++++++++++++++++++++++++++++++++++++++++++++++======-->
+
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
@@ -54,15 +67,20 @@
         type="password"
         id="password"
         formControlName="password"
+        nz-input placeholder="Password"
         (ngModelChange)="updateConfirmValidator()"
       />
     </nz-form-control>
   </nz-form-item>
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
+  <!--=================================++++++checkPassword++++++++++++++++++++++++++++++++++++++++++++======-->
   <nz-form-item>
     <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
     <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
-      <input nz-input type="password" formControlName="checkPassword" id="checkPassword" />
+      <input nz-input
+             type="password"
+             formControlName="checkPassword"
+             id="checkPassword"
+             nz-input placeholder="Check password"/>
       <ng-template #errorTpl let-control>
         <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container>
         <ng-container *ngIf="control.hasError('confirm')">
@@ -71,22 +89,71 @@
       </ng-template>
     </nz-form-control>
   </nz-form-item>
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
+
+  <!--=====User============================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
   <nz-form-item>
     <nz-form-label
-      [nzSm]="6"
-      [nzXs]="24"
-      nzFor="nickname"
-      nzRequired
-      nzTooltipTitle="What do you want other to call you"
-    >
-      <span>Nickname</span>
+      [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired >
+      <span>Name</span>
     </nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
-      <input nz-input id="nickname" formControlName="nickname" />
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your name!">
+      <input nz-input id="userName" formControlName="userName" nz-input placeholder="Name" />
     </nz-form-control>
   </nz-form-item>
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
+  <nz-form-item>
+
+    <nz-form-label
+      [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired >
+      <span>Surname</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your surname!">
+      <input nz-input id="userSurname" formControlName="userSurname" nz-input placeholder="Surname"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label
+      [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired >
+      <span>Patronymic</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your patronymic!">
+      <input nz-input id="userPatronymic" formControlName="userPatronymic" nz-input placeholder="Patronymic"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="DateBorn" nzRequired>Date born</nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24">
+      <nz-date-picker formControlName="userDateBirth"></nz-date-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label
+      [nzSm]="6" [nzXs]="24" nzFor="studyGroup" nzRequired >
+      <span>Study group</span>
+    </nz-form-label>
+    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your study group!">
+      <input nz-input id="studyGroup" formControlName="studyGroup" nz-input placeholder="Study group"/>
+    </nz-form-control>
+  </nz-form-item>
+
+  <!--Nickname=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
+<!--  <nz-form-item>-->
+<!--    <nz-form-label-->
+<!--      [nzSm]="6"-->
+<!--      [nzXs]="24"-->
+<!--      nzFor="nickname"-->
+<!--      nzRequired-->
+<!--      nzTooltipTitle="What do you want other to call you"-->
+<!--    >-->
+<!--      <span>Nickname</span>-->
+<!--    </nz-form-label>-->
+<!--    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">-->
+<!--      <input nz-input id="nickname" formControlName="nickname" />-->
+<!--    </nz-form-control>-->
+<!--  </nz-form-item>-->
+  <!--phoneNumber"=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
 <!--  <nz-form-item>-->
 <!--    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>-->
 <!--    <nz-form-control-->
@@ -106,62 +173,56 @@
 <!--      </nz-input-group>-->
 <!--    </nz-form-control>-->
 <!--  </nz-form-item>-->
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
-  <nz-form-item>
-    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>Website</nz-form-label>
-    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input website!">
-      <input nz-input id="website" formControlName="website" placeholder="website" />
-    </nz-form-control>
-  </nz-form-item>
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
-  <nz-form-item>
-    <nz-form-label
-      [nzSm]="6"
-      [nzXs]="24"
-      nzFor="captcha"
-      nzRequired
-      nzTooltipTitle="Please click 'Get captcha'"
-    >
-      Captcha
-    </nz-form-label>
-    <nz-form-control
-      [nzSm]="14"
-      [nzXs]="24"
-      nzErrorTip="Please input the captcha you got!"
-      nzExtra="We must make sure that your are a human."
-    >
-      <div nz-row [nzGutter]="8">
-        <div nz-col [nzSpan]="12">
-          <input nz-input formControlName="captcha" id="captcha" />
-        </div>
-        <div nz-col [nzSpan]="12">
-          <button nz-button (click)="getCaptcha($event)">Get captcha</button>
-        </div>
-      </div>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item nz-row class="register-area">
-    <nz-form-control [nzSpan]="14" [nzOffset]="6">
-      <label nz-checkbox formControlName="agree">
-            <span>
-              I have read the
-              <a>agreement</a>
-            </span>
-      </label>
-    </nz-form-control>
-  </nz-form-item>
+  <!--Website=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
+<!--  <nz-form-item>-->
+<!--    <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="website" nzRequired>Website</nz-form-label>-->
+<!--    <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input website!">-->
+<!--      <input nz-input id="website" formControlName="website" placeholder="website" />-->
+<!--    </nz-form-control>-->
+<!--  </nz-form-item>-->
+  <!--Captcha=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
+<!--  <nz-form-item>-->
+<!--    <nz-form-label-->
+<!--      [nzSm]="6"-->
+<!--      [nzXs]="24"-->
+<!--      nzFor="captcha"-->
+<!--      nzRequired-->
+<!--      nzTooltipTitle="Please click 'Get captcha'"-->
+<!--    >-->
+<!--      Captcha-->
+<!--    </nz-form-label>-->
+<!--    <nz-form-control-->
+<!--      [nzSm]="14"-->
+<!--      [nzXs]="24"-->
+<!--      nzErrorTip="Please input the captcha you got!"-->
+<!--      nzExtra="We must make sure that your are a human."-->
+<!--    >-->
+<!--      <div nz-row [nzGutter]="8">-->
+<!--        <div nz-col [nzSpan]="12">-->
+<!--          <input nz-input formControlName="captcha" id="captcha" />-->
+<!--        </div>-->
+<!--        <div nz-col [nzSpan]="12">-->
+<!--          <button nz-button (click)="getCaptcha($event)">Get captcha</button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </nz-form-control>-->
+<!--  </nz-form-item>-->
+  <!--button agreement=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
+<!--  <nz-form-item nz-row class="register-area">-->
+<!--    <nz-form-control [nzSpan]="14" [nzOffset]="6">-->
+<!--      <label nz-checkbox formControlName="agree">-->
+<!--            <span>-->
+<!--              I have read the-->
+<!--              <a>agreement</a>-->
+<!--            </span>-->
+<!--      </label>-->
+<!--    </nz-form-control>-->
+<!--  </nz-form-item>-->
+
+  <!--button Register=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
   <nz-form-item nz-row class="register-area">
     <nz-form-control [nzSpan]="14" [nzOffset]="6">
       <button nz-button nzType="primary">Register</button>
     </nz-form-control>
   </nz-form-item>
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
-
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
-
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
-
-  <!--=================================++++++++++++++++++++++++++++++++++++++++++++++++++======-->
-
   </form>
