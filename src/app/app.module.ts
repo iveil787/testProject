@@ -20,6 +20,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { LoginService } from "../services/login.service";
 
 registerLocaleData(en);
 
@@ -42,7 +43,7 @@ registerLocaleData(en);
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([])
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [[LoginService],{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
