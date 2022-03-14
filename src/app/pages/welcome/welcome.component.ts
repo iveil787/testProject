@@ -44,12 +44,13 @@ export class WelcomeComponent implements OnInit {
     if (this.myForm.valid) {
       console.log('submit', this.myForm.value);
       // проверки
-      this.addStudents();
-      this.loginservice.getData();
-      this.loginservice.getDatSaerve();
+      // this.loginservice.getData();
+      // this.loginservice.getDatSaerve();
       // console.log(this.myForm.getRawValue().userDateBirth.getTime());
-
       // this.loginservice.postData(this.myForm.value);
+
+     // добввление на сервер студента
+      this.addStudents();
     } else {
       Object.values(this.myForm.controls).forEach(control => {
         if (control.invalid) {
@@ -59,6 +60,8 @@ export class WelcomeComponent implements OnInit {
       });
     }
   }
+
+  // ====================================методы для валидации==============================================
   updateConfirmValidator(): void {
     /** wait for refresh value */
     Promise.resolve().then(() => this.myForm.controls["checkPassword"].updateValueAndValidity());
@@ -86,15 +89,25 @@ export class WelcomeComponent implements OnInit {
       email: this.myForm.getRawValue().email,
       login: this.myForm.getRawValue().login,
       password: this.myForm.getRawValue().password,
-      checkPassword: this.myForm.getRawValue().checkPassword,
-      userName: this.myForm.getRawValue().userName,
-      userSurname: this.myForm.getRawValue().userSurname,
-      userPatronymic: this.myForm.getRawValue().userPatronymic,
-      userDateBirth: this.myForm.getRawValue().userDateBirth.getTime(),
+      name: this.myForm.getRawValue().userName,
+      surname: this.myForm.getRawValue().userSurname,
+      patronymic: this.myForm.getRawValue().userPatronymic,
+      dateBirth: this.myForm.getRawValue().userDateBirth.getTime(),
       studyGroup: this.myForm.getRawValue().studyGroup,
     }
-    this.loginservice.addData(newStudent);
+    this.loginservice.addData(newStudent).subscribe();
   };
+
+  // id: number;
+  // email: string;
+  // login: string;
+  // password: string;
+  // name: string;
+  // surname: string;
+  // patronymic: string;
+  // dateBirth: number;
+  // studyGroup: string;
+
   // this.myForm.getRawValue('userDateBirth').userDateBirth.toGMTString()
   //
   // console.log(this.myForm.getRawValue().userDateBirth.getTime())
@@ -111,14 +124,6 @@ export class WelcomeComponent implements OnInit {
       userPatronymic: [null, [Validators.required]],
       userDateBirth: [null],
       studyGroup: [null, [Validators.required]],
-      // nickname: [null, [Validators.required]],
-      // nickname: [null, [Validators.required]],
-      // nickname: [null, [Validators.required]],
-      // phoneNumberPrefix: ['+86'],
-      // phoneNumber: [null, [Validators.required]],
-      // website: [null, [Validators.required]],
-      // captcha: [null, [Validators.required]],
-      // agree: [false]
     });
   }
 
