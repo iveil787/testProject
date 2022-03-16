@@ -21,12 +21,15 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { LoginService } from "../services/login.service";
+import { LoginFormComponent } from './pages/login-form/login-form.component';
+import {NzInputModule} from "ng-zorro-antd/input";
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ registerLocaleData(en);
     NzFormModule,
     NzMenuModule,
     StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    NzInputModule
   ],
   providers: [[LoginService],{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -11,6 +11,9 @@ import {LoginService} from "../../../services/login.service";
   styleUrls: ['./welcome.component.less'],
 })
 export class WelcomeComponent implements OnInit {
+
+  constructor(private fb: FormBuilder,@Inject(LoginService) private loginservice: LoginService) {}
+
   myForm! : FormGroup;
 
   // Старая форма
@@ -27,8 +30,7 @@ export class WelcomeComponent implements OnInit {
   //   });
   // }
 
-
-  limitAge(control: AbstractControl): ValidationErrors | null {
+    limitAge(control: AbstractControl): ValidationErrors | null {
     const date = new Date();
     const pastDate = new Date(date.setFullYear(date.getFullYear() - 10));
     const inputDate = new Date(control.value);
@@ -80,7 +82,7 @@ export class WelcomeComponent implements OnInit {
     e.preventDefault();
   }
 
-  constructor(private fb: FormBuilder,@Inject(LoginService) private loginservice: LoginService) {}
+
 
 // =====================================ходим на сервис=====addStudents==========================================
   addStudents(): void{

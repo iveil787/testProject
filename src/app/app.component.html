@@ -18,6 +18,9 @@
             <a routerLink="/welcome">Welcome</a>
           </li>
           <li nz-menu-item nzMatchRouter>
+            <a routerLink="/login">login-form</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
             <a>Monitor</a>
           </li>
           <li nz-menu-item nzMatchRouter>
@@ -48,6 +51,7 @@
     <nz-content>
       <div class="inner-content">
         <router-outlet></router-outlet>
+<!--   как номально добавить логин ?     <app-login-form></app-login-form>-->
       </div>
     </nz-content>
   </nz-layout>

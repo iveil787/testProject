@@ -25,7 +25,7 @@ import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
     NzInputModule,
     NzSelectModule,
     NzCheckboxModule,
-    NzDatePickerModule
+    NzDatePickerModule,
   ],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent]
