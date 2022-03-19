@@ -13,6 +13,9 @@ export class LoginFormComponent implements OnInit {
   submitForm(): void {
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
+      this.loginservice.checkToken();
+      this.loginservice.checkTokenTime();
+      this.loginservice.checkTokenID(this.validateForm.getRawValue().login);
       this.loginservice.getLoginSaerve(this.validateForm.getRawValue().login,this.validateForm.getRawValue().password)
     } else {
       Object.values(this.validateForm.controls).forEach(control => {

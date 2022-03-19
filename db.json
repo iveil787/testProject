@@ -1,110 +1,26 @@
 {
   "posts": [
     {
-      "id": 1,
-      "email": "Dr Nice",
-      "login": "fff",
-      "password": "4545",
-      "name": "fdf",
-      "surname": "Faust",
-      "patronymic": "ff"
-    },
-    {
-      "id": 2,
-      "email": "Bombasto",
-      "login": "fff",
-      "password": "4545",
-      "name": "fdf",
-      "surname": "Faust",
-      "patronymic": "ff"
-    },
-    {
-      "id": 792.6535176675304,
-      "email": "rrewew@maill.com",
-      "login": "ee",
-      "password": "ee",
-      "name": "ee",
-      "surname": "ee",
-      "patronymic": "ee",
-      "dateBirth": 1648029279181,
-      "studyGroup": "ee"
-    },
-    {
-      "id": 179.82004943365948,
-      "email": "rrewew@maill.com",
+      "id": "5846ef1c-e50d-43da-99df-311225fd1c11",
+      "email": "yyy@yandex.ru",
       "login": "ww",
-      "password": "1212",
+      "password": "ww",
       "name": "ww",
       "surname": "ww",
       "patronymic": "ww",
-      "dateBirth": 1647425261544,
+      "dateBirth": 1647373728263,
       "studyGroup": "ww"
     },
     {
-      "id": 879.5223352459805,
-      "email": "rrewew@maill.com",
-      "login": "gig",
-      "password": "3434",
-      "name": "ww",
-      "surname": "ww",
-      "patronymic": "ww",
-      "dateBirth": 1647425261544,
-      "studyGroup": "ww"
-    },
-    {
-      "id": 765.8690279066731,
-      "email": "rrewew@maill.com",
-      "login": "gig",
-      "password": "3434",
-      "name": "ww",
-      "surname": "ww",
-      "patronymic": "ww",
-      "dateBirth": 1647425261544,
-      "studyGroup": "ww"
-    },
-    {
-      "id": 203.19565392654314,
-      "email": "rrewew@maill.com",
-      "login": "gig",
-      "password": "3434",
-      "name": "ww",
-      "surname": "ww",
-      "patronymic": "ww",
-      "dateBirth": 1647425261544,
-      "studyGroup": "ww"
-    },
-    {
-      "id": 395.9260919034431,
+      "id": "024a162e-bd6e-4e0d-912d-8d62925e886a",
       "email": "yyy@yandex.ru",
-      "login": "yy",
-      "password": "yyyy",
-      "name": "yy",
-      "surname": "yy",
-      "patronymic": "yy",
-      "dateBirth": 1648549629173,
-      "studyGroup": "yy"
-    },
-    {
-      "id": 100.58406040756785,
-      "email": "yyy@yandex.ru",
-      "login": "ert",
-      "password": "45564556",
-      "name": "rt",
-      "surname": "rt",
-      "patronymic": "rt",
-      "dateBirth": 1647946449504,
-      "studyGroup": "rt"
-    },
-    {
-      "id": 7.478857605492939,
-      "email": "yyy@yandex.ru",
-      "login": "tyty",
-      "password": "4545",
-      "name": "gh",
-      "surname": "gh",
-      "patronymic": "gh",
-      "dateBirth": 1647514584174,
-      "studyGroup": "gh"
+      "login": "rr",
+      "password": "rr",
+      "name": "rr",
+      "surname": "rr",
+      "patronymic": "rr",
+      "dateBirth": 1648065159780,
+      "studyGroup": "rr"
     }
   ],
   "comments": [
