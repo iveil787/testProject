@@ -1,6 +1,7 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, OnChanges, SimpleChanges, DoCheck} from '@angular/core';
 import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, FormBuilder} from '@angular/forms';
 import {LoginService} from "../../../services/login.service";
+import {Router} from "@angular/router";
 
 // import { Student } from "../models/UserStudents";
 
@@ -10,11 +11,12 @@ import {LoginService} from "../../../services/login.service";
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.less'],
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent implements OnInit, OnChanges, DoCheck {
 
-  constructor(private fb: FormBuilder,@Inject(LoginService) private loginservice: LoginService) {}
+  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService, private router: Router) {
+  }
 
-  myForm! : FormGroup;
+  myForm!: FormGroup;
 
   // Старая форма
   // constructor(){
@@ -30,13 +32,15 @@ export class WelcomeComponent implements OnInit {
   //   });
   // }
 
-    limitAge(control: AbstractControl): ValidationErrors | null {
+  limitAge(control: AbstractControl): ValidationErrors | null {
     const date = new Date();
     const pastDate = new Date(date.setFullYear(date.getFullYear() - 10));
     const inputDate = new Date(control.value);
     if (inputDate > pastDate) {
-      return { "recuiredDate<": pastDate.toLocaleDateString(),
-        "inputedDate": inputDate.toLocaleDateString() };
+      return {
+        "recuiredDate<": pastDate.toLocaleDateString(),
+        "inputedDate": inputDate.toLocaleDateString()
+      };
     }
     return null;
   }
@@ -51,13 +55,14 @@ export class WelcomeComponent implements OnInit {
       // console.log(this.myForm.getRawValue().userDateBirth.getTime());
       // this.loginservice.postData(this.myForm.value);
 
-     // добввление на сервер студента
+      // добввление на сервер студента
+
       this.addStudents();
     } else {
       Object.values(this.myForm.controls).forEach(control => {
         if (control.invalid) {
           control.markAsDirty();
-          control.updateValueAndValidity({ onlySelf: true });
+          control.updateValueAndValidity({onlySelf: true});
         }
       });
     }
@@ -71,9 +76,9 @@ export class WelcomeComponent implements OnInit {
 
   confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
     if (!control.value) {
-      return { required: true };
+      return {required: true};
     } else if (control.value !== this.myForm.controls["password"].value) {
-      return { confirm: true, error: true };
+      return {confirm: true, error: true};
     }
     return {};
   };
@@ -83,9 +88,8 @@ export class WelcomeComponent implements OnInit {
   }
 
 
-
 // =====================================ходим на сервис=====addStudents==========================================
-  addStudents(): void{
+  addStudents(): void {
     const newStudent = {
       id: this.loginservice.modelUserStudent.length + 1,
       email: this.myForm.getRawValue().email,
@@ -113,6 +117,23 @@ export class WelcomeComponent implements OnInit {
   // this.myForm.getRawValue('userDateBirth').userDateBirth.toGMTString()
   //
   // console.log(this.myForm.getRawValue().userDateBirth.getTime())
+  // =====================================Навигация=====ngOnInit()-==========================================
+  gologin() {
+
+    this.router.navigate(['login']);
+  }
+
+  goHome() {
+
+    this.router.navigate(['welcome']);
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log("changes")
+  }
+  ngDoCheck() {
+    this.loginservice.checkToken()
+  }
 
 // =====================================Validators=====ngOnInit()-==========================================
   ngOnInit(): void {
@@ -121,12 +142,13 @@ export class WelcomeComponent implements OnInit {
       login: [null, [Validators.required]],
       password: [null, [Validators.required]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      userName: [null, [Validators.required], ],
+      userName: [null, [Validators.required],],
       userSurname: [null, [Validators.required]],
       userPatronymic: [null, [Validators.required]],
       userDateBirth: [null],
       studyGroup: [null, [Validators.required]],
     });
   }
+
 
 }

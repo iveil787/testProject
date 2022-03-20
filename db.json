@@ -21,6 +21,17 @@
       "patronymic": "rr",
       "dateBirth": 1648065159780,
       "studyGroup": "rr"
+    },
+    {
+      "id": "0e9a3cf5-e9db-4808-9a6f-5d2c7076be70",
+      "email": "yyy@yandex.ru",
+      "login": "ee",
+      "password": "ee",
+      "name": "ee",
+      "surname": "ee",
+      "patronymic": "ee",
+      "dateBirth": 1647378966607,
+      "studyGroup": "ee"
     }
   ],
   "comments": [

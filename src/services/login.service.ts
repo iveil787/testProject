@@ -5,13 +5,14 @@ import {Student} from "../models/UserStudents";
 import {Observable} from "rxjs";
 // import {JSONFile} from "@angular/cli/utilities/json-file";
 import { v4 as uuidv4 } from 'uuid';
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private router: Router) {
   }
 
 // проверка метода addStudents()
@@ -45,26 +46,20 @@ export class LoginService {
   //   return this.http.get("posts");
   // }
 
-  checkToken(){
+  checkToken(): void{
     // localStorage.getItem("token");
-    if (localStorage.getItem("token") == null){
-      console.log(false)
+    if (localStorage.getItem("token")){
+      console.log("Токен есть",false)
+      this.checkTokenTime()
     } else {
-      console.log(true)
+      console.log("токена нет",true)
+      this.router.navigate(['login'])
     }
   };
-  // const limit = 24 * 3600 * 1000; // 24 часа
-  // localStorage.getItem("token");
-  //   var localStorageInitTime = localStorage.getItem('localStorageInitTime');
-  //   if (localStorageInitTime === null) {
-  //     localStorage.setItem('localStorageInitTime', +new Date());
-  //   } else if(+new Date() - localStorageInitTime > limit)
-  //     localStorage.clear();
-  //   localStorage.setItem('localStorageInitTime', +new Date());
-  // }
+
   checkTokenTime(){
     const limit = 24 * 3600 * 1000;
-    let tokenObj = JSON.parse(localStorage['token']);
+    let tokenObj = JSON.parse(localStorage.getItem("token") as string);
 
     // console.log(tokenObj.time);
     // console.log(tokenObj.id);
@@ -72,13 +67,17 @@ export class LoginService {
 
     if (+new Date() - Date.parse(tokenObj.time) > limit){
       console.log("время истекло")
+      localStorage.clear();
     } else {
       console.log("время ещё есть")
+      // this.checkTokenID() Поверка циклится
     }
   };
 
-  checkTokenID(login: string){
-    let tokenObj = JSON.parse(localStorage['token']);
+  checkTokenID(){
+    // JSON.parse(localStorage.getItem("token") as string
+    // JSON.parse(localStorage['token']
+    let tokenObj = JSON.parse(localStorage.getItem("token") as string);
     // if (login === tokenObj.id){
     //   console.log("id верный")
     // } else {
@@ -86,30 +85,29 @@ export class LoginService {
     // }
     // console.log(login);
     // console.log(tokenObj.id);
-    this.http.get <Student[]>("http://localhost:3000/posts?login=" + login).subscribe((data: Student[]) => {
-      console.log({id: data[0].id === tokenObj.id})
+    this.http.get <Student[]>("http://localhost:3000/posts?id=" + tokenObj.id).subscribe((data: Student[]) => {
+      if ({id: data[0].id === tokenObj.id}){
+        console.log("id верный")
+      } else {
+        console.log("id не верный")
+        localStorage.clear();
+      }
     });
   }
-
-  // getLoginSaerve(login:string, password:string){
+// getLoginSaerve(login:string, password:string){
   //   // ${1 + 2}
   //   this.http.get("http://localhost:3000/posts?login="+ login +"&password="+ password).subscribe(data =>console.log(data));
   //   return this.http.get("posts");
   // }
-
-
-  getLoginSaerve(login: string, password: string) {
+  getLoginSaerve(login: string, password: string):Observable <Student[]> {
     // ${1 + 2}
-    this.http.get <Student[]>("http://localhost:3000/posts?login=" + login + "&password=" + password).subscribe((data: Student[]) => {
-      localStorage.setItem("token", JSON.stringify({id: data[0].id, time: new Date()}))
-    });
+    return  this.http.get <Student[]>("http://localhost:3000/posts?login=" + login + "&password=" + password)
     // // localStorage.setItem()
     // // Observable<ArrayBuffer>;
     // // <Obs<Student>>
 
-    return this.http.get("posts");
+    // return this.http.get("posts");
   }
-
   // postLogin(user: Student): Observable<void>{
   //   this.modelUserStudent.push(user);
   //   const body = {id: Math.random()*1000, email: user.email,login: user.login,password: user.password,name: user.name,
