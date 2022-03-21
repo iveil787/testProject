@@ -1,9 +1,6 @@
-import {Component, Inject, OnInit, OnChanges, SimpleChanges, DoCheck} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, FormBuilder} from '@angular/forms';
 import {LoginService} from "../../../services/login.service";
-import {Router} from "@angular/router";
-
-// import { Student } from "../models/UserStudents";
 
 
 @Component({
@@ -11,26 +8,26 @@ import {Router} from "@angular/router";
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.less'],
 })
-export class WelcomeComponent implements OnInit, OnChanges, DoCheck {
+export class WelcomeComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService, private router: Router) {
+  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService) {
   }
 
   myForm!: FormGroup;
 
-  // Старая форма
-  // constructor(){
-  //   this.myForm = new FormGroup({
-  //     userAllName: new FormGroup({
-  //         "userName": new FormControl(null, [Validators.required, Validators.pattern("[а-яА-Я a-zA-Z]*")]),
-  //         "userSurname": new FormControl(null, [Validators.required, Validators.pattern("[а-яА-Я a-zA-Z]*")]),
-  //         "userPatronymic": new FormControl(null, [Validators.required, Validators.pattern("[а-яА-Я a-zA-Z]*")]),
-  //       },
-  //     ),
-  //     "userDateBirth": new FormControl(null, [Validators.required, this.limitAge, Validators.pattern("[^а-яА-Я a-zA-Z]*")]),
-  //     "userRating": new FormControl(null, [Validators.required, Validators.maxLength(1), Validators.pattern("[0-5]")]),
-  //   });
-  // }
+  ngOnInit(): void {
+    this.myForm = this.fb.group({
+      email: [null, [Validators.email, Validators.required]],
+      login: [null, [Validators.required]],
+      password: [null, [Validators.required]],
+      checkPassword: [null, [Validators.required, this.confirmationValidator]],
+      userName: [null, [Validators.required],],
+      userSurname: [null, [Validators.required]],
+      userPatronymic: [null, [Validators.required]],
+      userDateBirth: [null],
+      studyGroup: [null, [Validators.required]],
+    });
+  }
 
   limitAge(control: AbstractControl): ValidationErrors | null {
     const date = new Date();
@@ -49,14 +46,6 @@ export class WelcomeComponent implements OnInit, OnChanges, DoCheck {
   submitForm(): void {
     if (this.myForm.valid) {
       console.log('submit', this.myForm.value);
-      // проверки
-      // this.loginservice.getData();
-      // this.loginservice.getDatSaerve();
-      // console.log(this.myForm.getRawValue().userDateBirth.getTime());
-      // this.loginservice.postData(this.myForm.value);
-
-      // добввление на сервер студента
-
       this.addStudents();
     } else {
       Object.values(this.myForm.controls).forEach(control => {
@@ -87,8 +76,7 @@ export class WelcomeComponent implements OnInit, OnChanges, DoCheck {
     e.preventDefault();
   }
 
-
-// =====================================ходим на сервис=====addStudents==========================================
+// ==========================================addStudents==========================================
   addStudents(): void {
     const newStudent = {
       id: this.loginservice.modelUserStudent.length + 1,
@@ -103,52 +91,4 @@ export class WelcomeComponent implements OnInit, OnChanges, DoCheck {
     }
     this.loginservice.addData(newStudent).subscribe();
   };
-
-  // id: number;
-  // email: string;
-  // login: string;
-  // password: string;
-  // name: string;
-  // surname: string;
-  // patronymic: string;
-  // dateBirth: number;
-  // studyGroup: string;
-
-  // this.myForm.getRawValue('userDateBirth').userDateBirth.toGMTString()
-  //
-  // console.log(this.myForm.getRawValue().userDateBirth.getTime())
-  // =====================================Навигация=====ngOnInit()-==========================================
-  gologin() {
-
-    this.router.navigate(['login']);
-  }
-
-  goHome() {
-
-    this.router.navigate(['welcome']);
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log("changes")
-  }
-  ngDoCheck() {
-    this.loginservice.checkToken()
-  }
-
-// =====================================Validators=====ngOnInit()-==========================================
-  ngOnInit(): void {
-    this.myForm = this.fb.group({
-      email: [null, [Validators.email, Validators.required]],
-      login: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      userName: [null, [Validators.required],],
-      userSurname: [null, [Validators.required]],
-      userPatronymic: [null, [Validators.required]],
-      userDateBirth: [null],
-      studyGroup: [null, [Validators.required]],
-    });
-  }
-
-
 }

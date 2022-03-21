@@ -32,6 +32,39 @@
       "patronymic": "ee",
       "dateBirth": 1647378966607,
       "studyGroup": "ee"
+    },
+    {
+      "id": "3f6f93e0-b225-4f6f-a44a-10180cfd825f",
+      "email": "yyy@yandex.ru",
+      "login": "eerr",
+      "password": "tt",
+      "name": "tt",
+      "surname": "tt",
+      "patronymic": "tt",
+      "dateBirth": 1647990141821,
+      "studyGroup": "tt"
+    },
+    {
+      "id": "77a89f2f-815a-4e91-9457-af70be8ec16c",
+      "email": "rrewew@maill.com",
+      "login": "rr",
+      "password": "rr",
+      "name": "rr",
+      "surname": "rr",
+      "patronymic": "rr",
+      "dateBirth": 1646219790975,
+      "studyGroup": "ee"
+    },
+    {
+      "id": "13cab238-49c3-4c49-bb01-2128d17c8207",
+      "email": "rrewew@maill.com",
+      "login": "tt",
+      "password": "tt",
+      "name": "tt",
+      "surname": "tt",
+      "patronymic": "tt",
+      "dateBirth": 1646220348638,
+      "studyGroup": "tt"
     }
   ],
   "comments": [

@@ -17,10 +17,7 @@
   </nz-form-item>
       <button nz-button   class="login-form-button login-form-margin" [nzType]="'primary'">Log in</button>
 </form>
-<form >
-  <div class="login-out-regi">
-    <div ><button nz-button action="/welcome" nzType="primary" (click)="goRegistration()">Register</button></div>
-    <div ><button nz-button (click)="clearToken()">Log out</button></div>
-  </div>
+<form class="login-out-regi">
+    <div ><span>У ещё вас нет аккаунта? </span><a routerLink="/welcome">Зарегистрироваться</a></div>
 </form>
 </div>

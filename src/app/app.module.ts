@@ -23,13 +23,15 @@ import { EffectsModule } from '@ngrx/effects';
 import { LoginService } from "../services/login.service";
 import { LoginFormComponent } from './pages/login-form/login-form.component';
 import {NzInputModule} from "ng-zorro-antd/input";
+import { HomeComponent } from './pages/home/home.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
