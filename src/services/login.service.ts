@@ -65,7 +65,7 @@ export class LoginService {
     });
   }
 
-  getLoginSaerve(login: string, password: string): Observable<Student[]> {
+  getLoginService(login: string, password: string): Observable<Student[]> {
     return this.http.get <Student[]>("http://localhost:3000/posts?login=" + login + "&password=" + password)
   }
 }

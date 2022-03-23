@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../../../services/login.service";
 import {Router} from "@angular/router";
 import {Student} from "../../../models/UserStudents";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -14,7 +15,10 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService, private router: Router) {
   }
+
   validateForm!: FormGroup;
+
+  subscription: Subscription | undefined;
 
   ngOnInit(): void {
     this.validateForm = this.fb.group({
@@ -24,14 +28,19 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-// .unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   submitForm(): void {
+    const login = this.validateForm.getRawValue().login;
+    const password = this.validateForm.getRawValue().password;
+
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
 
-      this.loginservice.getLoginSaerve(this.validateForm.getRawValue().login, this.validateForm.getRawValue().password).subscribe((data: Student[]) => {
+      this.subscription = this.loginservice.getLoginService(login, password).subscribe((data: Student[]) => {
         localStorage.setItem("token", JSON.stringify({id: data[0].id, time: new Date()}))
         this.router.navigate(['home']);
       });
