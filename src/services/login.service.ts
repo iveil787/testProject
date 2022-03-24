@@ -68,5 +68,15 @@ export class LoginService {
   getLoginService(login: string, password: string): Observable<Student[]> {
     return this.http.get <Student[]>("http://localhost:3000/posts?login=" + login + "&password=" + password)
   }
+
+  logOut() {
+    localStorage.clear();
+    this.router.navigate(['login'])
+  }
+
+  currentUser(): Observable<Student[]> {
+    const tokenObj = JSON.parse(localStorage.getItem("token") as string);
+    return this.http.get <Student[]>("http://localhost:3000/posts?id=" + tokenObj.id)
+  }
 }
 

@@ -40,12 +40,21 @@
   <nz-layout>
     <nz-header>
       <div class="app-header">
-          <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
+                  <span class="header-trigger" (click)="isCollapsed = !isCollapsed">
               <i class="trigger"
                  nz-icon
                  [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
               ></i>
           </span>
+        <nz-avatar nzIcon="user" nz-popover="" [nzPopoverTitle]="nowUser" [nzPopoverContent]="contentTemplate"
+                   nzPopoverPlacement="bottomRight">User
+        </nz-avatar>
+        <ng-template #contentTemplate>
+          <a (click)="logOut()">logOut</a>
+        </ng-template>
+        <ng-template #nowUser>
+          <div *ngFor="let userName of data">{{userName.name}}</div>
+        </ng-template>
       </div>
     </nz-header>
     <nz-content>
@@ -55,3 +64,4 @@
     </nz-content>
   </nz-layout>
 </nz-layout>
+

@@ -24,6 +24,8 @@ import { LoginService } from "../services/login.service";
 import { LoginFormComponent } from './pages/login-form/login-form.component';
 import {NzInputModule} from "ng-zorro-antd/input";
 import { HomeComponent } from './pages/home/home.component';
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
+import {NzPopoverModule} from "ng-zorro-antd/popover";
 
 registerLocaleData(en);
 
@@ -47,7 +49,9 @@ registerLocaleData(en);
     NzMenuModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
-    NzInputModule
+    NzInputModule,
+    NzAvatarModule,
+    NzPopoverModule
   ],
   providers: [[LoginService],{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
