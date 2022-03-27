@@ -1,10 +1,8 @@
-import { NgModule } from '@angular/core';
+import {NgModule} from '@angular/core';
+import {WelcomeRoutingModule} from './welcome-routing.module';
+import {NzButtonModule} from 'ng-zorro-antd/button';
 
-import { WelcomeRoutingModule } from './welcome-routing.module';
-
-import { NzButtonModule } from 'ng-zorro-antd/button';
-
-import { WelcomeComponent } from './welcome.component';
+import {WelcomeComponent} from './welcome.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {NzGridModule} from "ng-zorro-antd/grid";
 import {NzFormModule} from "ng-zorro-antd/form";
@@ -24,9 +22,10 @@ import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
     NzInputModule,
     NzSelectModule,
     NzCheckboxModule,
-    NzDatePickerModule
+    NzDatePickerModule,
   ],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent]
 })
-export class WelcomeModule { }
+export class WelcomeModule {
+}

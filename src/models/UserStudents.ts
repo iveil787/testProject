@@ -6,6 +6,7 @@ export interface Student {
   name: string;
   surname: string;
   patronymic: string;
-  dateBirth: string;
+  dateBirth: number;
   studyGroup: string;
 }
+

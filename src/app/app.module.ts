@@ -20,12 +20,20 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { LoginService } from "../services/login.service";
+import { LoginFormComponent } from './pages/login-form/login-form.component';
+import {NzInputModule} from "ng-zorro-antd/input";
+import { HomeComponent } from './pages/home/home.component';
+import {NzAvatarModule} from "ng-zorro-antd/avatar";
+import {NzPopoverModule} from "ng-zorro-antd/popover";
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginFormComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +48,12 @@ registerLocaleData(en);
     NzFormModule,
     NzMenuModule,
     StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([])
+    EffectsModule.forRoot([]),
+    NzInputModule,
+    NzAvatarModule,
+    NzPopoverModule
   ],
-  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  providers: [[LoginService],{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

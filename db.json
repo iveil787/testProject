@@ -1,9 +1,70 @@
 {
   "posts": [
     {
-      "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "id": "5846ef1c-e50d-43da-99df-311225fd1c11",
+      "email": "yyy@yandex.ru",
+      "login": "ww",
+      "password": "ww",
+      "name": "ww",
+      "surname": "ww",
+      "patronymic": "ww",
+      "dateBirth": 1647373728263,
+      "studyGroup": "ww"
+    },
+    {
+      "id": "024a162e-bd6e-4e0d-912d-8d62925e886a",
+      "email": "yyy@yandex.ru",
+      "login": "rr",
+      "password": "rr",
+      "name": "rr",
+      "surname": "rr",
+      "patronymic": "rr",
+      "dateBirth": 1648065159780,
+      "studyGroup": "rr"
+    },
+    {
+      "id": "0e9a3cf5-e9db-4808-9a6f-5d2c7076be70",
+      "email": "yyy@yandex.ru",
+      "login": "ee",
+      "password": "ee",
+      "name": "ee",
+      "surname": "ee",
+      "patronymic": "ee",
+      "dateBirth": 1647378966607,
+      "studyGroup": "ee"
+    },
+    {
+      "id": "3f6f93e0-b225-4f6f-a44a-10180cfd825f",
+      "email": "yyy@yandex.ru",
+      "login": "eerr",
+      "password": "tt",
+      "name": "tt",
+      "surname": "tt",
+      "patronymic": "tt",
+      "dateBirth": 1647990141821,
+      "studyGroup": "tt"
+    },
+    {
+      "id": "77a89f2f-815a-4e91-9457-af70be8ec16c",
+      "email": "rrewew@maill.com",
+      "login": "rr",
+      "password": "rr",
+      "name": "rr",
+      "surname": "rr",
+      "patronymic": "rr",
+      "dateBirth": 1646219790975,
+      "studyGroup": "ee"
+    },
+    {
+      "id": "13cab238-49c3-4c49-bb01-2128d17c8207",
+      "email": "rrewew@maill.com",
+      "login": "tt",
+      "password": "tt",
+      "name": "tt",
+      "surname": "tt",
+      "patronymic": "tt",
+      "dateBirth": 1646220348638,
+      "studyGroup": "tt"
     }
   ],
   "comments": [
