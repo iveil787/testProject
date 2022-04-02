@@ -65,6 +65,17 @@
       "patronymic": "tt",
       "dateBirth": 1646220348638,
       "studyGroup": "tt"
+    },
+    {
+      "id": "b4061f51-5cfc-4075-b200-177dc94448ed",
+      "email": "yyy@yandex.ru",
+      "login": "uu",
+      "password": "uu",
+      "name": "uu",
+      "surname": "uu",
+      "patronymic": "uu",
+      "dateBirth": 1646232276326,
+      "studyGroup": "uu"
     }
   ],
   "comments": [

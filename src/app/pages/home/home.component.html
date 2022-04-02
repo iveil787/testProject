@@ -62,6 +62,16 @@
         <router-outlet></router-outlet>
       </div>
     </nz-content>
-  </nz-layout>
+    <button (click)="increment()">Increment</button>
+    <button (click)="decrement()" [disabled]="disableDecrease$ | async " >Decrement</button>
+    <button (click)="clear()" [disabled]="disableDecrease$ | async ">Clear</button>
+
+    <div>
+      <span>
+      is counter :{{count$ | async}} ; Update at {{updatedAt$ | async | date: "yyyy-MM-dd-hh:mm:ss" }}
+    </span>
+    </div></nz-layout>
 </nz-layout>
+
+
 

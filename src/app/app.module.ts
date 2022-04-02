@@ -26,6 +26,10 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import { HomeComponent } from './pages/home/home.component';
 import {NzAvatarModule} from "ng-zorro-antd/avatar";
 import {NzPopoverModule} from "ng-zorro-antd/popover";
+import { reducers, metaReducers } from './reducers/store-redux';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 registerLocaleData(en);
 
@@ -51,7 +55,12 @@ registerLocaleData(en);
     EffectsModule.forRoot([]),
     NzInputModule,
     NzAvatarModule,
-    NzPopoverModule
+    NzPopoverModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    StoreRouterConnectingModule.forRoot(),
   ],
   providers: [[LoginService],{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
