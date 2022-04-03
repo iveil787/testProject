@@ -30,7 +30,7 @@ export const userReducerRegis = (state = initialStateRegis, action: any) => {
   //   studyGroup: "rr",
   // }
 
-  // let state2 = [...state];
+  // let state2 = [...state]; qqqq
 
 
   switch (action.type) {
