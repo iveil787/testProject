@@ -2,19 +2,33 @@ import {Action} from "@ngrx/store";
 import {Student} from "../../../models/UserStudents";
 
 export enum registerUserActions {
-  addUserRedux = "[user] addUserRedux",
+  taskCreateUserRedux = "[user] taskCreateUserRedux",
+  errorCreateUser = "[user] errorCreateUser",
+  successCreateUser = "[user] successCreateUser",
 
 }
 
-export class userAddUserAction implements Action {
-
-  constructor(public payload: Student){
+export class TaskCreateUserAction implements Action {
+  constructor(public payload: Student) {
 
   }
 
-  readonly type = registerUserActions.addUserRedux;
-  // readonly payload = ''
+  readonly type = registerUserActions.taskCreateUserRedux;
+}
 
+export class ErrorCreateUserAction implements Action {
+  constructor(public payload: Student) {
+
+  }
+
+  readonly type = registerUserActions.errorCreateUser;
+}
+
+export class SuccessCreateUserAction implements Action {
+  constructor(public payload: Student) {
+  }
+
+  readonly type = registerUserActions.successCreateUser;
 }
 
 // потом допиши ещё экшики и хранилища не зубудь

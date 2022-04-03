@@ -78,5 +78,10 @@ export class LoginService {
     const tokenObj = JSON.parse(localStorage.getItem("token") as string);
     return this.http.get <Student[]>("http://localhost:3000/posts?id=" + tokenObj.id)
   }
+
+
+  test(){
+    console.log("you catch it")
+  }
 }
 

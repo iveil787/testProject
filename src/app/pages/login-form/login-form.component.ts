@@ -3,8 +3,12 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "../../../services/login.service";
 import {Router} from "@angular/router";
 import {Student} from "../../../models/UserStudents";
-import {Subscription} from "rxjs";
-
+import {Observable, Subscription} from "rxjs";
+import {select, Store} from "@ngrx/store";
+import {TaskloginUserAction} from "../../reducers/redux-login/login.actoins";
+import {ErrosList} from "../../reducers/errors/error.reduser";
+import {NzMessageService} from "ng-zorro-antd/message";
+import {selectError} from "../../reducers/errors/error.selectors";
 
 @Component({
   selector: 'app-login-form',
@@ -13,8 +17,12 @@ import {Subscription} from "rxjs";
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
 
-  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService, private router: Router) {
+  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService, private router: Router
+    , private store$: Store<Student>, private error$: Store<ErrosList>, private message: NzMessageService
+  ) {
   }
+
+  public errore$: Observable<string> = this.error$.pipe(select(selectError));
 
   validateForm!: FormGroup;
 
@@ -34,16 +42,10 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   }
 
   submitForm(): void {
-    const login = this.validateForm.getRawValue().login;
-    const password = this.validateForm.getRawValue().password;
 
     if (this.validateForm.valid) {
       console.log('submit', this.validateForm.value);
-
-      this.subscription = this.loginservice.getLoginService(login, password).subscribe((data: Student[]) => {
-        localStorage.setItem("token", JSON.stringify({id: data[0].id, time: new Date()}))
-        this.router.navigate(['home']);
-      });
+      this.loginServiceRedux();
       this.loginservice.checkToken();
     } else {
       Object.values(this.validateForm.controls).forEach(control => {
@@ -54,4 +56,17 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       });
     }
   }
+
+  loginServiceRedux() {
+    this.store$.dispatch(new TaskloginUserAction({
+        login: this.validateForm.getRawValue().login,
+        password: this.validateForm.getRawValue().password,
+      })
+    )
+  }
+
+  createMessage(type: string): void {
+    this.message.create(type, `This is a message of ${type}`);
+  }
+
 }
