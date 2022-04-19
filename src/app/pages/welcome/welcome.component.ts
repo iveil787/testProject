@@ -1,6 +1,9 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, FormBuilder} from '@angular/forms';
 import {LoginService} from "../../../services/login.service";
+import {TaskCreateUserAction} from "../../reducers/redux-welcome/register.actions";
+import {Store} from "@ngrx/store";
+import {CountState} from "../../reducers/count/count.reducer";
 
 
 @Component({
@@ -10,7 +13,8 @@ import {LoginService} from "../../../services/login.service";
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService) {
+  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService,
+              private store$: Store<CountState>) {
   }
 
   myForm!: FormGroup;
@@ -46,7 +50,8 @@ export class WelcomeComponent implements OnInit {
   submitForm(): void {
     if (this.myForm.valid) {
       console.log('submit', this.myForm.value);
-      this.addStudents();
+      // this.addStudents() этот метод работает напрямую с сервисом;
+      this.createUserRedux();
     } else {
       Object.values(this.myForm.controls).forEach(control => {
         if (control.invalid) {
@@ -77,6 +82,7 @@ export class WelcomeComponent implements OnInit {
   }
 
 // ==========================================addStudents==========================================
+//   этот метод работает напрямую с сервисом;
   addStudents(): void {
     const newStudent = {
       id: this.loginservice.modelUserStudent.length + 1,
@@ -91,4 +97,19 @@ export class WelcomeComponent implements OnInit {
     }
     this.loginservice.addData(newStudent).subscribe();
   };
+
+  createUserRedux() {
+    this.store$.dispatch(new TaskCreateUserAction({
+        id: this.loginservice.modelUserStudent.length + 1,
+        email: this.myForm.getRawValue().email,
+        login: this.myForm.getRawValue().login,
+        password: this.myForm.getRawValue().password,
+        name: this.myForm.getRawValue().userName,
+        surname: this.myForm.getRawValue().userSurname,
+        patronymic: this.myForm.getRawValue().userPatronymic,
+        dateBirth: this.myForm.getRawValue().userDateBirth.getTime(),
+        studyGroup: this.myForm.getRawValue().studyGroup,
+      })
+    )
+  }
 }

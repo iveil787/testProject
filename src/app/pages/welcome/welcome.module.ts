@@ -10,6 +10,7 @@ import {NzInputModule} from "ng-zorro-antd/input";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {CommonModule} from "@angular/common";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
     NzSelectModule,
     NzCheckboxModule,
     NzDatePickerModule,
+    CommonModule,
   ],
   declarations: [WelcomeComponent],
   exports: [WelcomeComponent]

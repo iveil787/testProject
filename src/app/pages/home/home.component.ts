@@ -4,7 +4,6 @@ import {LoginService} from "../../../services/login.service";
 import {Student} from "../../../models/UserStudents";
 import {Subscription} from 'rxjs';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,7 +14,9 @@ export class HomeComponent implements OnInit, OnDestroy {
   data: Student[] | undefined;
   subscription: Subscription | undefined;
 
-  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService) {
+  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService,
+              // private store$: Store<CountState>
+  ) {
   }
 
   ngOnInit(): void {
@@ -37,4 +38,31 @@ export class HomeComponent implements OnInit, OnDestroy {
   currentUser() {
     this.subscription = this.loginservice.currentUser().subscribe((data: Student[]) => (this.data = data));
   }
+
+  // increment() {
+  //   this.store$.dispatch(new TaskCreateUserAction({
+  //       id: 789789,
+  //       email: "yyy@yandex.ru",
+  //       login: "rr",
+  //       password: "rr",
+  //       name: "rr",
+  //       surname: "rr",
+  //       patronymic: "rr",
+  //       dateBirth: 1648065159780,
+  //       studyGroup: "rr",
+  //     })
+  //   )
+  // }
+
+  // public count$: Observable<number> = this.store$.pipe(select(selectCount));
+  // public updatedAt$: Observable<number> = this.store$.pipe(select(selectUpdatedAt));
+  // public  disableDecrease$: Observable<boolean> = this.count$.pipe(map(count => count <= 0));
+// test
+//   decrement() {
+//     this.store$.dispatch(new CountDecreaseAction())
+//   }
+//
+//   clear() {
+//     this.store$.dispatch(new CountClearAction())
+//   }
 }
