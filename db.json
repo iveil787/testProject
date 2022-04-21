@@ -131,15 +131,29 @@
       "patronymic": "oo",
       "dateBirth": 1649259366846,
       "studyGroup": "oo"
-    }
-  ],
-  "comments": [
+    },
     {
-      "id": 1,
-      "body": "some comment",
-      "postId": 1
+      "id": "6e8feda9-78bc-454a-b096-9c45ca3978e4",
+      "email": "yyy@yandex.ru",
+      "login": "hh",
+      "password": "hh",
+      "name": "hh",
+      "surname": "hh",
+      "patronymic": "hh",
+      "dateBirth": 1649254586733,
+      "studyGroup": "hh"
     }
   ],
+  "homework": {
+    "students": [
+      {
+        "test": "tw"
+      }
+    ],
+    "teachers": [
+      {}
+    ]
+  },
   "profile": {
     "name": "typicode"
   }

@@ -1,9 +1,10 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, FormBuilder} from '@angular/forms';
 import {LoginService} from "../../../services/login.service";
-import {TaskCreateUserAction} from "../../reducers/redux-welcome/register.actions";
+
 import {Store} from "@ngrx/store";
 import {CountState} from "../../reducers/count/count.reducer";
+import {TaskCreateUserAction} from "../../reducers/table-user/table.action";
 
 
 @Component({
@@ -51,7 +52,7 @@ export class WelcomeComponent implements OnInit {
     if (this.myForm.valid) {
       console.log('submit', this.myForm.value);
       // this.addStudents() этот метод работает напрямую с сервисом;
-      this.createUserRedux();
+      this.addStudents();
     } else {
       Object.values(this.myForm.controls).forEach(control => {
         if (control.invalid) {

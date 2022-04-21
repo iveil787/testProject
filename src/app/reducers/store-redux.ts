@@ -7,31 +7,35 @@ import {
 } from '@ngrx/store';
 import {environment} from '../../environments/environment';
 import {countNode, CountState, countReducer} from "./count/count.reducer";
-import {userNode, userReducerRegis} from "./redux-welcome/register.reduser";
+
 import {Student} from "../../models/UserStudents";
 import {loginUser, loginUserReducer} from "./redux-login/login.reduser";
-import {errorsList, errorReduser, ErrosList} from "./errors/error.reduser";
+import {errorsList, errorReduser, ErrorsList} from "./errors/error.reduser";
+import {tableUser, tableUserReducer} from "./table-user/table.reduser";
 
 
 export interface State {
 
   [countNode]: CountState;
 
-  [userNode]: Student[];
-
   [loginUser]: Student[];
 
-  [errorsList]: ErrosList;
+  [errorsList]: ErrorsList;
 
+  [tableUser]: Student[];
+
+  // [userNode]: Student[];
 }
 
 
 export const reducers: ActionReducerMap<State> = {
   // @ts-ignore
+
+  // [userNode]: userReducerRegis,
   [countNode]: countReducer,
-  [userNode]: userReducerRegis,
   [loginUser]: loginUserReducer,
   [errorsList]: errorReduser,
+  [tableUser]: tableUserReducer,
 }
 
 

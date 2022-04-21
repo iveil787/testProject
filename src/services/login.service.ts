@@ -69,6 +69,10 @@ export class LoginService {
     return this.http.get <Student[]>("http://localhost:3000/posts?login=" + login + "&password=" + password)
   }
 
+  getAllUser(): Observable<Student[]> {
+    return this.http.get <Student[]>("http://localhost:3000/posts");
+  }
+
   logOut() {
     localStorage.clear();
     this.router.navigate(['login'])

@@ -6,7 +6,7 @@ import {Student} from "../../../models/UserStudents";
 import {Observable, Subscription} from "rxjs";
 import {select, Store} from "@ngrx/store";
 import {TaskloginUserAction} from "../../reducers/redux-login/login.actoins";
-import {ErrosList} from "../../reducers/errors/error.reduser";
+import {ErrorsList} from "../../reducers/errors/error.reduser";
 import {NzMessageService} from "ng-zorro-antd/message";
 import {selectError} from "../../reducers/errors/error.selectors";
 
@@ -18,7 +18,7 @@ import {selectError} from "../../reducers/errors/error.selectors";
 export class LoginFormComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService, private router: Router
-    , private store$: Store<Student>, private error$: Store<ErrosList>, private message: NzMessageService
+    , private store$: Store<Student>, private error$: Store<ErrorsList>, private message: NzMessageService
   ) {
   }
 
