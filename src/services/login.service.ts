@@ -5,13 +5,14 @@ import {Student} from "../models/UserStudents";
 import {Observable} from "rxjs";
 import {v4 as uuidv4} from 'uuid';
 import {Router} from "@angular/router";
+import {NzMessageService} from "ng-zorro-antd/message";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private message: NzMessageService) {
   }
 
   modelUserStudent: Student[] = [
@@ -27,7 +28,7 @@ export class LoginService {
       id: uuidv4(), email: user.email, login: user.login, password: user.password, name: user.name,
       surname: user.surname, patronymic: user.patronymic, dateBirth: user.dateBirth, studyGroup: user.studyGroup
     };
-    return this.http.post<void>('http://localhost:3000/posts', body);
+    return this.http.post<void>('http://localhost:3000/user', body);
   }
 
   checkToken(): void {
@@ -54,7 +55,7 @@ export class LoginService {
 
   checkTokenID(): void {
     let tokenObj = JSON.parse(localStorage.getItem("token") as string);
-    this.http.get <Student[]>("http://localhost:3000/posts?id=" + tokenObj.id).subscribe((data: Student[]) => {
+    this.http.get <Student[]>("http://localhost:3000/user?id=" + tokenObj.id).subscribe((data: Student[]) => {
       if (data[0]?.id === tokenObj.id) {
         console.log("id верный")
       } else {
@@ -66,11 +67,11 @@ export class LoginService {
   }
 
   getLoginService(login: string, password: string): Observable<Student[]> {
-    return this.http.get <Student[]>("http://localhost:3000/posts?login=" + login + "&password=" + password)
+    return this.http.get <Student[]>("http://localhost:3000/user?login=" + login + "&password=" + password)
   }
 
   getAllUser(): Observable<Student[]> {
-    return this.http.get <Student[]>("http://localhost:3000/posts");
+    return this.http.get <Student[]>("http://localhost:3000/user");
   }
 
   logOut() {
@@ -78,9 +79,13 @@ export class LoginService {
     this.router.navigate(['login'])
   }
 
+  createMessage(type: string): void {
+    this.message.create(type, `This is a message of ${type}`);
+  }
+
   currentUser(): Observable<Student[]> {
     const tokenObj = JSON.parse(localStorage.getItem("token") as string);
-    return this.http.get <Student[]>("http://localhost:3000/posts?id=" + tokenObj.id)
+    return this.http.get <Student[]>("http://localhost:3000/user?id=" + tokenObj.id)
   }
 
 

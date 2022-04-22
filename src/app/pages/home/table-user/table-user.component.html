@@ -7,6 +7,7 @@
     <th>StudyGroup</th>
     <th>DateBirth</th>
     <th>Action</th>
+    <th>HW</th>
   </tr>
   </thead>
   <tbody>
@@ -17,9 +18,13 @@
     <td>{{ data.studyGroup }}</td>
     <td>{{ data.dateBirth }}</td>
     <td>
-      <a>add homework 一 {{ data.name }}</a>
+      <a (click)="showHW()">add homework 一 {{ data.name }}</a>
       <nz-divider nzType="vertical"></nz-divider>
       <a>Delete</a>
+    </td>
+    <td>
+      {{ homeWork.case }}
+      <nz-divider nzType="vertical"></nz-divider>
     </td>
   </tr>
   </tbody>

@@ -5,17 +5,14 @@ import {LoginService} from "../../../services/login.service";
 import {map, switchMap} from "rxjs";
 import {Router} from "@angular/router";
 import {TaskErrorsActions} from "../errors/error.action";
-import {NzMessageService} from "ng-zorro-antd/message";
+
 
 @Injectable()
 export class loginEffects {
   constructor(private actions$: Actions, private router: Router,
-              @Inject(LoginService) private loginservice: LoginService, private message: NzMessageService) {
+              @Inject(LoginService) private loginservice: LoginService) {
   }
 
-  createMessage(type: string): void {
-    this.message.create(type, `This is a message of ${type}`);
-  }
 
   test2Effect$ = createEffect(() =>
     this.actions$.pipe(
@@ -35,10 +32,9 @@ export class loginEffects {
                 this.router.navigate(['home']);
                 return new FindUserAction(currentUser)
               } else {
-                this.createMessage('error')
+                this.loginservice.createMessage('error')
                 return new TaskErrorsActions()
               }
-
             }
           ))
       })
