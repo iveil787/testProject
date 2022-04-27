@@ -7,6 +7,15 @@ import {v4 as uuidv4} from 'uuid';
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 
+interface HomeWork {
+  idWomeHork: number;
+  idUser: number;
+  idStudent: number;
+  nameHw: string;
+  case: string;
+  date: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -88,9 +97,9 @@ export class LoginService {
     return this.http.get <Student[]>("http://localhost:3000/user?id=" + tokenObj.id)
   }
 
-
-  test(){
-    console.log("you catch it")
+// ++++++++++++++++++++++++++++++++++++ servis homework +++++++++++++++++++++++++++++++++++++
+  getAllHomework(): Observable<HomeWork[]> {
+    return this.http.get <HomeWork[]>("http://localhost:3000/homework");
   }
 }
 

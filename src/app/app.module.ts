@@ -38,6 +38,13 @@ import {NzBadgeModule} from "ng-zorro-antd/badge";
 import {NzDropDownModule} from "ng-zorro-antd/dropdown";
 import {NzDividerModule} from "ng-zorro-antd/divider";
 import {TableUserEffects} from "./reducers/table-user/table.effects";
+import { TableHomeworkComponent } from './pages/home/table-homework/table-homework.component';
+import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
+import {NzDrawerModule} from "ng-zorro-antd/drawer";
+import {NzModalModule} from "ng-zorro-antd/modal";
+import {NzRadioModule} from "ng-zorro-antd/radio";
+import {NzSelectModule} from "ng-zorro-antd/select";
+import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 
 registerLocaleData(en);
 
@@ -46,7 +53,8 @@ registerLocaleData(en);
     AppComponent,
     LoginFormComponent,
     HomeComponent,
-    TableUserComponent
+    TableUserComponent,
+    TableHomeworkComponent
   ],
   imports: [
     BrowserModule,
@@ -74,6 +82,12 @@ registerLocaleData(en);
     NzBadgeModule,
     NzDropDownModule,
     NzDividerModule,
+    NzDatePickerModule,
+    NzDrawerModule,
+    NzModalModule,
+    NzRadioModule,
+    NzSelectModule,
+    NzCheckboxModule,
   ],
   providers: [[LoginService,NzMessageService],{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]

@@ -1,0 +1,196 @@
+<nz-table #basicTable [nzData]="listOfData">
+  <thead>
+  <tr>
+    <th>idUser</th>
+    <th>idWomeHork</th>
+    <th>idStudent</th>
+    <th>nameHw</th>
+    <th>date</th>
+    <th>case</th>
+    <th>case</th>
+    <th>case</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of homeWork">
+    <td>{{ data.idUser }}</td>
+    <td>{{ data.idWomeHork }}</td>
+    <td>{{ data.idStudent }}</td>
+    <td>{{ data.nameHw }}</td>
+    <td>{{ data.date }}</td>
+    <td>{{ data.case }}</td>
+    <td>
+      <a>Action 一 {{ data.case }}</a>
+      <nz-divider nzType="vertical"></nz-divider>
+      <a>Delete</a>
+    </td>
+    <td>
+      <button nz-button [nzType]="'primary'" (click)="showModal()"><span>Show Modal</span></button>
+      <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+        <ng-container *nzModalContent>
+
+          <!--          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">-->
+
+          <!--            <div nz-row [nzGutter]="8">-->
+          <!--              <div nz-col [nzSpan]="24">-->
+          <!--                <nz-form-item>-->
+          <!--                  <nz-form-label-->
+          <!--                  >Homework-->
+          <!--                  </nz-form-label>-->
+          <!--                  <nz-form-control>-->
+
+          <!--                    <input nz-input placeholder="title of homework"/>-->
+
+          <!--                  </nz-form-control>-->
+          <!--                </nz-form-item>-->
+          <!--              </div>-->
+          <!--            </div>-->
+
+          <!--            <div nz-row [nzGutter]="8">-->
+          <!--              <div nz-col [nzSpan]="24">-->
+          <!--                <nz-form-item>-->
+          <!--                  <nz-form-label>Description</nz-form-label>-->
+          <!--                  <nz-form-control>-->
+          <!--                <textarea-->
+          <!--                  nz-input-->
+          <!--                  placeholder="please enter url description"-->
+          <!--                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"-->
+          <!--                ></textarea>-->
+          <!--                  </nz-form-control>-->
+          <!--                </nz-form-item>-->
+          <!--              </div>-->
+          <!--            </div>-->
+
+          <!--            &lt;!&ndash;            <div nz-row [nzGutter]="6">&ndash;&gt;-->
+          <!--            &lt;!&ndash;              <div nz-col nzSpan="24">&ndash;&gt;-->
+
+          <!--            <div nz-row [nzGutter]="8">-->
+          <!--              <div nz-col [nzSpan]="24">-->
+          <!--                <nz-form-label>Studets</nz-form-label>-->
+          <!--                <nz-select [(ngModel)]="singleValue" [nzSize]="size" nzShowSearch>-->
+
+          <!--                  <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label"-->
+          <!--                             [nzValue]="option.value"></nz-option>-->
+          <!--                </nz-select>-->
+          <!--                <br>-->
+          <!--                <br>-->
+          <!--              </div>-->
+          <!--            </div>-->
+
+          <!--            &lt;!&ndash;              </div>&ndash;&gt;-->
+          <!--            &lt;!&ndash;            </div>&ndash;&gt;-->
+
+          <!--            <div nz-row [nzGutter]="8">-->
+          <!--              <div nz-col [nzSpan]="24">-->
+          <!--                <nz-form-item>-->
+          <!--                  <nz-form-label-->
+          <!--                  >Date Time-->
+          <!--                  </nz-form-label>-->
+          <!--                  <nz-form-control>-->
+          <!--                    <nz-range-picker></nz-range-picker>-->
+          <!--                  </nz-form-control>-->
+          <!--                </nz-form-item>-->
+          <!--              </div>-->
+          <!--            </div>-->
+
+
+          <!--            <nz-form-item nz-row class="register-area">-->
+          <!--              <nz-form-control [nzSpan]="14" [nzOffset]="10">-->
+          <!--                <button nz-button nzType="primary">Register</button>-->
+          <!--              </nz-form-control>-->
+          <!--            </nz-form-item>-->
+          <!--          </form>-->
+          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzFor="nickname"
+
+              >
+                <span>Nickname</span>
+              </nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+                <input nz-input id="nickname" formControlName="nickname"/>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzFor="homework"
+
+              ><span>Homework</span>
+              </nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+
+                <input nz-input id="homework" formControlName="homework"/>
+
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzFor="description"
+
+              ><span>Description</span>
+              </nz-form-label>
+              <nz-form-control>
+                <textarea
+                  nz-input id="description"
+                  placeholder="please enter description"
+                  formControlName="description"
+                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+              >Deadline
+              </nz-form-label>
+              <nz-form-control>
+                <nz-range-picker formControlName="deadline" ></nz-range-picker>
+              </nz-form-control>
+            </nz-form-item>
+
+            <!--            <nz-form-item>-->
+            <!--              <nz-form-label-->
+            <!--                [nzSm]="6"-->
+            <!--                [nzXs]="24"-->
+            <!--                nzFor="select"-->
+
+            <!--              >Studets-->
+            <!--              </nz-form-label>-->
+            <!--              <nz-select [(ngModel)]="singleValue" [nzSize]="size" nzShowSearch id="select" formControlName="select">-->
+
+            <!--                <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label"-->
+            <!--                           [nzValue]="option.value"></nz-option>-->
+            <!--              </nz-select>-->
+            <!--            </nz-form-item>-->
+            <!--            <br>-->
+            <!--            <br>-->
+
+<!--            <nz-form-item nz-row class="register-area">-->
+<!--              <nz-form-control [nzSpan]="14" [nzOffset]="6">-->
+<!--                <button nz-button nzType="primary">Register</button>-->
+<!--              </nz-form-control>-->
+<!--            </nz-form-item>-->
+          </form>
+          <!--          <p>Content two</p>-->
+          <!--          <p>Content three</p>-->
+        </ng-container>
+      </nz-modal>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+
+
