@@ -6,19 +6,19 @@
     <th>idStudent</th>
     <th>nameHw</th>
     <th>date</th>
+    <th>status</th>
     <th>case</th>
-    <th>case</th>
-    <th>case</th>
+    <th><div *ngFor="let userName of teacher">{{userName.id}}</div></th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of homeWork">
-    <td>{{ data.idUser }}</td>
-    <td>{{ data.idWomeHork }}</td>
-    <td>{{ data.idStudent }}</td>
-    <td>{{ data.nameHw }}</td>
-    <td>{{ data.date }}</td>
-    <td>{{ data.case }}</td>
+    <td>{{ data.idTeacher }}</td>
+    <td>{{ data.id }}</td>
+    <td>{{ data.nicknameStudent }}</td>
+    <td>{{ data.homework }}</td>
+    <td>{{ data.deadline }}</td>
+    <td>{{ data.idTeacher }}</td>
     <td>
       <a>Action 一 {{ data.case }}</a>
       <nz-divider nzType="vertical"></nz-divider>
@@ -106,13 +106,13 @@
               <nz-form-label
                 [nzSm]="6"
                 [nzXs]="24"
-                nzFor="nickname"
+                nzFor="nicknameStudent"
 
               >
                 <span>Nickname</span>
               </nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
-                <input nz-input id="nickname" formControlName="nickname"/>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
+                <input nz-input id="nicknameStudent" formControlName="nicknameStudent"/>
               </nz-form-control>
             </nz-form-item>
 
@@ -124,7 +124,7 @@
 
               ><span>Homework</span>
               </nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname!">
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Homework!">
 
                 <input nz-input id="homework" formControlName="homework"/>
 
@@ -156,35 +156,56 @@
               >Deadline
               </nz-form-label>
               <nz-form-control>
-                <nz-range-picker formControlName="deadline" ></nz-range-picker>
+                <nz-range-picker formControlName="deadline"></nz-range-picker>
               </nz-form-control>
             </nz-form-item>
 
-            <!--            <nz-form-item>-->
-            <!--              <nz-form-label-->
-            <!--                [nzSm]="6"-->
-            <!--                [nzXs]="24"-->
-            <!--                nzFor="select"-->
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzFor="description"
 
-            <!--              >Studets-->
-            <!--              </nz-form-label>-->
-            <!--              <nz-select [(ngModel)]="singleValue" [nzSize]="size" nzShowSearch id="select" formControlName="select">-->
+              ><span>Wishes</span>
+              </nz-form-label>
+              <nz-form-control>
+                <textarea
+                  nz-input id="wishes"
+                  placeholder="please enter wishes"
+                  formControlName="wishes"
+                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                ></textarea>
+              </nz-form-control>
+            </nz-form-item>
+<!--================================================-->
+<!--            <nz-form-item>-->
+<!--              <nz-form-label-->
+<!--                [nzSm]="6"-->
+<!--                [nzXs]="24"-->
+<!--                nzFor="select"-->
 
-            <!--                <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label"-->
-            <!--                           [nzValue]="option.value"></nz-option>-->
-            <!--              </nz-select>-->
-            <!--            </nz-form-item>-->
-            <!--            <br>-->
-            <!--            <br>-->
+<!--              >Studets-->
+<!--              </nz-form-label>-->
+<!--              <nz-select [(ngModel)]="singleValue" [nzSize]="size" nzShowSearch id="select" formControlName="select">-->
 
-<!--            <nz-form-item nz-row class="register-area">-->
-<!--              <nz-form-control [nzSpan]="14" [nzOffset]="6">-->
-<!--                <button nz-button nzType="primary">Register</button>-->
-<!--              </nz-form-control>-->
+<!--                <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label"-->
+<!--                           [nzValue]="option.value"></nz-option>-->
+<!--              </nz-select>-->
 <!--            </nz-form-item>-->
+<!--            <br>-->
+<!--            <br>-->
+
+            <!--            <nz-form-item nz-row class="register-area">-->
+            <!--              <nz-form-control [nzSpan]="14" [nzOffset]="6">-->
+            <!--                <button nz-button nzType="primary">Register</button>-->
+            <!--              </nz-form-control>-->
+            <!--            </nz-form-item>-->
           </form>
           <!--          <p>Content two</p>-->
           <!--          <p>Content three</p>-->
+
+
+
         </ng-container>
       </nz-modal>
     </td>

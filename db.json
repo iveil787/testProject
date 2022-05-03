@@ -69,31 +69,43 @@
   ],
   "homework": [
     {
-      "idWomeHork": 1,
-      "idUser": 11,
-      "idStudent": 111,
-      "nameHw": "fggffg",
-      "case": "string",
-      "date": 323
+      "id": "4b34d0c1-8c0f-4fc9-827b-f11eab0025e1",
+      "idTeacher": "брать значение из токена",
+      "nicknameStudent": "ee",
+      "homework": "ee",
+      "description": "ee",
+      "deadline": [
+        "2022-05-03T19:33:16.376Z",
+        "2022-05-04T19:33:16.376Z"
+      ],
+      "wishes": "ee"
     },
     {
-      "idWomeHork": 2,
-      "idUser": 22,
-      "idStudent": 111,
-      "nameHw": "fggffg",
-      "case": "string",
-      "date": 323
+      "id": "525b8d0f-d127-4f2c-8549-9bc06a859c8c",
+      "idTeacher": "брать значение из токена",
+      "nicknameStudent": "rr",
+      "homework": "rr",
+      "description": "rr",
+      "deadline": [
+        "2022-05-04T14:20:11.382Z",
+        "2022-05-05T14:20:11.382Z"
+      ],
+      "wishes": "rr"
     },
     {
-      "idWomeHork": 3,
-      "idUser": 11,
-      "idStudent": 222,
-      "nameHw": "fggffg",
-      "case": "string",
-      "date": 323
+      "id": "23db4560-cfa5-45fc-8d6c-fb2ab81daead",
+      "idTeacher": "брать значение из токена",
+      "nicknameStudent": "yy",
+      "homework": "yy",
+      "description": "yy",
+      "deadline": [
+        "2022-05-05T14:20:36.864Z",
+        "2022-05-07T14:20:36.864Z"
+      ],
+      "wishes": "yy"
     }
   ],
   "profile": {
-    "name": "typicode"
+    "wishes": "tt"
   }
 }

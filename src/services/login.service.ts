@@ -8,12 +8,14 @@ import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 
 interface HomeWork {
-  idWomeHork: number;
-  idUser: number;
-  idStudent: number;
-  nameHw: string;
-  case: string;
-  date: number;
+  id: string;
+  idTeacher: string;
+  nicknameStudent: string;
+  homework: string;
+  description: string;
+
+  deadline: number;
+  wishes: string;
 }
 
 @Injectable({
@@ -101,5 +103,35 @@ export class LoginService {
   getAllHomework(): Observable<HomeWork[]> {
     return this.http.get <HomeWork[]>("http://localhost:3000/homework");
   }
+
+
+  modelHomework: HomeWork[] = [
+  //   {
+  //   wishes: "ffff"
+  // },
+  ];
+
+  addHomework(user: HomeWork): Observable<void>{
+    this.modelHomework.push(user);
+    const body = {
+      id: user.id,
+      idTeacher: user.idTeacher, nicknameStudent: user.nicknameStudent,
+      homework: user.homework, description: user.description,
+
+      deadline: user.deadline,
+      wishes: user.wishes
+        };
+
+    return this.http.post<void>("http://localhost:3000/homework", body);
+  }
+
+  // addData(user: Student): Observable<void> {
+  //   this.modelUserStudent.push(user);
+  //   const body = {
+  //     id: uuidv4(), email: user.email, login: user.login, password: user.password, name: user.name,
+  //     surname: user.surname, patronymic: user.patronymic, dateBirth: user.dateBirth, studyGroup: user.studyGroup
+  //   };
+  //   return this.http.post<void>('http://localhost:3000/user', body);
+  // }
 }
 
