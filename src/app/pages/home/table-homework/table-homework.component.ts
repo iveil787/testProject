@@ -1,11 +1,15 @@
 import {Component, Inject, OnInit} from '@angular/core';
-
-import {LoginService} from "../../../../services/login.service";
+import {Homework, LoginService} from "../../../../services/login.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-
 import {NzSelectSizeType} from "ng-zorro-antd/select";
 import {v4 as uuidv4} from 'uuid';
 import {Student} from "../../../../models/UserStudents";
+import {select, Store} from "@ngrx/store";
+
+import {TaskCreateTableHomeworkActions} from "../../../reducers/homework/homework.action";
+import {Observable} from "rxjs";
+
+import {tableHomeworkSelector} from "../../../reducers/homework/homework.selector";
 
 
 interface HomeWork {
@@ -25,10 +29,14 @@ interface HomeWork {
 })
 export class TableHomeworkComponent implements OnInit {
 
-  constructor(@Inject(LoginService) private loginservice: LoginService, private fb: FormBuilder) {
+  constructor(@Inject(LoginService) private loginservice: LoginService, private fb: FormBuilder, private store$: Store<HomeWork>) {
   }
 
   ngOnInit(): void {
+    this.taskTableHomework()
+    this.tableHomeworkDate$.subscribe((allHomework) => console.log(allHomework))
+
+
     this.validateForm = this.fb.group({
       nicknameStudent: [null, [Validators.required]],
       homework: [null, [Validators.required]],
@@ -50,6 +58,18 @@ export class TableHomeworkComponent implements OnInit {
     // this.listOfOption = children;
   }
 
+
+  public tableHomeworkDate$: Observable<Homework[]> = this.store$.pipe(select(tableHomeworkSelector));
+
+  goInToTheServ() {
+    this.tableHomeworkDate$
+  }
+
+  taskTableHomework() {
+    this.store$.dispatch(new TaskCreateTableHomeworkActions()
+    )
+  }
+
   // ====================================================== selector
   currentUser() {
     this.subscription = this.loginservice.currentUser().subscribe((data: Student[]) => (this.teacher = data))
@@ -64,7 +84,7 @@ export class TableHomeworkComponent implements OnInit {
       nicknameStudent: this.validateForm.getRawValue().nicknameStudent,
       homework: this.validateForm.getRawValue().homework,
       description: this.validateForm.getRawValue().description,
-      deadline: this.validateForm.getRawValue().deadline,
+      deadline: this.validateForm.getRawValue().deadline[0].getTime(),
       wishes: this.validateForm.getRawValue().wishes,
 
     }
@@ -79,6 +99,7 @@ export class TableHomeworkComponent implements OnInit {
   subscription: any;
 
   teacher: any;
+
 
   listOfData: HomeWork[] = [
     {

@@ -7,7 +7,7 @@ import {v4 as uuidv4} from 'uuid';
 import {Router} from "@angular/router";
 import {NzMessageService} from "ng-zorro-antd/message";
 
-interface HomeWork {
+export interface Homework {
   id: string;
   idTeacher: string;
   nicknameStudent: string;
@@ -100,18 +100,18 @@ export class LoginService {
   }
 
 // ++++++++++++++++++++++++++++++++++++ servis homework +++++++++++++++++++++++++++++++++++++
-  getAllHomework(): Observable<HomeWork[]> {
-    return this.http.get <HomeWork[]>("http://localhost:3000/homework");
+  getAllHomework(): Observable<Homework[]> {
+    return this.http.get <Homework[]>("http://localhost:3000/homework");
   }
 
 
-  modelHomework: HomeWork[] = [
+  modelHomework: Homework[] = [
   //   {
   //   wishes: "ffff"
   // },
   ];
 
-  addHomework(user: HomeWork): Observable<void>{
+  addHomework(user: Homework): Observable<void>{
     this.modelHomework.push(user);
     const body = {
       id: user.id,

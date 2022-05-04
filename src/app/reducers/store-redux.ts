@@ -12,6 +12,8 @@ import {Student} from "../../models/UserStudents";
 import {loginUser, loginUserReducer} from "./redux-login/login.reduser";
 import {errorsList, errorReduser, ErrorsList} from "./errors/error.reduser";
 import {tableUser, tableUserReducer} from "./table-user/table.reduser";
+import {homeWorkReduser, listHomework} from "./homework/homework.reduser";
+import {Homework} from "../../services/login.service";
 
 
 export interface State {
@@ -24,18 +26,18 @@ export interface State {
 
   [tableUser]: Student[];
 
-  // [userNode]: Student[];
+  [listHomework]: Homework[];
 }
 
 
 export const reducers: ActionReducerMap<State> = {
   // @ts-ignore
 
-  // [userNode]: userReducerRegis,
   [countNode]: countReducer,
   [loginUser]: loginUserReducer,
   [errorsList]: errorReduser,
   [tableUser]: tableUserReducer,
+  [listHomework]: homeWorkReduser,
 }
 
 

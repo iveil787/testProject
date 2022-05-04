@@ -12,7 +12,7 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of homeWork">
+  <tr *ngFor="let data of tableHomeworkDate$ | async">
     <td>{{ data.idTeacher }}</td>
     <td>{{ data.id }}</td>
     <td>{{ data.nicknameStudent }}</td>
@@ -20,7 +20,7 @@
     <td>{{ data.deadline }}</td>
     <td>{{ data.idTeacher }}</td>
     <td>
-      <a>Action 一 {{ data.case }}</a>
+      <a>Action 一 {{ data.wishes }}</a>
       <nz-divider nzType="vertical"></nz-divider>
       <a>Delete</a>
     </td>
@@ -212,6 +212,20 @@
   </tr>
   </tbody>
 </nz-table>
+
+<nz-form-item>
+  <nz-form-label
+    [nzSm]="6"
+    [nzXs]="24"
+
+
+  >Deadline
+  </nz-form-label>
+  <nz-form-control>
+    <nz-range-picker
+      formControlName="eee"></nz-range-picker>
+  </nz-form-control>
+</nz-form-item>
 
 
 

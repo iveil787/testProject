@@ -18,7 +18,7 @@
     <td>{{ data.surname }}</td>
     <td>{{ data.patronymic }}</td>
     <td>{{ data.studyGroup }}</td>
-    <td>{{ data.dateBirth }}</td>
+    <td>{{ data.dateBirth | date:'dd.MM.yyyy' }}</td>
     <td>
       {{ homeWork.case }}
       <nz-divider nzType="vertical"></nz-divider>

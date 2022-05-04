@@ -103,6 +103,27 @@
         "2022-05-07T14:20:36.864Z"
       ],
       "wishes": "yy"
+    },
+    {
+      "id": "a3ee10ce-e8a6-4593-b1bf-2632e5915be9",
+      "idTeacher": "брать значение из токена",
+      "nicknameStudent": "nn",
+      "homework": "nn",
+      "description": "nn",
+      "deadline": [
+        "2022-05-12T12:20:24.942Z",
+        "2022-05-13T12:20:24.942Z"
+      ],
+      "wishes": "nn"
+    },
+    {
+      "id": "50d3663a-0653-41cf-88c5-b84bc0a43b14",
+      "idTeacher": "брать значение из токена",
+      "nicknameStudent": "ss",
+      "homework": "ss",
+      "description": "ss",
+      "deadline": 1651765169600,
+      "wishes": "ss"
     }
   ],
   "profile": {

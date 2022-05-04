@@ -45,6 +45,7 @@ import {NzModalModule} from "ng-zorro-antd/modal";
 import {NzRadioModule} from "ng-zorro-antd/radio";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
+import {HomeworkEffects} from "./reducers/homework/homework.effects";
 
 registerLocaleData(en);
 
@@ -69,7 +70,7 @@ registerLocaleData(en);
     NzFormModule,
     NzMenuModule,
     StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([loginEffects, TableUserEffects]),
+    EffectsModule.forRoot([loginEffects, TableUserEffects,HomeworkEffects]),
     NzInputModule,
     NzAvatarModule,
     NzPopoverModule,

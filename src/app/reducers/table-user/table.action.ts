@@ -11,7 +11,7 @@ export enum UserActions {
   successCreateUser = "[user] successCreateUser",
 }
 
-// ========================================Для регистрации Action========================================
+// ========================================Create User========================================
 export class TaskCreateUserAction implements Action {
   constructor(public payload: Student) {
   }
@@ -26,7 +26,7 @@ export class SuccessCreateUserAction implements Action {
 
   readonly type = UserActions.successCreateUser;
 }
-// ========================================Для регистрации Action========================================
+// ========================================Create Table User========================================
 export class TaskCreateTableUser implements Action {
   // constructor(public payload: Student) {
   //
