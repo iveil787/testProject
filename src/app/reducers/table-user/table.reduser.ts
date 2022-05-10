@@ -5,7 +5,7 @@ export const tableUser = "tableUser"
 
 const initialTableUser: Student[] = [
   {
-    id: 11111111,
+    id: "11111111",
     email: "yyy@yandex.ru",
     login: "rr",
     password: "rr",

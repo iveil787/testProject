@@ -2,7 +2,12 @@ import {Inject, Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {Homework, LoginService} from "../../../services/login.service";
 import {map, switchMap} from "rxjs";
-import {HomeworkActions, SuccessCreateHomeworkActions, SuccessCreateTableHomeworkActions} from "./homework.action";
+import {
+  HomeworkActions,
+  SuccessCreateHomeworkActions,
+  SuccessCreateTableHomeworkActions,
+  SuccessEditHomeworkActions
+} from "./homework.action";
 
 @Injectable()
 export class HomeworkEffects {
@@ -33,5 +38,15 @@ export class HomeworkEffects {
     )
   );
 
+ editHWEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HomeworkActions.taskEditHomeworkActions),
+      switchMap((action) => {
+        // @ts-ignore
+
+        return this.loginservice.addEditHomework(action.payload).pipe(map(() => new SuccessEditHomeworkActions(action.payload)))
+      })
+    )
+  );
 
 }

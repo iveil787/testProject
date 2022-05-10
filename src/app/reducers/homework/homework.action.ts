@@ -8,6 +8,9 @@ export enum HomeworkActions {
   errorHomework = "[homework] errorHomework",
   taskCreateTableHomeworkActions = "[homework] TaskCreateTableHomeworkActions",
   successCreateTableHomeworkActions = "[homework] successCreateTableHomeworkActions",
+  successEditHomeworkActions ="[homework] successEditHomeworkActions",
+  taskEditHomeworkActions="[homework] taskEditHomeworkActions",
+
 
 }
 
@@ -27,6 +30,19 @@ export class SuccessCreateHomeworkActions implements Action {
   readonly type = HomeworkActions.successCreateHomeworkActions;
 }
 
+export class TaskEditHomeworkActions implements Action {
+  constructor(public payload: Homework) {
+  }
+
+  readonly type = HomeworkActions.taskEditHomeworkActions;
+}
+
+export class SuccessEditHomeworkActions implements Action {
+  constructor(public payload: Student[]) {
+  }
+
+  readonly type = HomeworkActions.successEditHomeworkActions;
+}
 
 // ========================================Create Table Homework========================================
 export class TaskCreateTableHomeworkActions implements Action {
@@ -40,5 +56,9 @@ export class SuccessCreateTableHomeworkActions implements Action {
 
   readonly type = HomeworkActions.successCreateTableHomeworkActions;
 }
+
+
+
+
 
 

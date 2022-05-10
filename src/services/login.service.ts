@@ -14,7 +14,8 @@ export interface Homework {
   homework: string;
   description: string;
 
-  deadline: number;
+  startDate: number;
+  endDate: number;
   wishes: string;
 }
 
@@ -28,7 +29,7 @@ export class LoginService {
 
   modelUserStudent: Student[] = [
     {
-      id: 1, email: "Dr Nice", login: "fff", password: "4545", name: "fdf", surname: "Faust", patronymic: "ff",
+      id: "1", email: "Dr Nice", login: "fff", password: "4545", name: "fdf", surname: "Faust", patronymic: "ff",
       dateBirth: 4444, studyGroup: "1"
     },
   ];
@@ -104,12 +105,9 @@ export class LoginService {
     return this.http.get <Homework[]>("http://localhost:3000/homework");
   }
 
+  modelHomework: Homework[] = [];
 
-  modelHomework: Homework[] = [
-  //   {
-  //   wishes: "ffff"
-  // },
-  ];
+  modelEditHomework: Homework[] = [];
 
   addHomework(user: Homework): Observable<void>{
     this.modelHomework.push(user);
@@ -118,12 +116,29 @@ export class LoginService {
       idTeacher: user.idTeacher, nicknameStudent: user.nicknameStudent,
       homework: user.homework, description: user.description,
 
-      deadline: user.deadline,
+      startDate: user.startDate, endDate: user.endDate,
+
       wishes: user.wishes
         };
 
     return this.http.post<void>("http://localhost:3000/homework", body);
   }
+
+  addEditHomework  (user: Homework): Observable<void>{
+    this.modelEditHomework.push(user);
+    const body = {
+      id: user.id,
+      idTeacher: user.idTeacher, nicknameStudent: user.nicknameStudent,
+      homework: user.homework, description: user.description,
+
+      startDate: user.startDate, endDate: user.endDate,
+
+      wishes: user.wishes
+    };
+
+    return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);
+  }
+
 
   // addData(user: Student): Observable<void> {
   //   this.modelUserStudent.push(user);

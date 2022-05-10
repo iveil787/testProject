@@ -10,17 +10,29 @@ const initialHomework: Homework [] = [
     nicknameStudent: "rr",
     homework: "rr",
     description: "rr",
-    deadline: 4,
+    startDate: 44,
+    endDate: 55,
     wishes: "rr"
   }]
 
-export const  homeWorkReduser = (state: Homework[] = initialHomework, action: any) => {
+export const homeWorkReduser = (state: Homework[] = initialHomework, action: any) => {
 
   switch (action.type) {
     case HomeworkActions.successCreateTableHomeworkActions:
-      return action.payload;
+      return [...action.payload];
     case HomeworkActions.successCreateHomeworkActions:
       return [...state, action.payload];
+    case HomeworkActions.successEditHomeworkActions:
+
+      return [...state.map((editTest) => {
+          if (action.payload.id === editTest.id) {
+            return action.payload
+          } else {
+            return editTest
+          }
+        }
+      )]
+        ;
     default:
       return state;
   }

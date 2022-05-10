@@ -69,61 +69,54 @@
   ],
   "homework": [
     {
-      "id": "4b34d0c1-8c0f-4fc9-827b-f11eab0025e1",
-      "idTeacher": "брать значение из токена",
+      "id": "c4bee960-32ac-4e3b-82de-1c10c64bcfb5",
+      "idTeacher": "5846ef1c-e50d-43da-99df-311225fd1c11",
+      "nicknameStudent": "qq",
+      "homework": "qq",
+      "description": "rtttt",
+      "startDate": 1652301927696,
+      "endDate": 1652388327696,
+      "wishes": "lalk"
+    },
+    {
+      "id": "8a93fbc3-6361-44f6-a376-4eeaa9b107cd",
+      "idTeacher": "5846ef1c-e50d-43da-99df-311225fd1c11",
+      "nicknameStudent": "mm",
+      "homework": "mm",
+      "description": "mm",
+      "startDate": 1652291258080,
+      "endDate": 1652377658080,
+      "wishes": "rrrr"
+    },
+    {
+      "id": "0ffbffe9-dfa7-4b4c-89ec-ab379667ac85",
+      "idTeacher": "5846ef1c-e50d-43da-99df-311225fd1c11",
+      "nicknameStudent": "bv",
+      "homework": "vv",
+      "description": "vv",
+      "startDate": 1651928062988,
+      "endDate": 1652014462988,
+      "wishes": "vv"
+    },
+    {
+      "id": "6de64433-4f14-4da5-8a0f-63c41df7046b",
+      "idTeacher": "5846ef1c-e50d-43da-99df-311225fd1c11",
       "nicknameStudent": "ee",
-      "homework": "ee",
-      "description": "ee",
-      "deadline": [
-        "2022-05-03T19:33:16.376Z",
-        "2022-05-04T19:33:16.376Z"
-      ],
-      "wishes": "ee"
+      "homework": "tt",
+      "description": "tt",
+      "startDate": 1652290980353,
+      "endDate": 1652377380353,
+      "wishes": "tt"
     },
     {
-      "id": "525b8d0f-d127-4f2c-8549-9bc06a859c8c",
-      "idTeacher": "брать значение из токена",
-      "nicknameStudent": "rr",
-      "homework": "rr",
-      "description": "rr",
-      "deadline": [
-        "2022-05-04T14:20:11.382Z",
-        "2022-05-05T14:20:11.382Z"
-      ],
-      "wishes": "rr"
-    },
-    {
-      "id": "23db4560-cfa5-45fc-8d6c-fb2ab81daead",
-      "idTeacher": "брать значение из токена",
-      "nicknameStudent": "yy",
-      "homework": "yy",
-      "description": "yy",
-      "deadline": [
-        "2022-05-05T14:20:36.864Z",
-        "2022-05-07T14:20:36.864Z"
-      ],
-      "wishes": "yy"
-    },
-    {
-      "id": "a3ee10ce-e8a6-4593-b1bf-2632e5915be9",
-      "idTeacher": "брать значение из токена",
-      "nicknameStudent": "nn",
-      "homework": "nn",
-      "description": "nn",
-      "deadline": [
-        "2022-05-12T12:20:24.942Z",
-        "2022-05-13T12:20:24.942Z"
-      ],
-      "wishes": "nn"
-    },
-    {
-      "id": "50d3663a-0653-41cf-88c5-b84bc0a43b14",
-      "idTeacher": "брать значение из токена",
-      "nicknameStudent": "ss",
-      "homework": "ss",
-      "description": "ss",
-      "deadline": 1651765169600,
-      "wishes": "ss"
+      "id": "dd4c76ea-37bc-4565-a04d-ecc6ca2b4e0b",
+      "idTeacher": "5846ef1c-e50d-43da-99df-311225fd1c11",
+      "nicknameStudent": "tt",
+      "homework": "tt",
+      "description": "tt",
+      "startDate": 1652299944467,
+      "endDate": 1652386344467,
+      "wishes": "ttt"
     }
   ],
   "profile": {

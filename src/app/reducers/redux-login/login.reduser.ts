@@ -6,7 +6,7 @@ export const loginUser = "loginUser";
 
 const initialStatelogin: Student[] = [
   {
-    id: 11111111,
+    id: "11111111",
     email: "yyy@yandex.ru",
     login: "rr",
     password: "rr",

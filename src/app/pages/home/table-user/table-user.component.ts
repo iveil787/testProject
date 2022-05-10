@@ -2,10 +2,11 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {Student} from "../../../../models/UserStudents";
 import {select, Store} from "@ngrx/store";
 import {TaskCreateTableUser} from "../../../reducers/table-user/table.action";
-import {LoginService} from "../../../../services/login.service";
+import {Homework, LoginService} from "../../../../services/login.service";
 import {tableSelector} from "../../../reducers/table-user/table.selector";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {tableHomeworkSelector} from "../../../reducers/homework/homework.selector";
 
 
 interface HomeWork {
@@ -37,8 +38,10 @@ export interface StudentTest {
 export class TableUserComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(LoginService) private loginservice: LoginService, private store$: Store<Student>,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute, private HomeWorkStore$: Store<HomeWork>) {
   }
+
+  public tableHomeworkDate$: Observable<Homework[]> = this.HomeWorkStore$.pipe(select(tableHomeworkSelector));
 
   id: any;
   sub: any;
@@ -52,6 +55,7 @@ export class TableUserComponent implements OnInit, OnDestroy {
       this.id = +params['id']; // (+) converts string 'id' to a number
     });
   }
+
   ngOnDestroy() {
     this.sub.unsubscribe();
   }
@@ -61,6 +65,7 @@ export class TableUserComponent implements OnInit, OnDestroy {
   goInToTheServ() {
     this.tableDate$
   }
+
   taskTableUser() {
     this.store$.dispatch(new TaskCreateTableUser()
     )
@@ -73,8 +78,8 @@ export class TableUserComponent implements OnInit, OnDestroy {
     idUser: 2222,
     nameHw: "aaaa",
     case: "bbbbbb",
-    date:2222,
-}
+    date: 2222,
+  }
 
   listOfData: StudentTest[] = [
     {
@@ -143,4 +148,11 @@ export class TableUserComponent implements OnInit, OnDestroy {
   saveHW() {
     alert("saveHW")
   }
+
+  filterHW(userID: string) {
+    // this.tableHomeworkDate$.pipe(map((HW) => (HW.filter((item) => (userID === item.idTeacher)))))
+
+    return  this.tableHomeworkDate$.pipe(map((HW) => (HW.filter((item) => (userID === item.nicknameStudent)))))
+  }
+
 }

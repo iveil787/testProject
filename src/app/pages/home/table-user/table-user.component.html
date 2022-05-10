@@ -5,7 +5,7 @@
     <th>Surname</th>
     <th>Patronymic</th>
     <th>StudyGroup</th>
-    <th>DateBirth</th>
+<!--    <th>DateBirth</th>-->
     <th>HW</th>
     <th>Action</th>
   </tr>
@@ -18,15 +18,14 @@
     <td>{{ data.surname }}</td>
     <td>{{ data.patronymic }}</td>
     <td>{{ data.studyGroup }}</td>
-    <td>{{ data.dateBirth | date:'dd.MM.yyyy' }}</td>
-    <td>
-      {{ homeWork.case }}
-      <nz-divider nzType="vertical"></nz-divider>
+<!--    <td>{{ data.dateBirth | date:'dd.MM.yyyy' }}</td>-->
+    <td  >
+      {{ (filterHW(data.name) | async)?.[0]?.homework}}
+
     </td>
     <td>
 <!--      <button nz-button nzType="primary" (click)="open()">Create</button>-->
       <!--      <a (click)="showHW()">add homework 一 {{ data.name }}</a>-->
-      <nz-divider nzType="vertical"></nz-divider>
       <a>Delete</a>
     </td>
 
@@ -88,45 +87,3 @@
   </ng-template>
 </nz-drawer>
 
-<button
-  nz-button
-  nzType="primary"
-  nz-popover
-  nzPopoverTitle="New HW"
-  [(nzPopoverVisible)]="visiblePopover"
-  (nzPopoverVisibleChange)="change($event)"
-  nzPopoverTrigger="click"
-  [nzPopoverContent]="contentTemplate"
->
-  Click me
-</button>
-<ng-template #contentTemplate>
-
-  <nz-form-item>
-    <nz-form-label>title of homework</nz-form-label>
-    <nz-form-control>
-      <input nz-input placeholder="title of homework"/>
-    </nz-form-control>
-
-
-  </nz-form-item>
-  <nz-form-label>Description for homework</nz-form-label>
-  <nz-form-control>
-    <input nz-input placeholder="please enter the description "/>
-  </nz-form-control>
-  <nz-form-item>
-    <nz-form-label>student</nz-form-label>
-
-
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label>DateTime</nz-form-label>
-    <nz-form-control>
-      <nz-range-picker></nz-range-picker>
-    </nz-form-control>
-  </nz-form-item>
-
-  <button nz-button nzType="primary" (click)="saveHW()">SaveHW</button>
-  <a (click)="clickMe()">Close </a>
-
-</ng-template>

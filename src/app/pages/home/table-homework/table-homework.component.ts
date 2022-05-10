@@ -1,15 +1,18 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {Homework, LoginService} from "../../../../services/login.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {NzSelectSizeType} from "ng-zorro-antd/select";
+
 import {v4 as uuidv4} from 'uuid';
 import {Student} from "../../../../models/UserStudents";
 import {select, Store} from "@ngrx/store";
-
-import {TaskCreateTableHomeworkActions} from "../../../reducers/homework/homework.action";
-import {Observable} from "rxjs";
-
+import {
+  TaskCreateHomeworkActions,
+  TaskCreateTableHomeworkActions, TaskEditHomeworkActions
+} from "../../../reducers/homework/homework.action";
+import { Observable} from "rxjs";
 import {tableHomeworkSelector} from "../../../reducers/homework/homework.selector";
+import {tableSelector} from "../../../reducers/table-user/table.selector";
+
 
 
 interface HomeWork {
@@ -29,70 +32,16 @@ interface HomeWork {
 })
 export class TableHomeworkComponent implements OnInit {
 
-  constructor(@Inject(LoginService) private loginservice: LoginService, private fb: FormBuilder, private store$: Store<HomeWork>) {
+  constructor(@Inject(LoginService) private loginservice: LoginService, private fb: FormBuilder,
+              private store$: Store<HomeWork>, private list$: Store<Student>) {
   }
 
-  ngOnInit(): void {
-    this.taskTableHomework()
-    this.tableHomeworkDate$.subscribe((allHomework) => console.log(allHomework))
+  // ==================================переменные ==============================
+  validateForm!: FormGroup;
 
-
-    this.validateForm = this.fb.group({
-      nicknameStudent: [null, [Validators.required]],
-      homework: [null, [Validators.required]],
-      description: [null, [Validators.required]],
-      // select: [null],
-      deadline: [null],
-      wishes: [null, [Validators.required, Validators.maxLength(10)]],
-    });
-    console.log(this.validateForm.getRawValue().description)
-    this.goTo();
-    this.currentUser();
-    console.log(this.teacher);
-
-    // ====================================================== selector
-    // const children: Array<{ label: string; value: string }> = [];
-    // for (let i = 10; i < 36; i++) {
-    //   children.push({label: i.toString(36) + i, value: i.toString(36) + i});
-    // }
-    // this.listOfOption = children;
-  }
-
+  validateFormDetails!: FormGroup;
 
   public tableHomeworkDate$: Observable<Homework[]> = this.store$.pipe(select(tableHomeworkSelector));
-
-  goInToTheServ() {
-    this.tableHomeworkDate$
-  }
-
-  taskTableHomework() {
-    this.store$.dispatch(new TaskCreateTableHomeworkActions()
-    )
-  }
-
-  // ====================================================== selector
-  currentUser() {
-    this.subscription = this.loginservice.currentUser().subscribe((data: Student[]) => (this.teacher = data))
-    // this.loginservice.currentUser().subscribe((data: Student[]) => (this.teacher = data));
-  }
-
-  addHomework(): void {
-    // this.currentUser();
-    const newHomework = {
-      id: uuidv4(),
-      idTeacher: "брать значение из токена",
-      nicknameStudent: this.validateForm.getRawValue().nicknameStudent,
-      homework: this.validateForm.getRawValue().homework,
-      description: this.validateForm.getRawValue().description,
-      deadline: this.validateForm.getRawValue().deadline[0].getTime(),
-      wishes: this.validateForm.getRawValue().wishes,
-
-    }
-    this.loginservice.addHomework(newHomework).subscribe();
-    console.log(newHomework);
-  };
-
-  // ======================================================
 
   homeWork: any;
 
@@ -100,7 +49,14 @@ export class TableHomeworkComponent implements OnInit {
 
   teacher: any;
 
+  statusTime: any = new Date;
 
+  editHwTest: any;
+
+  selectedValue = null;
+
+  time = new Date();
+  // ====================================================== мусор
   listOfData: HomeWork[] = [
     {
       idWomeHork: 1,
@@ -128,11 +84,36 @@ export class TableHomeworkComponent implements OnInit {
     }
   ];
 
+  // ================================== Жизненный цикл ==============================
+  ngOnInit(): void {
 
-// =========================================================
+    this.statusTime.getTime();
+
+    this.taskTableHomework()
+    this.tableHomeworkDate$.subscribe((allHomework) => console.log(allHomework))
+
+    this.validateForm = this.fb.group({
+      nicknameStudent: [null, [Validators.required]],
+      homework: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+      deadline: [null],
+      wishes: [null, [Validators.required, Validators.maxLength(10)]],
+    });
 
 
-  validateForm!: FormGroup;
+    this.validateFormDetails = this.fb.group({
+      nicknameStudent: [null, [Validators.required]],
+      homework: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+      deadline: [null],
+      wishes: [null, [Validators.required, Validators.maxLength(10)]],
+    });
+
+
+    // this.currentUser() берёт данные Юзера из токена
+    this.currentUser();
+
+  }
 
 
   submitForm(): void {
@@ -149,25 +130,92 @@ export class TableHomeworkComponent implements OnInit {
     }
   }
 
+  submitFormDetails(): void {
+    if (this.validateFormDetails.valid) {
+      this.addEditHomework();
+      console.log('submit', this.validateFormDetails.value);
+    } else {
+      Object.values(this.validateFormDetails.controls).forEach(control => {
+        if (control.invalid) {
+          control.markAsDirty();
+          control.updateValueAndValidity({onlySelf: true});
+        }
+      });
+    }
+  }
 
+
+  addHomework(): void {
+    // this.currentUser();
+    const [startDate, endDate] = this.validateForm.getRawValue().deadline
+    const newHomework = {
+      id: uuidv4(),
+      idTeacher: this.teacher[0].id,
+      nicknameStudent: this.validateForm.getRawValue().nicknameStudent,
+      homework: this.validateForm.getRawValue().homework,
+      description: this.validateForm.getRawValue().description,
+      startDate: startDate.getTime(),
+      endDate: endDate.getTime(),
+      wishes: this.validateForm.getRawValue().wishes,
+
+    }
+    // this.loginservice.addHomework(newHomework).subscribe();
+    this.taskCreateHWUser(newHomework)
+
+
+    console.log(newHomework);
+
+    // console.log(this.validateForm.getRawValue().deadline);
+  };
+
+  addEditHomework(): void {
+    // this.currentUser();
+    const [startDate, endDate] = this.validateFormDetails.getRawValue().deadline
+    const newEditHomework = {
+      id: this.editHwTest.id,
+      idTeacher: this.teacher[0].id,
+      nicknameStudent: this.editHwTest.nicknameStudent,
+      homework: this.editHwTest.homework,
+      description: this.validateFormDetails.getRawValue().description,
+      startDate: startDate.getTime(),
+      endDate: endDate.getTime(),
+      wishes: this.validateFormDetails.getRawValue().wishes,
+    }
+    // this.loginservice.addEditHomework(newEditHomework).subscribe();
+
+    this.taskEditHomework(newEditHomework)
+    // console.log(this.validateForm.getRawValue().deadline);
+  };
+
+  taskEditHomework(HW: Homework) {
+    this.store$.dispatch(new TaskEditHomeworkActions(HW))
+  }
+
+  // поход на серв без state
+  // goTo(): void {
+  //   this.loginservice.getAllHomework().subscribe((data) => (this.homeWork = data))
+  // }
   // ====================================================goToService
-  goTo(): void {
-    this.loginservice.getAllHomework().subscribe((data) => (this.homeWork = data))
+  goInToTheServ() {
+    this.tableHomeworkDate$
   }
 
-  // ====================================================visiblePopover
-  visiblePopover: boolean = false;
-
-  clickMe(): void {
-    this.visiblePopover = false;
+  taskTableHomework() {
+    this.store$.dispatch(new TaskCreateTableHomeworkActions()
+    )
   }
 
-  change(value: any): void {
-    console.log(value);
+  // ====================================================== попытки получить данные из subscribe
+  currentUser() {
+    return this.loginservice.currentUser().subscribe((data: Student[]) => {
+      this.teacher = data
+    })
+
   }
+
+  // ====================================================visiblePopoverCreate
 
   isVisible = false;
-
 
   showModal(): void {
     this.isVisible = true;
@@ -184,19 +232,52 @@ export class TableHomeworkComponent implements OnInit {
     this.isVisible = false;
   }
 
-  saveHW() {
-    alert("saveHW")
+// ====================================================visiblePopoverEdite
+
+  isVisibleDetails = false;
+
+  showModalDetails(): void {
+    this.isVisibleDetails = true;
   }
 
+  handleOkDetails(): void {
+    console.log('Button ok clicked!');
+    this.isVisibleDetails = false;
+    this.submitFormDetails()
+  }
 
-// ++++++++++++++++++++++++++++++++++++selector
+  handleCancelDetails(): void {
+    console.log('Button cancel clicked!');
+    this.isVisibleDetails = false;
+    this.submitFormDetails()
+  }
+
+  editHW(Hw: any): void {
+    this.editHwTest = Hw;
+    this.validateFormDetails.controls["nicknameStudent"].setValue(Hw?.nicknameStudent);
+    this.validateFormDetails.controls["homework"].setValue(Hw?.homework);
+    this.validateFormDetails.controls["description"].setValue(Hw?.description);
+    this.validateFormDetails.controls["wishes"].setValue(Hw?.wishes);
+
+  }
+
+// ++++++++++++++++++++++++++++++++++++selector 2
+
+  public allUseList$: Observable<Student[]> = this.list$.pipe(select(tableSelector));
+
+  goToUse() {
+    this.allUseList$
+  }
+
+  // taskTableUser() {
+  //   this.list$.dispatch(new TaskCreateTableUser()
+  //   )
+  // }
 
 
-  listOfOption: Array<{ label: string; value: string }> = [];
-  size: NzSelectSizeType = 'default';
-  singleValue = 'a10';
-  multipleValue = ['a10', 'c12'];
-  tagValue = ['a10', 'c12', 'tag'];
-
+  taskCreateHWUser(HW: Homework) {
+    this.list$.dispatch(new TaskCreateHomeworkActions(HW)
+    )
+  }
 
 }

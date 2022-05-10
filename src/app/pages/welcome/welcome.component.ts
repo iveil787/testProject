@@ -86,7 +86,7 @@ export class WelcomeComponent implements OnInit {
 //   этот метод работает напрямую с сервисом;
   addStudents(): void {
     const newStudent = {
-      id: this.loginservice.modelUserStudent.length + 1,
+      id:  "1",
       email: this.myForm.getRawValue().email,
       login: this.myForm.getRawValue().login,
       password: this.myForm.getRawValue().password,
@@ -101,7 +101,7 @@ export class WelcomeComponent implements OnInit {
 
   createUserRedux() {
     this.store$.dispatch(new TaskCreateUserAction({
-        id: this.loginservice.modelUserStudent.length + 1,
+        id: "1",
         email: this.myForm.getRawValue().email,
         login: this.myForm.getRawValue().login,
         password: this.myForm.getRawValue().password,
