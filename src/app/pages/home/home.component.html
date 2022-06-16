@@ -19,6 +19,15 @@
           </li>
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/login">login-form</a>
+
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/table-homework">table-homework</a>
+            Homework
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a routerLink="/home/table-user">table-user</a>
+            Homework
           </li>
           <li nz-menu-item nzMatchRouter>
             <a>Monitor</a>
@@ -59,7 +68,10 @@
     </nz-header>
     <nz-content>
       <div class="inner-content">
-        <router-outlet></router-outlet>
+        <router-outlet>
+          <!--          <app-table-user></app-table-user>-->
+        </router-outlet>
+
       </div>
     </nz-content>
   </nz-layout>

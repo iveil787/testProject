@@ -1,11 +1,11 @@
 import {Student} from "../../../models/UserStudents";
-import {registerUserActions} from "./register.actions";
+import {UserActions} from "./table.action";
 
-export const userNode = "user";
+export const tableUser = "tableUser"
 
-const initialStateRegis: Student[] = [
+const initialTableUser: Student[] = [
   {
-    id: 789789,
+    id: "11111111",
     email: "yyy@yandex.ru",
     login: "rr",
     password: "rr",
@@ -16,13 +16,15 @@ const initialStateRegis: Student[] = [
     studyGroup: "rr",
   }];
 
-export const userReducerRegis = (state = initialStateRegis, action: any) => {
+export const tableUserReducer = (state = initialTableUser, action: any) => {
 
   switch (action.type) {
-       case registerUserActions.successCreateUser:
+    case UserActions.successCreateTableUser:
+      return action.payload;
+    case UserActions.successCreateUser:
       return [...state, action.payload];
     default:
       return state;
   }
-}
 
+}

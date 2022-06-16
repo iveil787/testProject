@@ -1,10 +1,10 @@
 import {createFeatureSelector, createSelector} from "@ngrx/store";
-import {errorsList, ErrosList} from "./error.reduser";
+import {errorsList, ErrorsList} from "./error.reduser";
 
 
-export const selectErrorFeature = createFeatureSelector<ErrosList>(errorsList);
+export const selectErrorFeature = createFeatureSelector<ErrorsList>(errorsList);
 
 export const selectError = createSelector(
   selectErrorFeature,
-  (error: ErrosList): string => error.error
+  (error: ErrorsList): string => error.error
 );

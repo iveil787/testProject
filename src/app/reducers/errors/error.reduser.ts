@@ -1,16 +1,16 @@
 import {ErrorsActions} from "./error.action";
 
-export const errorsList = "Error";
+export const errorsList = "Errors";
 
-export interface ErrosList {
+export interface ErrorsList {
   error: string,
 }
 
-const initialError: ErrosList = {
+const initialError: ErrorsList = {
   error: "Cleare",
 }
 
-export const errorReduser = (state: ErrosList = initialError, action: any) => {
+export const errorReduser = (state: ErrorsList = initialError, action: any) => {
   switch (action.type) {
     case ErrorsActions.taskErrorsActions:
       return {

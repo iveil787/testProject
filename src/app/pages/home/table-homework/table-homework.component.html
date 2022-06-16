@@ -1,0 +1,228 @@
+<nz-table #basicTable [nzData]="listOfData">
+  <thead>
+  <tr>
+    <th>Teacher</th>
+    <th>Student</th>
+    <th>Homework</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Status</th>
+    <th>Description</th>
+    <th>Wishes</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let data of tableHomeworkDate$ | async">
+    <td>{{ data.idTeacher }}</td>
+    <td>{{ data.nicknameStudent }}</td>
+    <td>{{ data.homework }}</td>
+    <td>{{ data.startDate | date:'dd.MM.yyyy'}}</td>
+    <td>{{ data.endDate | date:'dd.MM.yyyy'}}</td>
+    <td [ngClass]="data.endDate > statusTime ?  'green' : 'red'">Status</td>
+    <td>{{ data.description}}</td>
+    <td>{{ data.wishes }}</td>
+
+    <!--    <td>-->
+    <!--      <a>Action 一 {{ data.wishes }}</a>-->
+    <!--      <nz-divider nzType="vertical"></nz-divider>-->
+    <!--      <a>Delete</a>-->
+    <!--    </td>-->
+    <td>
+      <button nz-button [nzType]="'primary'" (click)="showModalDetails(); editHW(data)">
+        <span>Edit</span>
+      </button>
+    </td>
+
+    <td>
+    <button nz-button [nzType]="'primary'" (click)="deleteHWRedux(data)" >
+      <span>delete</span>
+    </button>
+    </td>
+
+    <td>
+      <button nz-button [nzType]="'primary'" (click)="showModal()">
+        <span>Create</span>
+      </button>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>
+
+<!--================================================= formCreate =================================================-->
+
+<!--<button nz-button [nzType]="'primary'" (click)="showModal()"><span>Create</span></button>-->
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6" [nzXs]="10"
+          nzFor="nicknameStudent"
+
+        ><span>Student</span>
+        </nz-form-label>
+
+        <nz-select class="userNameSelect" nz-input id="nicknameStudent" formControlName="nicknameStudent"
+                   nzShowSearch nzAllowClear nzPlaceHolder="Select a student" [(ngModel)]="selectedValue">
+          <nz-option
+            *ngFor="let data of allUseList$ | async"
+            nzLabel="{{ data.name }}" nzValue="{{ data.name }}"></nz-option>
+        </nz-select>
+
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          nzFor="homework"
+
+        ><span>Homework</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Homework!">
+
+          <input nz-input id="homework" formControlName="homework"/>
+
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          nzFor="description"
+
+        ><span>Description</span>
+        </nz-form-label>
+        <nz-form-control>
+                <textarea
+                  nz-input id="description"
+                  placeholder="please enter description"
+                  formControlName="description"
+                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+        >Deadline
+        </nz-form-label>
+        <nz-form-control>
+          <nz-range-picker  formControlName="deadline"></nz-range-picker>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          nzFor="description"
+
+        ><span>Wishes</span>
+        </nz-form-label>
+        <nz-form-control>
+                <textarea
+                  nz-input id="wishes"
+                  placeholder="please enter wishes"
+                  formControlName="wishes"
+                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
+
+<!--================================================= formEdite =================================================-->
+<!--<button nz-button [nzType]="'primary'" (click)="showModalDetails()"><span>Show Modal</span></button>-->
+<nz-modal [(nzVisible)]="isVisibleDetails" nzTitle="The first Modal" (nzOnCancel)="handleCancelDetails()" (nzOnOk)="handleOkDetails()">
+  <ng-container *nzModalContent>
+    <form nz-form [formGroup]="validateFormDetails" (ngSubmit)="submitFormDetails()">
+
+      <nz-form-item >
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          nzFor="nicknameStudent"
+
+        >
+          <span>Nickname</span>
+        </nz-form-label >
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!"  >
+          <input  nz-input id="nicknameStudentDetails" formControlName="nicknameStudent" readonly />
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          nzFor="homework"
+
+        ><span>Homework</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Homework!">
+
+          <input nz-input id="homeworkDetails" formControlName="homework" readonly />
+
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          nzFor="description"
+
+        ><span>Description</span>
+        </nz-form-label>
+        <nz-form-control>
+                <textarea
+                  nz-input id="descriptionDetails"
+                  placeholder="please enter description"
+                  formControlName="description"
+                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          readonly
+        >Deadline
+        </nz-form-label>
+        <nz-form-control>
+          <nz-range-picker  formControlName="deadline" ></nz-range-picker>
+        </nz-form-control>
+      </nz-form-item>
+
+      <nz-form-item>
+        <nz-form-label
+          [nzSm]="6"
+          [nzXs]="24"
+          nzFor="description"
+
+        ><span>Wishes</span>
+        </nz-form-label>
+        <nz-form-control>
+                <textarea
+                  nz-input id="wishesDetails"
+                  placeholder="please enter wishes"
+                  formControlName="wishes"
+                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                ></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
+
+
+

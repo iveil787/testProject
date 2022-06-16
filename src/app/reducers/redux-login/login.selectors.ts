@@ -14,3 +14,8 @@ export const selectorPassword = createSelector(
   selectorsloginUserFeature,
   (state: Student): string => state.password
 );
+
+export const selectorCurrentUser = createSelector(
+  selectorsloginUserFeature,
+  (state: Student): string => state.id
+);

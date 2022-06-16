@@ -5,18 +5,30 @@ import {Student} from "../models/UserStudents";
 import {Observable} from "rxjs";
 import {v4 as uuidv4} from 'uuid';
 import {Router} from "@angular/router";
+import {NzMessageService} from "ng-zorro-antd/message";
+
+export interface Homework {
+  id: string;
+  idTeacher: string;
+  nicknameStudent: string;
+  homework: string;
+  description: string;
+  startDate: number;
+  endDate: number;
+  wishes: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(private http: HttpClient, private router: Router, private message: NzMessageService) {
   }
 
   modelUserStudent: Student[] = [
     {
-      id: 1, email: "Dr Nice", login: "fff", password: "4545", name: "fdf", surname: "Faust", patronymic: "ff",
+      id: "1", email: "Dr Nice", login: "fff", password: "4545", name: "fdf", surname: "Faust", patronymic: "ff",
       dateBirth: 4444, studyGroup: "1"
     },
   ];
@@ -27,7 +39,7 @@ export class LoginService {
       id: uuidv4(), email: user.email, login: user.login, password: user.password, name: user.name,
       surname: user.surname, patronymic: user.patronymic, dateBirth: user.dateBirth, studyGroup: user.studyGroup
     };
-    return this.http.post<void>('http://localhost:3000/posts', body);
+    return this.http.post<void>('http://localhost:3000/user', body);
   }
 
   checkToken(): void {
@@ -54,7 +66,7 @@ export class LoginService {
 
   checkTokenID(): void {
     let tokenObj = JSON.parse(localStorage.getItem("token") as string);
-    this.http.get <Student[]>("http://localhost:3000/posts?id=" + tokenObj.id).subscribe((data: Student[]) => {
+    this.http.get <Student[]>("http://localhost:3000/user?id=" + tokenObj.id).subscribe((data: Student[]) => {
       if (data[0]?.id === tokenObj.id) {
         console.log("id верный")
       } else {
@@ -66,7 +78,11 @@ export class LoginService {
   }
 
   getLoginService(login: string, password: string): Observable<Student[]> {
-    return this.http.get <Student[]>("http://localhost:3000/posts?login=" + login + "&password=" + password)
+    return this.http.get <Student[]>("http://localhost:3000/user?login=" + login + "&password=" + password)
+  }
+
+  getAllUser(): Observable<Student[]> {
+    return this.http.get <Student[]>("http://localhost:3000/user");
   }
 
   logOut() {
@@ -74,14 +90,66 @@ export class LoginService {
     this.router.navigate(['login'])
   }
 
+  createMessage(type: string): void {
+    this.message.create(type, `This is a message of ${type}`);
+  }
+
   currentUser(): Observable<Student[]> {
     const tokenObj = JSON.parse(localStorage.getItem("token") as string);
-    return this.http.get <Student[]>("http://localhost:3000/posts?id=" + tokenObj.id)
+    return this.http.get <Student[]>("http://localhost:3000/user?id=" + tokenObj.id)
   }
 
-
-  test(){
-    console.log("you catch it")
+// ++++++++++++++++++++++++++++++++++++ servis homework +++++++++++++++++++++++++++++++++++++
+  getAllHomework(): Observable<Homework[]> {
+    return this.http.get <Homework[]>("http://localhost:3000/homework");
   }
+
+  modelHomework: Homework[] = [];
+
+  modelEditHomework: Homework[] = [];
+
+  addHomework(user: Homework): Observable<void>{
+    this.modelHomework.push(user);
+    const body = {
+      id: user.id,
+      idTeacher: user.idTeacher, nicknameStudent: user.nicknameStudent,
+      homework: user.homework, description: user.description,
+
+      startDate: user.startDate, endDate: user.endDate,
+
+      wishes: user.wishes
+        };
+
+    return this.http.post<void>("http://localhost:3000/homework", body);
+  }
+
+  addEditHomework  (user: Homework): Observable<void>{
+    this.modelEditHomework.push(user);
+    const body = {
+      id: user.id,
+      idTeacher: user.idTeacher, nicknameStudent: user.nicknameStudent,
+      homework: user.homework, description: user.description,
+
+      startDate: user.startDate, endDate: user.endDate,
+
+      wishes: user.wishes
+    };
+
+    return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);
+  }
+
+  deleteHW(HW: Homework){
+    console.log("cach")
+    return this.http.delete<void>("http://localhost:3000/homework/" + HW.id);
+  }
+
+  // addData(user: Student): Observable<void> {
+  //   this.modelUserStudent.push(user);
+  //   const body = {
+  //     id: uuidv4(), email: user.email, login: user.login, password: user.password, name: user.name,
+  //     surname: user.surname, patronymic: user.patronymic, dateBirth: user.dateBirth, studyGroup: user.studyGroup
+  //   };
+  //   return this.http.post<void>('http://localhost:3000/user', body);
+  // }
 }
 
