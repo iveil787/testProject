@@ -13,7 +13,6 @@ export interface Homework {
   nicknameStudent: string;
   homework: string;
   description: string;
-
   startDate: number;
   endDate: number;
   wishes: string;
@@ -139,6 +138,10 @@ export class LoginService {
     return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);
   }
 
+  deleteHW(HW: Homework){
+    console.log("cach")
+    return this.http.delete<void>("http://localhost:3000/homework/" + HW.id);
+  }
 
   // addData(user: Student): Observable<void> {
   //   this.modelUserStudent.push(user);

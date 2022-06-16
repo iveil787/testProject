@@ -9,7 +9,8 @@
       "surname": "ww",
       "patronymic": "ww",
       "dateBirth": 1647373728263,
-      "studyGroup": "ww"
+      "studyGroup": "ww",
+      "role": "TEACHER"
     },
     {
       "id": "024a162e-bd6e-4e0d-912d-8d62925e886a",
@@ -20,7 +21,8 @@
       "surname": "rr",
       "patronymic": "rr",
       "dateBirth": 1648065159780,
-      "studyGroup": "rr"
+      "studyGroup": "rr",
+      "role": "STUDENT"
     },
     {
       "id": "0e9a3cf5-e9db-4808-9a6f-5d2c7076be70",
@@ -69,53 +71,73 @@
   ],
   "homework": [
     {
-      "id": "c4bee960-32ac-4e3b-82de-1c10c64bcfb5",
+      "id": "05e7088d-eadb-46a4-b6fe-3617adaf9876",
       "idTeacher": "5846ef1c-e50d-43da-99df-311225fd1c11",
-      "nicknameStudent": "qq",
-      "homework": "qq",
-      "description": "rtttt",
-      "startDate": 1652301927696,
-      "endDate": 1652388327696,
-      "wishes": "lalk"
+      "nicknameStudent": "rr",
+      "homework": "ee",
+      "description": "66",
+      "startDate": 1652800911002,
+      "endDate": 1652887311002,
+      "wishes": "66"
     },
     {
-      "id": "8a93fbc3-6361-44f6-a376-4eeaa9b107cd",
+      "id": "1f72d7f1-22a8-4c83-8deb-6038e3ac702f",
       "idTeacher": "5846ef1c-e50d-43da-99df-311225fd1c11",
-      "nicknameStudent": "mm",
-      "homework": "mm",
-      "description": "mm",
-      "startDate": 1652291258080,
-      "endDate": 1652377658080,
+      "nicknameStudent": "rr",
+      "homework": "yy",
+      "description": "yy",
+      "startDate": 1652291031480,
+      "endDate": 1652377431480,
+      "wishes": "hhhh"
+    },
+    {
+      "id": "44c7c227-e1c3-4375-8af0-a6ce06ef376d",
+      "idTeacher": "0e9a3cf5-e9db-4808-9a6f-5d2c7076be70",
+      "nicknameStudent": "rr",
+      "homework": "yy",
+      "description": "yy",
+      "startDate": 1652291031480,
+      "endDate": 1652377431480,
       "wishes": "rrrr"
     },
     {
-      "id": "0ffbffe9-dfa7-4b4c-89ec-ab379667ac85",
-      "idTeacher": "5846ef1c-e50d-43da-99df-311225fd1c11",
-      "nicknameStudent": "bv",
-      "homework": "vv",
-      "description": "vv",
-      "startDate": 1651928062988,
-      "endDate": 1652014462988,
-      "wishes": "vv"
-    },
-    {
-      "id": "6de64433-4f14-4da5-8a0f-63c41df7046b",
-      "idTeacher": "5846ef1c-e50d-43da-99df-311225fd1c11",
-      "nicknameStudent": "ee",
+      "id": "f0638db9-8880-4198-b942-03d11cead902",
+      "idTeacher": "0e9a3cf5-e9db-4808-9a6f-5d2c7076be70",
+      "nicknameStudent": "rr",
       "homework": "tt",
       "description": "tt",
-      "startDate": 1652290980353,
-      "endDate": 1652377380353,
-      "wishes": "tt"
+      "startDate": 1652903250276,
+      "endDate": 1652989650276,
+      "wishes": "ttt"
     },
     {
-      "id": "dd4c76ea-37bc-4565-a04d-ecc6ca2b4e0b",
-      "idTeacher": "5846ef1c-e50d-43da-99df-311225fd1c11",
-      "nicknameStudent": "tt",
+      "id": "08222b81-6dc9-47a1-8f03-f8cb0d8a4130",
+      "idTeacher": "0e9a3cf5-e9db-4808-9a6f-5d2c7076be70",
+      "nicknameStudent": "rr",
       "homework": "tt",
       "description": "tt",
-      "startDate": 1652299944467,
-      "endDate": 1652386344467,
+      "startDate": 1652903250276,
+      "endDate": 1652989650276,
+      "wishes": "ttt"
+    },
+    {
+      "id": "522eaebf-d343-46b2-82e1-9986d46a38b0",
+      "idTeacher": "0e9a3cf5-e9db-4808-9a6f-5d2c7076be70",
+      "nicknameStudent": "rr",
+      "homework": "tt",
+      "description": "tt",
+      "startDate": 1652903250276,
+      "endDate": 1652989650276,
+      "wishes": "ttt"
+    },
+    {
+      "id": "1e4b0826-76b6-44ab-924c-824586561768",
+      "idTeacher": "0e9a3cf5-e9db-4808-9a6f-5d2c7076be70",
+      "nicknameStudent": "rr",
+      "homework": "tt",
+      "description": "tt",
+      "startDate": 1652903250276,
+      "endDate": 1652989650276,
       "wishes": "ttt"
     }
   ],

@@ -32,6 +32,13 @@
         <span>Edit</span>
       </button>
     </td>
+
+    <td>
+    <button nz-button [nzType]="'primary'" (click)="deleteHWRedux(data)" >
+      <span>delete</span>
+    </button>
+    </td>
+
     <td>
       <button nz-button [nzType]="'primary'" (click)="showModal()">
         <span>Create</span>
@@ -188,10 +195,11 @@
         <nz-form-label
           [nzSm]="6"
           [nzXs]="24"
+          readonly
         >Deadline
         </nz-form-label>
         <nz-form-control>
-          <nz-range-picker formControlName="deadline"></nz-range-picker>
+          <nz-range-picker  formControlName="deadline" ></nz-range-picker>
         </nz-form-control>
       </nz-form-item>
 

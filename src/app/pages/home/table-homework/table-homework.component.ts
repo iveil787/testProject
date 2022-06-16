@@ -7,11 +7,12 @@ import {Student} from "../../../../models/UserStudents";
 import {select, Store} from "@ngrx/store";
 import {
   TaskCreateHomeworkActions,
-  TaskCreateTableHomeworkActions, TaskEditHomeworkActions
+  TaskCreateTableHomeworkActions, TaskDelletHomeworkActions, TaskEditHomeworkActions
 } from "../../../reducers/homework/homework.action";
-import { Observable} from "rxjs";
-import {tableHomeworkSelector} from "../../../reducers/homework/homework.selector";
+import {Observable} from "rxjs";
+import {filterTeacherHomeworkSelector} from "../../../reducers/homework/homework.selector";
 import {tableSelector} from "../../../reducers/table-user/table.selector";
+
 
 
 
@@ -41,7 +42,8 @@ export class TableHomeworkComponent implements OnInit {
 
   validateFormDetails!: FormGroup;
 
-  public tableHomeworkDate$: Observable<Homework[]> = this.store$.pipe(select(tableHomeworkSelector));
+  public tableHomeworkDate$: Observable<Homework[]> = this.store$.pipe(select(filterTeacherHomeworkSelector));
+
 
   homeWork: any;
 
@@ -55,7 +57,7 @@ export class TableHomeworkComponent implements OnInit {
 
   selectedValue = null;
 
-  time = new Date();
+  // time = [, ]
   // ====================================================== мусор
   listOfData: HomeWork[] = [
     {
@@ -84,12 +86,20 @@ export class TableHomeworkComponent implements OnInit {
     }
   ];
 
+
+// filterHWforTeacher(userId: String){
+//
+//   return  this.tableHomeworkDate$.pipe(map((all) => (all.filter((item) => ( item.idTeacher === "userId")
+//
+//   ))))
+// }
   // ================================== Жизненный цикл ==============================
   ngOnInit(): void {
 
-    this.statusTime.getTime();
+    this.statusTime.getTime()
 
     this.taskTableHomework()
+    // this.filterHWforTeacher(this.teacher)
     this.tableHomeworkDate$.subscribe((allHomework) => console.log(allHomework))
 
     this.validateForm = this.fb.group({
@@ -196,9 +206,9 @@ export class TableHomeworkComponent implements OnInit {
   //   this.loginservice.getAllHomework().subscribe((data) => (this.homeWork = data))
   // }
   // ====================================================goToService
-  goInToTheServ() {
-    this.tableHomeworkDate$
-  }
+  // goInToTheServ() {
+  //   this.tableHomeworkDate$
+  // }
 
   taskTableHomework() {
     this.store$.dispatch(new TaskCreateTableHomeworkActions()
@@ -258,6 +268,7 @@ export class TableHomeworkComponent implements OnInit {
     this.validateFormDetails.controls["homework"].setValue(Hw?.homework);
     this.validateFormDetails.controls["description"].setValue(Hw?.description);
     this.validateFormDetails.controls["wishes"].setValue(Hw?.wishes);
+    this.validateFormDetails.controls["deadline"].setValue([Hw?.startDate,]);
 
   }
 
@@ -269,15 +280,18 @@ export class TableHomeworkComponent implements OnInit {
     this.allUseList$
   }
 
-  // taskTableUser() {
-  //   this.list$.dispatch(new TaskCreateTableUser()
-  //   )
-  // }
-
-
-  taskCreateHWUser(HW: Homework) {
+   taskCreateHWUser(HW: Homework) {
     this.list$.dispatch(new TaskCreateHomeworkActions(HW)
     )
+  }
+
+  deleteHW(idHW: Homework){
+    this.loginservice.deleteHW(idHW).subscribe()
+     console.log(idHW);
+  }
+
+  deleteHWRedux(HW: Homework){
+    this.list$.dispatch(new TaskDelletHomeworkActions(HW))
   }
 
 }

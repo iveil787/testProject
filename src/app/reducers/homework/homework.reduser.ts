@@ -23,7 +23,6 @@ export const homeWorkReduser = (state: Homework[] = initialHomework, action: any
     case HomeworkActions.successCreateHomeworkActions:
       return [...state, action.payload];
     case HomeworkActions.successEditHomeworkActions:
-
       return [...state.map((editTest) => {
           if (action.payload.id === editTest.id) {
             return action.payload
@@ -31,8 +30,9 @@ export const homeWorkReduser = (state: Homework[] = initialHomework, action: any
             return editTest
           }
         }
-      )]
-        ;
+      )];
+    case HomeworkActions.successDelletHomeworkActions:
+      return [...state.filter(HW => HW.id !== action.payload.id)];
     default:
       return state;
   }

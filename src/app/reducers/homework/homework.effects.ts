@@ -5,7 +5,7 @@ import {map, switchMap} from "rxjs";
 import {
   HomeworkActions,
   SuccessCreateHomeworkActions,
-  SuccessCreateTableHomeworkActions,
+  SuccessCreateTableHomeworkActions, SuccessDelletHomeworkActions,
   SuccessEditHomeworkActions
 } from "./homework.action";
 
@@ -45,6 +45,17 @@ export class HomeworkEffects {
         // @ts-ignore
 
         return this.loginservice.addEditHomework(action.payload).pipe(map(() => new SuccessEditHomeworkActions(action.payload)))
+      })
+    )
+  );
+
+  delletHWEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HomeworkActions.taskDelletHomeworkActions),
+      switchMap((action) => {
+        // @ts-ignore
+
+        return this.loginservice.deleteHW(action.payload).pipe(map(() => new SuccessDelletHomeworkActions(action.payload)))
       })
     )
   );
