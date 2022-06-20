@@ -46,6 +46,8 @@ import {NzRadioModule} from "ng-zorro-antd/radio";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import {HomeworkEffects} from "./reducers/homework/homework.effects";
+import { HomePageComponent } from './pages/home/home-page/home-page.component';
+import {RolePipe} from "../services/role.pipe";
 
 registerLocaleData(en);
 
@@ -55,7 +57,9 @@ registerLocaleData(en);
     LoginFormComponent,
     HomeComponent,
     TableUserComponent,
-    TableHomeworkComponent
+    TableHomeworkComponent,
+    HomePageComponent,
+    RolePipe,
   ],
   imports: [
     BrowserModule,
@@ -90,7 +94,7 @@ registerLocaleData(en);
     NzSelectModule,
     NzCheckboxModule,
   ],
-  providers: [[LoginService,NzMessageService],{ provide: NZ_I18N, useValue: en_US }],
+  providers: [[LoginService,NzMessageService,RolePipe],{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

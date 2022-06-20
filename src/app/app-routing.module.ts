@@ -4,6 +4,7 @@ import {LoginFormComponent} from "./pages/login-form/login-form.component";
 import {HomeComponent} from "./pages/home/home.component";
 import {TableUserComponent} from "./pages/home/table-user/table-user.component";
 import {TableHomeworkComponent} from "./pages/home/table-homework/table-homework.component";
+import {HomePageComponent} from "./pages/home/home-page/home-page.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'},
@@ -15,6 +16,7 @@ const routes: Routes = [
       {path: '', redirectTo: 'table-user', pathMatch: 'full'},
       {path: 'table-user', component: TableUserComponent},
       {path: 'table-homework', component: TableHomeworkComponent},
+      {path: 'home-page', component: HomePageComponent},
     ]
   },
 

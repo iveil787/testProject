@@ -1,12 +1,24 @@
 {
   "user": [
     {
-      "id": "5846ef1c-e50d-43da-99df-311225fd1c11",
+      "id": "5846ef1c-e50d-43da-99df-311225fd1c12",
       "email": "yyy@yandex.ru",
       "login": "ww",
       "password": "ww",
       "name": "ww",
       "surname": "ww",
+      "patronymic": "ww",
+      "dateBirth": 1647373728263,
+      "studyGroup": "ww",
+      "role": "ADMIN"
+    },
+    {
+      "id": "5846ef1c-e50d-43da-99df-311225fd1c11",
+      "email": "yyy@yandex.ru",
+      "login": "hh",
+      "password": "hh",
+      "name": "hh",
+      "surname": "hh",
       "patronymic": "ww",
       "dateBirth": 1647373728263,
       "studyGroup": "ww",
