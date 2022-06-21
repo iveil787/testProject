@@ -48,6 +48,7 @@ import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import {HomeworkEffects} from "./reducers/homework/homework.effects";
 import { HomePageComponent } from './pages/home/home-page/home-page.component';
 import {RolePipe} from "../services/role.pipe";
+import {NzTypographyModule} from "ng-zorro-antd/typography";
 
 registerLocaleData(en);
 
@@ -61,39 +62,40 @@ registerLocaleData(en);
     HomePageComponent,
     RolePipe,
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    NzButtonModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    IconsProviderModule,
-    NzLayoutModule,
-    NzFormModule,
-    NzMenuModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([loginEffects, TableUserEffects,HomeworkEffects]),
-    NzInputModule,
-    NzAvatarModule,
-    NzPopoverModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers
-    }),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    StoreRouterConnectingModule.forRoot(),
-    NzTableModule,
-    NzBadgeModule,
-    NzDropDownModule,
-    NzDividerModule,
-    NzDatePickerModule,
-    NzDrawerModule,
-    NzModalModule,
-    NzRadioModule,
-    NzSelectModule,
-    NzCheckboxModule,
-  ],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        NzButtonModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        IconsProviderModule,
+        NzLayoutModule,
+        NzFormModule,
+        NzMenuModule,
+        StoreModule.forRoot({}, {}),
+        EffectsModule.forRoot([loginEffects, TableUserEffects, HomeworkEffects]),
+        NzInputModule,
+        NzAvatarModule,
+        NzPopoverModule,
+        StoreModule.forRoot(reducers, {
+            metaReducers
+        }),
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+        StoreRouterConnectingModule.forRoot(),
+        NzTableModule,
+        NzBadgeModule,
+        NzDropDownModule,
+        NzDividerModule,
+        NzDatePickerModule,
+        NzDrawerModule,
+        NzModalModule,
+        NzRadioModule,
+        NzSelectModule,
+        NzCheckboxModule,
+        NzTypographyModule,
+    ],
   providers: [[LoginService,NzMessageService,RolePipe],{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })

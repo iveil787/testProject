@@ -1,7 +1,107 @@
-<p>home-page works!</p>
-<button nz-button nzType="primary" >Primary Button</button>
+<!--<p *ngIf="roleAdmin | role">  111111111</p>-->
+<!--test-->
+<!--<div >{{currentUser?.role | role}}</div>-->
 
 
-<p *ngIf="roleAdmin | role">  111111111</p>
+<div nz-col nzSpan="14" nzOffset="8" *ngIf="roleAdmin | role">
 
-<div >{{currentUser?.role | role}}</div>
+  <form nz-form [formGroup]="myForm" (ngSubmit)="submitForm()">
+    <h3 class="caption" nz-typography>Форма для создания учителей</h3>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail!">
+        <input formControlName="email" id="email" nz-input placeholder="E-mail"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24" nzFor="login" nzRequired>
+        <span>Login</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your login!">
+        <input id="login" formControlName="login" nz-input placeholder="login"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your password!">
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          nz-input placeholder="Password"
+          (ngModelChange)="updateConfirmValidator()"
+        />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="checkPassword" nzRequired>Confirm Password</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" [nzErrorTip]="errorTpl">
+        <input
+          type="password"
+          formControlName="checkPassword"
+          id="checkPassword"
+          nz-input placeholder="Check password"/>
+        <ng-template #errorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">Please confirm your password!</ng-container>
+          <ng-container *ngIf="control.hasError('confirm')">
+            Two passwords that you enter is inconsistent!
+          </ng-container>
+        </ng-template>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired>
+        <span>Name</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your name!">
+        <input id="userName" formControlName="userName" nz-input placeholder="Name"/>
+      </nz-form-control>
+    </nz-form-item>
+
+
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired>
+        <span>Surname</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your surname!">
+        <input id="userSurname" formControlName="userSurname" nz-input placeholder="Surname"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24" nzFor="name" nzRequired>
+        <span>Patronymic</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your patronymic!">
+        <input id="userPatronymic" formControlName="userPatronymic" nz-input placeholder="Patronymic"/>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="DateBorn" nzRequired>Date born</nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24">
+        <nz-date-picker formControlName="userDateBirth"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-label
+        [nzSm]="6" [nzXs]="24" nzFor="studyGroup" nzRequired>
+        <span>Study group</span>
+      </nz-form-label>
+      <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your study group!">
+        <input id="studyGroup" formControlName="studyGroup" nz-input placeholder="Study group"/>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item nz-row class="register-area">
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary" routerLink="/login">Register</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>

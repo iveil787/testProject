@@ -17,12 +17,9 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/welcome">Welcome</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/login">login-form</a>
 
-          </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/home/table-homework">table-homework</a>
+            <a routerLink="/home/table-homework" >table-homework</a>
             Homework
           </li>
           <li nz-menu-item nzMatchRouter>
@@ -33,7 +30,7 @@
             <a>Monitor</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/home/home-page">home-page</a>
+            <a routerLink="/home/home-page"  *ngIf="roleAdmin | role">home-page</a>
           </li>
         </ul>
       </li>

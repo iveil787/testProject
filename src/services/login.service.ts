@@ -18,10 +18,6 @@ export interface Homework {
   wishes: string;
 }
 
-
-
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -33,7 +29,7 @@ export class LoginService {
   modelUserStudent: Student[] = [
     {
       id: "1", email: "Dr Nice", login: "fff", password: "4545", name: "fdf", surname: "Faust", patronymic: "ff",
-      dateBirth: 4444, studyGroup: "1"
+      dateBirth: 4444, studyGroup: "1", role:  "STUDENT",
     },
   ];
 
@@ -41,7 +37,16 @@ export class LoginService {
     this.modelUserStudent.push(user);
     const body = {
       id: uuidv4(), email: user.email, login: user.login, password: user.password, name: user.name,
-      surname: user.surname, patronymic: user.patronymic, dateBirth: user.dateBirth, studyGroup: user.studyGroup
+      surname: user.surname, patronymic: user.patronymic, dateBirth: user.dateBirth, studyGroup: user.studyGroup, role:  "STUDENT",
+    };
+    return this.http.post<void>('http://localhost:3000/user', body);
+  }
+
+  addDataTeacher(user: Student): Observable<void> {
+    this.modelUserStudent.push(user);
+    const body = {
+      id: uuidv4(), email: user.email, login: user.login, password: user.password, name: user.name,
+      surname: user.surname, patronymic: user.patronymic, dateBirth: user.dateBirth, studyGroup: user.studyGroup, role:  "TEACHER",
     };
     return this.http.post<void>('http://localhost:3000/user', body);
   }

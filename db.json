@@ -59,6 +59,30 @@
       "dateBirth": 1647990141821,
       "studyGroup": "tt",
       "role": "STUDENT"
+    },
+    {
+      "id": "1b51b4b7-3643-49ff-8b4a-efd0befbbb8b",
+      "email": "yyy@yandex.ru",
+      "login": "mm",
+      "password": "mm",
+      "name": "mm",
+      "surname": "mm",
+      "patronymic": "mm",
+      "dateBirth": 1654459704864,
+      "studyGroup": "mm",
+      "role": "STUDENT"
+    },
+    {
+      "id": "6112b9dd-97f5-4b67-9a42-13ec2ae5618b",
+      "email": "yyy@yandex.ru",
+      "login": "oo",
+      "password": "oo",
+      "name": "oo",
+      "surname": "oo",
+      "patronymic": "oo",
+      "dateBirth": 1654546921734,
+      "studyGroup": "oo",
+      "role": "TEACHER"
     }
   ],
   "homework": [

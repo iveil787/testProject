@@ -95,6 +95,7 @@ export class WelcomeComponent implements OnInit {
       patronymic: this.myForm.getRawValue().userPatronymic,
       dateBirth: this.myForm.getRawValue().userDateBirth.getTime(),
       studyGroup: this.myForm.getRawValue().studyGroup,
+      role:  "STUDENT",
     }
     this.loginservice.addData(newStudent).subscribe();
   };

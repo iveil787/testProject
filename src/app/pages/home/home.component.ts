@@ -14,6 +14,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   data: Student[] | undefined;
   subscription: Subscription | undefined;
   roleTeacher = ROLES.TEACHER;
+  roleStudent = ROLES.STUDENT;
+  roleAdmin = ROLES.ADMIN;
 
   constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService,
               // private store$: Store<CountState>
