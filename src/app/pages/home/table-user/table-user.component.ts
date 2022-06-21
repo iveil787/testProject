@@ -1,5 +1,5 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {Student} from "../../../../models/UserStudents";
+import {ROLES, Student} from "../../../../models/UserStudents";
 import {select, Store} from "@ngrx/store";
 import {TaskCreateTableUser} from "../../../reducers/table-user/table.action";
 import {Homework, LoginService} from "../../../../services/login.service";
@@ -45,6 +45,7 @@ export class TableUserComponent implements OnInit, OnDestroy {
 
   id: any;
   sub: any;
+  roleTeacher = ROLES.TEACHER;
 
   ngOnInit(): void {
     this.taskTableUser()

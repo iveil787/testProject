@@ -1,6 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {Student} from "../../../../models/UserStudents";
+import {ROLES, Student} from "../../../../models/UserStudents";
 import {LoginService} from "../../../../services/login.service";
+
 
 @Component({
   selector: 'app-home-page',
@@ -11,10 +12,14 @@ export class HomePageComponent implements OnInit ,OnDestroy{
 
   constructor(@Inject(LoginService) private loginservice: LoginService) {
   }
-  data: any;
-  subscription:any
+  currentUser: Student | undefined;
+  subscription: any
+  roleAdmin = ROLES.ADMIN
+
+
+
   ngOnInit(): void {
-    this.currentUser()
+    this.getCurrentUser()
   }
 
   ngOnDestroy(): void {
@@ -24,8 +29,10 @@ export class HomePageComponent implements OnInit ,OnDestroy{
   }
 
 
-  currentUser() {
-    this.subscription = this.loginservice.currentUser().subscribe((data: Student[]) => (this.data = data));
+
+  getCurrentUser() {
+    this.subscription = this.loginservice.currentUser().subscribe((data: Student[]) => (this.currentUser = data[0]));
+
   }
 
 

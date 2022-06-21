@@ -1,5 +1,5 @@
-<nz-table #basicTable [nzData]="listOfData">
-  <thead>
+<nz-table #basicTable [nzData]="listOfData" *ngIf="roleTeacher | role">
+  <thead >
   <tr>
     <th>Teacher</th>
     <th>Student</th>

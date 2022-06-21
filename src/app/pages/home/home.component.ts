@@ -1,7 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {LoginService} from "../../../services/login.service";
-import {Student} from "../../../models/UserStudents";
+import {ROLES, Student} from "../../../models/UserStudents";
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   isCollapsed = false;
   data: Student[] | undefined;
   subscription: Subscription | undefined;
+  roleTeacher = ROLES.TEACHER;
 
   constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService,
               // private store$: Store<CountState>

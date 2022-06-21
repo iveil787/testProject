@@ -3,7 +3,7 @@ import {Homework, LoginService} from "../../../../services/login.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 import {v4 as uuidv4} from 'uuid';
-import {Student} from "../../../../models/UserStudents";
+import {ROLES, Student} from "../../../../models/UserStudents";
 import {select, Store} from "@ngrx/store";
 import {
   TaskCreateHomeworkActions,
@@ -56,6 +56,8 @@ export class TableHomeworkComponent implements OnInit {
   editHwTest: any;
 
   selectedValue = null;
+
+  roleTeacher = ROLES.TEACHER;
 
   // time = [, ]
   // ====================================================== мусор
