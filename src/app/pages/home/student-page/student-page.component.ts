@@ -12,8 +12,7 @@ import {
 } from "../../../reducers/homework/homework.action";
 import {Observable} from "rxjs";
 import {
-  filterStudentHomeworkSelector,
-  filterTeacherHomeworkSelector
+  filterStudentHomeworkSelector
 } from "../../../reducers/homework/homework.selector";
 import {tableSelector} from "../../../reducers/table-user/table.selector";
 

@@ -1,4 +1,4 @@
-import {createFeatureSelector, createSelector, select} from "@ngrx/store";
+import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {listHomework} from "./homework.reduser";
 import {Homework} from "../../../services/login.service";
 
