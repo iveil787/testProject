@@ -169,6 +169,7 @@ export class TableHomeworkComponent implements OnInit {
       startDate: startDate.getTime(),
       endDate: endDate.getTime(),
       wishes: this.validateForm.getRawValue().wishes,
+      status_HW: "given",
 
     }
     // this.loginservice.addHomework(newHomework).subscribe();

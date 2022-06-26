@@ -16,6 +16,7 @@ export interface Homework {
   startDate: number;
   endDate: number;
   wishes: string;
+  status_HW?: string;
 }
 
 @Injectable({
@@ -126,7 +127,7 @@ export class LoginService {
 
       startDate: user.startDate, endDate: user.endDate,
 
-      wishes: user.wishes
+      wishes: user.wishes, status_HW: "given",
         };
 
     return this.http.post<void>("http://localhost:3000/homework", body);
@@ -141,11 +142,28 @@ export class LoginService {
 
       startDate: user.startDate, endDate: user.endDate,
 
-      wishes: user.wishes
+      wishes: user.wishes,
     };
 
     return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);
   }
+
+  addEditStatusHomework  (user: Homework): Observable<void>{
+    this.modelEditHomework.push(user);
+    const body = {
+      id: user.id,
+      idTeacher: user.idTeacher, nicknameStudent: user.nicknameStudent,
+      homework: user.homework, description: user.description,
+
+      startDate: user.startDate, endDate: user.endDate,
+
+      wishes: user.wishes, status_HW: "completed",
+    };
+
+    return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);
+  }
+
+
 
   deleteHW(HW: Homework){
     console.log("cach")
