@@ -5,6 +5,7 @@ import {HomeComponent} from "./pages/home/home.component";
 import {TableUserComponent} from "./pages/home/table-user/table-user.component";
 import {TableHomeworkComponent} from "./pages/home/table-homework/table-homework.component";
 import {HomePageComponent} from "./pages/home/home-page/home-page.component";
+import {StudentPageComponent} from "./pages/home/student-page/student-page.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: '/login'},
@@ -17,6 +18,7 @@ const routes: Routes = [
       {path: 'table-user', component: TableUserComponent},
       {path: 'table-homework', component: TableHomeworkComponent},
       {path: 'home-page', component: HomePageComponent},
+      {path: 'student-page', component: StudentPageComponent},
     ]
   },
 

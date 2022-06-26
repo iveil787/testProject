@@ -4,17 +4,6 @@ import {FormBuilder} from "@angular/forms";
 import {LoginService} from "./login.service";
 
 
-/*
- * Raise the value exponentially
- * Takes an exponent argument that defaults to 1.
- * Usage:
- *   value | exponentialStrength:exponent
- * Example:
- *   {{ 2 | exponentialStrength:10 }}
- *   formats to: 1024
-*/
-
-
 @Pipe({name: 'role'})
 export class RolePipe implements PipeTransform {
   subscription: any

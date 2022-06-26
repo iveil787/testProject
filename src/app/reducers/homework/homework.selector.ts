@@ -13,3 +13,8 @@ export const filterTeacherHomeworkSelector = createSelector(
   homeworkSelectorFeature,
   (tableDate: Homework[]) => tableDate.filter(HW => HW.idTeacher === JSON.parse(localStorage.getItem("token") as string)?.id)
 );
+
+export const filterStudentHomeworkSelector = createSelector(
+  homeworkSelectorFeature,
+  (tableDate: Homework[]) => tableDate.filter(HW => HW.nicknameStudent === JSON.parse(localStorage.getItem("token") as string)?.id)
+);

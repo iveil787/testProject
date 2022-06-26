@@ -49,6 +49,7 @@ import {HomeworkEffects} from "./reducers/homework/homework.effects";
 import { HomePageComponent } from './pages/home/home-page/home-page.component';
 import {RolePipe} from "../services/role.pipe";
 import {NzTypographyModule} from "ng-zorro-antd/typography";
+import { StudentPageComponent } from './pages/home/student-page/student-page.component';
 
 registerLocaleData(en);
 
@@ -61,6 +62,7 @@ registerLocaleData(en);
     TableHomeworkComponent,
     HomePageComponent,
     RolePipe,
+    StudentPageComponent,
   ],
     imports: [
         BrowserModule,
