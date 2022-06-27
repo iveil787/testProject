@@ -1,34 +1,28 @@
-<nz-table #basicTable [nzData]="date"  *ngIf="roleTeacher | role">
+<nz-table #basicTable [nzData]="listOfData" *ngIf="roleTeacher | role">
   <thead>
   <tr>
     <th>Name</th>
     <th>Surname</th>
     <th>Patronymic</th>
     <th>StudyGroup</th>
-<!--    <th>DateBirth</th>-->
+    <!--    <th>DateBirth</th>-->
     <th>HW</th>
     <th>Action</th>
   </tr>
   </thead>
   <tbody>
-<!--  tableDate$ | async-->
-<!--listOfData-->
+  <!--  tableDate$ | async-->
+  <!--listOfData-->
   <tr *ngFor="let data of tableDate$ | async">
-    <td>{{ data.name }}</td>
-    <td>{{ data.surname }}</td>
-    <td>{{ data.patronymic }}</td>
-    <td>{{ data.studyGroup }}</td>
-<!--    <td>{{ data.dateBirth | date:'dd.MM.yyyy' }}</td>-->
-    <td  >
-      {{ (filterHW(data.name) | async)?.[0]?.homework}}
-
-    </td>
-    <td>
-<!--      <button nz-button nzType="primary" (click)="open()">Create</button>-->
-      <!--      <a (click)="showHW()">add homework 一 {{ data.name }}</a>-->
-      <a>Delete</a>
-    </td>
-
+    <ng-container *ngIf="(data.role)=== roleTeacher">
+      <td>{{ data.name }}</td>
+      <td>{{ data.surname }}</td>
+      <td>{{ data.patronymic }}</td>
+      <td>{{ data.studyGroup }}</td>
+      <td>
+        {{ (filterHW(data.name) | async)?.[0]?.homework}}
+      </td>
+    </ng-container>
   </tr>
   </tbody>
 </nz-table>

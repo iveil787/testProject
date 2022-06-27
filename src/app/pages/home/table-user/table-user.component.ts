@@ -50,7 +50,7 @@ export class TableUserComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.taskTableUser()
     // this.goToServis() зполнить таблицу напрямую из сервиса
-    this.tableDate$.subscribe((allUser) => console.log(allUser))
+    // this.tableDate$.subscribe((allUser) => console.log(allUser))
 
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number

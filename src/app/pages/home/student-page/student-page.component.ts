@@ -3,18 +3,18 @@ import {Homework, LoginService} from "../../../../services/login.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 
-
 import {ROLES, Student} from "../../../../models/UserStudents";
 import {select, Store} from "@ngrx/store";
 import {
   TaskCreateHomeworkActions,
-  TaskCreateTableHomeworkActions, TaskDelletHomeworkActions, TaskEditStatusHomeworkActions
+  TaskCreateTableHomeworkActions,
+  TaskDelletHomeworkActions,
+  TaskEditStatusHomeworkActions
 } from "../../../reducers/homework/homework.action";
-import {Observable} from "rxjs";
-import {
-  filterStudentHomeworkSelector
-} from "../../../reducers/homework/homework.selector";
+import {map, Observable} from "rxjs";
+import {filterStudentHomeworkSelector,} from "../../../reducers/homework/homework.selector";
 import {tableSelector} from "../../../reducers/table-user/table.selector";
+import {TaskCreateTableUser} from "../../../reducers/table-user/table.action";
 
 interface HomeWork {
   idWomeHork: number;
@@ -34,10 +34,17 @@ interface HomeWork {
 export class StudentPageComponent implements OnInit {
 
   constructor(@Inject(LoginService) private loginservice: LoginService, private fb: FormBuilder,
-              private store$: Store<HomeWork>, private list$: Store<Student>) {
+              private store$: Store<HomeWork>, private list$: Store<Student>, private TeacherStore$: Store<Student>) {
   }
 
   // ==================================переменные ==============================
+  public tableTacherDate$: Observable<Student[]> = this.TeacherStore$.pipe(select(tableSelector));
+
+  filterHW(userID: string) {
+
+    return this.tableTacherDate$.pipe(map((HW) => (HW.filter((item) => (userID === item.id)))))
+  }
+
   validateForm!: FormGroup;
 
   validateFormDetails!: FormGroup;
@@ -97,7 +104,7 @@ export class StudentPageComponent implements OnInit {
 // }
   // ================================== Жизненный цикл ==============================
   ngOnInit(): void {
-
+    this.store$.dispatch(new TaskCreateTableUser())
     this.statusTime.getTime()
 
     this.taskTableHomework()
@@ -166,9 +173,11 @@ export class StudentPageComponent implements OnInit {
   }
 
   submitFormDetailsTeacher(): void {
+    debugger
     if (this.validateFormDetailsTeacher.valid) {
       // отключил изменение формы
-      // this.addEditStatus();
+      debugger
+      this.addEditStatus();
 
       console.log('submit', this.validateFormDetailsTeacher.value);
     } else {
@@ -185,14 +194,15 @@ export class StudentPageComponent implements OnInit {
   addEditStatus(): void {
     // this.currentUser();
     const [startDate, endDate] = this.validateFormDetails.getRawValue().deadline
+    debugger
     const newEditStatusHomework = {
       id: this.editHwTest.id,
-      idTeacher: this.teacher[0].id,
+      idTeacher: this.editHwTest.idTeacher,
       nicknameStudent: this.editHwTest.nicknameStudent,
       homework: this.editHwTest.homework,
       description: this.validateFormDetails.getRawValue().description,
-      startDate: startDate.getTime(),
-      endDate: endDate.getTime(),
+      startDate: startDate,
+      endDate: endDate,
       wishes: this.validateFormDetails.getRawValue().wishes,
       status_HW: "completed",
     }
@@ -296,7 +306,7 @@ export class StudentPageComponent implements OnInit {
     this.validateFormDetails.controls["homework"].setValue(Hw?.homework);
     this.validateFormDetails.controls["description"].setValue(Hw?.description);
     this.validateFormDetails.controls["wishes"].setValue(Hw?.wishes);
-    this.validateFormDetails.controls["deadline"].setValue([Hw?.startDate,Hw?.endDate]);
+    this.validateFormDetails.controls["deadline"].setValue([Hw?.startDate, Hw?.endDate]);
   }
 
 // ++++++++++++++++++++++++++++++++++++selector 2

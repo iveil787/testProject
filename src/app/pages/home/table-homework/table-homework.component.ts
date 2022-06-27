@@ -12,6 +12,7 @@ import {
 import {Observable} from "rxjs";
 import {filterTeacherHomeworkSelector} from "../../../reducers/homework/homework.selector";
 import {tableSelector} from "../../../reducers/table-user/table.selector";
+import {TaskCreateTableUser} from "../../../reducers/table-user/table.action";
 
 
 
@@ -59,33 +60,12 @@ export class TableHomeworkComponent implements OnInit {
 
   roleTeacher = ROLES.TEACHER;
 
+  allUseList: Student[] = [];
+
   // time = [, ]
   // ====================================================== мусор
   listOfData: HomeWork[] = [
-    {
-      idWomeHork: 1,
-      idUser: 11,
-      idStudent: 111,
-      nameHw: "fggffg",
-      case: "string",
-      date: 323,
-    },
-    {
-      idWomeHork: 1,
-      idUser: 11,
-      idStudent: 111,
-      nameHw: "fggffg",
-      case: "string",
-      date: 323,
-    },
-    {
-      idWomeHork: 1,
-      idUser: 11,
-      idStudent: 111,
-      nameHw: "fggffg",
-      case: "string",
-      date: 323,
-    }
+
   ];
 
 
@@ -97,12 +77,13 @@ export class TableHomeworkComponent implements OnInit {
 // }
   // ================================== Жизненный цикл ==============================
   ngOnInit(): void {
-
+    this.store$.dispatch(new TaskCreateTableUser())
     this.statusTime.getTime()
 
     this.taskTableHomework()
     // this.filterHWforTeacher(this.teacher)
     this.tableHomeworkDate$.subscribe((allHomework) => console.log(allHomework))
+    this.allUseList$.subscribe((allUseList) => this.allUseList = allUseList)
 
     this.validateForm = this.fb.group({
       nicknameStudent: [null, [Validators.required]],
@@ -170,6 +151,8 @@ export class TableHomeworkComponent implements OnInit {
       endDate: endDate.getTime(),
       wishes: this.validateForm.getRawValue().wishes,
       status_HW: "given",
+      nameTeacher: this.teacher[0].name,
+      idStudent: this.allUseList.filter((user: Student) => user.name === this.validateForm.getRawValue().nicknameStudent)[0].id,
 
     }
     // this.loginservice.addHomework(newHomework).subscribe();
@@ -279,9 +262,9 @@ export class TableHomeworkComponent implements OnInit {
 
   public allUseList$: Observable<Student[]> = this.list$.pipe(select(tableSelector));
 
-  goToUse() {
-    this.allUseList$
-  }
+  // goToUse() {
+  //   this.allUseList$
+  // }
 
    taskCreateHWUser(HW: Homework) {
     this.list$.dispatch(new TaskCreateHomeworkActions(HW)
