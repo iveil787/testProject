@@ -51,6 +51,8 @@ export class StudentPageComponent implements OnInit {
 
   validateFormDetailsTeacher!: FormGroup;
 
+  validateFormDetailsHomework!: FormGroup;
+
   public tableHomeworkDate$: Observable<Homework[]> = this.store$.pipe(select(filterStudentHomeworkSelector));
 
   homeWork: any;
@@ -128,12 +130,21 @@ export class StudentPageComponent implements OnInit {
       wishes: [null, [Validators.required, Validators.maxLength(10)]],
     });
 
-    this.validateFormDetailsTeacher = this.fb.group({
+    this.validateFormDetailsHomework = this.fb.group({
       nicknameStudent: [null, [Validators.required]],
       homework: [null, [Validators.required]],
       description: [null, [Validators.required]],
       deadline: [null],
       wishes: [null, [Validators.required, Validators.maxLength(10)]],
+    });
+
+    this.validateFormDetailsTeacher = this.fb.group({
+
+      nicknameTeacher: [null, [Validators.required]],
+      surnameTeacher: [null, [Validators.required]],
+      patronymicTeacher: [null, [Validators.required]],
+      studyTeacher: [null, [Validators.required]],
+      emailTeacher: [null, [Validators.required]],
     });
 
 
@@ -173,13 +184,11 @@ export class StudentPageComponent implements OnInit {
   }
 
   submitFormDetailsTeacher(): void {
-    debugger
-    if (this.validateFormDetailsTeacher.valid) {
-      // отключил изменение формы
-      debugger
-      this.addEditStatus();
 
-      console.log('submit', this.validateFormDetailsTeacher.value);
+    if (this.validateFormDetailsTeacher.valid) {
+
+
+      // console.log('submit', this.validateFormDetailsTeacher.value);
     } else {
       Object.values(this.validateFormDetailsTeacher.controls).forEach(control => {
         if (control.invalid) {
@@ -194,7 +203,7 @@ export class StudentPageComponent implements OnInit {
   addEditStatus(): void {
     // this.currentUser();
     const [startDate, endDate] = this.validateFormDetails.getRawValue().deadline
-    debugger
+
     const newEditStatusHomework = {
       id: this.editHwTest.id,
       idTeacher: this.editHwTest.idTeacher,
@@ -300,7 +309,7 @@ export class StudentPageComponent implements OnInit {
 
   // ==================================================== editHW ======================
 
-  editHW(Hw: any): void {
+  showEditHW(Hw: any): void {
     this.editHwTest = Hw;
     this.validateFormDetails.controls["nicknameStudent"].setValue(Hw?.nicknameStudent);
     this.validateFormDetails.controls["homework"].setValue(Hw?.homework);
@@ -309,6 +318,13 @@ export class StudentPageComponent implements OnInit {
     this.validateFormDetails.controls["deadline"].setValue([Hw?.startDate, Hw?.endDate]);
   }
 
+  showDetailsTeacher(Hw: any): void {
+    this.validateFormDetailsTeacher.controls["nicknameTeacher"].setValue(Hw?.nameTeacher);
+    this.validateFormDetailsTeacher.controls["surnameTeacher"].setValue(Hw?.surnameTeacher);
+    this.validateFormDetailsTeacher.controls["patronymicTeacher"].setValue(Hw?.patronymicTeacher);
+    this.validateFormDetailsTeacher.controls["studyTeacher"].setValue(Hw?.studyTeacher);
+    this.validateFormDetailsTeacher.controls["emailTeacher"].setValue(Hw?.emailTeacher);
+  }
 // ++++++++++++++++++++++++++++++++++++selector 2
 
   public allUseList$: Observable<Student[]> = this.list$.pipe(select(tableSelector));

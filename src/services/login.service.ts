@@ -18,6 +18,10 @@ export interface Homework {
   wishes: string;
   status_HW?: string;
   nameTeacher?: string;
+  surnameTeacher?: string;
+  patronymicTeacher?: string;
+  studyTeacher?: string;
+  emailTeacher?: string;
   idStudent?: string;
 }
 
@@ -140,12 +144,20 @@ export class LoginService {
     this.modelHomework.push(user);
     const body = {
       id: user.id,
-      idTeacher: user.idTeacher, nicknameStudent: user.nicknameStudent,
-      homework: user.homework, description: user.description,
-
-      startDate: user.startDate, endDate: user.endDate,
-
-      wishes: user.wishes, status_HW: "given", nameTeacher: user.nameTeacher, idStudent: user.idStudent,
+      idTeacher: user.idTeacher,
+      nicknameStudent: user.nicknameStudent,
+      homework: user.homework,
+      description: user.description,
+      startDate: user.startDate,
+      endDate: user.endDate,
+      wishes: user.wishes,
+      status_HW: "Задано",
+      nameTeacher: user.nameTeacher,
+      idStudent: user.idStudent,
+      surnameTeacher: user.surnameTeacher,
+      patronymicTeacher: user.patronymicTeacher,
+      studyTeacher: user.studyTeacher,
+      emailTeacher: user.emailTeacher,
     };
 
     return this.http.post<void>("http://localhost:3000/homework", body);
@@ -155,12 +167,20 @@ export class LoginService {
     this.modelEditHomework.push(user);
     const body = {
       id: user.id,
-      idTeacher: user.idTeacher, nicknameStudent: user.nicknameStudent,
-      homework: user.homework, description: user.description,
-
-      startDate: user.startDate, endDate: user.endDate,
-
+      idTeacher: user.idTeacher,
+      nicknameStudent: user.nicknameStudent,
+      homework: user.homework,
+      description: user.description,
+      startDate: user.startDate,
+      endDate: user.endDate,
       wishes: user.wishes,
+      status_HW: "Задано",
+      nameTeacher: user.nameTeacher,
+      idStudent: user.idStudent,
+      surnameTeacher: user.surnameTeacher,
+      patronymicTeacher: user.patronymicTeacher,
+      studyTeacher: user.studyTeacher,
+      emailTeacher: user.emailTeacher,
     };
 
     return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);
@@ -175,7 +195,7 @@ export class LoginService {
 
       startDate: user.startDate, endDate: user.endDate,
 
-      wishes: user.wishes, status_HW: "completed",
+      wishes: user.wishes, status_HW: "Выполнено",
     };
 
     return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);

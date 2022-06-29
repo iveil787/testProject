@@ -150,8 +150,12 @@ export class TableHomeworkComponent implements OnInit {
       startDate: startDate.getTime(),
       endDate: endDate.getTime(),
       wishes: this.validateForm.getRawValue().wishes,
-      status_HW: "given",
+      status_HW: "Задано",
       nameTeacher: this.teacher[0].name,
+      surnameTeacher: this.teacher[0].surname,
+      patronymicTeacher: this.teacher[0].patronymic,
+      studyTeacher: this.teacher[0].studyGroup,
+      emailTeacher:this.teacher[0].email,
       idStudent: this.allUseList.filter((user: Student) => user.name === this.validateForm.getRawValue().nicknameStudent)[0].id,
 
     }
@@ -250,7 +254,7 @@ export class TableHomeworkComponent implements OnInit {
 
   editHW(Hw: any): void {
     this.editHwTest = Hw;
-    this.validateFormDetails.controls["nicknameStudent"].setValue(Hw?.nicknameStudent);
+    this.validateFormDetails.controls["nicknameStudent"].setValue(Hw?.idStudent);
     this.validateFormDetails.controls["homework"].setValue(Hw?.homework);
     this.validateFormDetails.controls["description"].setValue(Hw?.description);
     this.validateFormDetails.controls["wishes"].setValue(Hw?.wishes);
