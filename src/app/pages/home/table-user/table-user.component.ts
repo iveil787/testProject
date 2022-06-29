@@ -1,5 +1,5 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import {Student} from "../../../../models/UserStudents";
+import {ROLES, Student} from "../../../../models/UserStudents";
 import {select, Store} from "@ngrx/store";
 import {TaskCreateTableUser} from "../../../reducers/table-user/table.action";
 import {Homework, LoginService} from "../../../../services/login.service";
@@ -45,11 +45,12 @@ export class TableUserComponent implements OnInit, OnDestroy {
 
   id: any;
   sub: any;
+  roleTeacher = ROLES.TEACHER;
 
   ngOnInit(): void {
     this.taskTableUser()
     // this.goToServis() зполнить таблицу напрямую из сервиса
-    this.tableDate$.subscribe((allUser) => console.log(allUser))
+    // this.tableDate$.subscribe((allUser) => console.log(allUser))
 
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number

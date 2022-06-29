@@ -1,26 +1,32 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, FormBuilder} from '@angular/forms';
-import {LoginService} from "../../../services/login.service";
-
+import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {ROLES, Student} from "../../../../models/UserStudents";
+import {LoginService} from "../../../../services/login.service";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
-import {CountState} from "../../reducers/count/count.reducer";
-import {TaskCreateUserAction} from "../../reducers/table-user/table.action";
+import {CountState} from "../../../reducers/count/count.reducer";
 
 
 @Component({
-  selector: 'app-welcome',
-  templateUrl: './welcome.component.html',
-  styleUrls: ['./welcome.component.less'],
+  selector: 'app-home-page',
+  templateUrl: './home-page.component.html',
+  styleUrls: ['./home-page.component.less']
 })
-export class WelcomeComponent implements OnInit {
+export class HomePageComponent implements OnInit ,OnDestroy{
 
   constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService,
               private store$: Store<CountState>) {
   }
+  currentUser: Student | undefined;
+  subscription: any
+  roleAdmin = ROLES.ADMIN
+
 
   myForm!: FormGroup;
 
   ngOnInit(): void {
+
+    this.getCurrentUser()
+
     this.myForm = this.fb.group({
       email: [null, [Validators.email, Validators.required]],
       login: [null, [Validators.required]],
@@ -32,6 +38,17 @@ export class WelcomeComponent implements OnInit {
       userDateBirth: [null],
       studyGroup: [null, [Validators.required]],
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
+
+  getCurrentUser() {
+    this.subscription = this.loginservice.currentUser().subscribe((data: Student[]) => (this.currentUser = data[0]));
+
   }
 
   limitAge(control: AbstractControl): ValidationErrors | null {
@@ -51,8 +68,8 @@ export class WelcomeComponent implements OnInit {
   submitForm(): void {
     if (this.myForm.valid) {
       console.log('submit', this.myForm.value);
-      // this.addStudents() этот метод работает напрямую с сервисом;
-      this.addStudents();
+
+      this.addDataTeacher();
     } else {
       Object.values(this.myForm.controls).forEach(control => {
         if (control.invalid) {
@@ -84,7 +101,7 @@ export class WelcomeComponent implements OnInit {
 
 // ==========================================addStudents==========================================
 //   этот метод работает напрямую с сервисом;
-  addStudents(): void {
+  addDataTeacher(): void {
     const newStudent = {
       id:  "1",
       email: this.myForm.getRawValue().email,
@@ -95,23 +112,9 @@ export class WelcomeComponent implements OnInit {
       patronymic: this.myForm.getRawValue().userPatronymic,
       dateBirth: this.myForm.getRawValue().userDateBirth.getTime(),
       studyGroup: this.myForm.getRawValue().studyGroup,
-      role:  "STUDENT",
+      role:  "TEACHER",
     }
-    this.loginservice.addData(newStudent).subscribe();
+    this.loginservice.addDataTeacher(newStudent).subscribe();
   };
 
-  createUserRedux() {
-    this.store$.dispatch(new TaskCreateUserAction({
-        id: "1",
-        email: this.myForm.getRawValue().email,
-        login: this.myForm.getRawValue().login,
-        password: this.myForm.getRawValue().password,
-        name: this.myForm.getRawValue().userName,
-        surname: this.myForm.getRawValue().userSurname,
-        patronymic: this.myForm.getRawValue().userPatronymic,
-        dateBirth: this.myForm.getRawValue().userDateBirth.getTime(),
-        studyGroup: this.myForm.getRawValue().studyGroup,
-      })
-    )
-  }
 }

@@ -46,6 +46,10 @@ import {NzRadioModule} from "ng-zorro-antd/radio";
 import {NzSelectModule} from "ng-zorro-antd/select";
 import {NzCheckboxModule} from "ng-zorro-antd/checkbox";
 import {HomeworkEffects} from "./reducers/homework/homework.effects";
+import { HomePageComponent } from './pages/home/home-page/home-page.component';
+import {RolePipe} from "../services/role.pipe";
+import {NzTypographyModule} from "ng-zorro-antd/typography";
+import { StudentPageComponent } from './pages/home/student-page/student-page.component';
 
 registerLocaleData(en);
 
@@ -55,42 +59,46 @@ registerLocaleData(en);
     LoginFormComponent,
     HomeComponent,
     TableUserComponent,
-    TableHomeworkComponent
+    TableHomeworkComponent,
+    HomePageComponent,
+    RolePipe,
+    StudentPageComponent,
   ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    NzButtonModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    IconsProviderModule,
-    NzLayoutModule,
-    NzFormModule,
-    NzMenuModule,
-    StoreModule.forRoot({}, {}),
-    EffectsModule.forRoot([loginEffects, TableUserEffects,HomeworkEffects]),
-    NzInputModule,
-    NzAvatarModule,
-    NzPopoverModule,
-    StoreModule.forRoot(reducers, {
-      metaReducers
-    }),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    StoreRouterConnectingModule.forRoot(),
-    NzTableModule,
-    NzBadgeModule,
-    NzDropDownModule,
-    NzDividerModule,
-    NzDatePickerModule,
-    NzDrawerModule,
-    NzModalModule,
-    NzRadioModule,
-    NzSelectModule,
-    NzCheckboxModule,
-  ],
-  providers: [[LoginService,NzMessageService],{ provide: NZ_I18N, useValue: en_US }],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        NzButtonModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        IconsProviderModule,
+        NzLayoutModule,
+        NzFormModule,
+        NzMenuModule,
+        StoreModule.forRoot({}, {}),
+        EffectsModule.forRoot([loginEffects, TableUserEffects, HomeworkEffects]),
+        NzInputModule,
+        NzAvatarModule,
+        NzPopoverModule,
+        StoreModule.forRoot(reducers, {
+            metaReducers
+        }),
+        StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+        StoreRouterConnectingModule.forRoot(),
+        NzTableModule,
+        NzBadgeModule,
+        NzDropDownModule,
+        NzDividerModule,
+        NzDatePickerModule,
+        NzDrawerModule,
+        NzModalModule,
+        NzRadioModule,
+        NzSelectModule,
+        NzCheckboxModule,
+        NzTypographyModule,
+    ],
+  providers: [[LoginService,NzMessageService,RolePipe],{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

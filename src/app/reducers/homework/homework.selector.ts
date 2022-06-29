@@ -1,4 +1,4 @@
-import {createFeatureSelector, createSelector, select} from "@ngrx/store";
+import {createFeatureSelector, createSelector} from "@ngrx/store";
 import {listHomework} from "./homework.reduser";
 import {Homework} from "../../../services/login.service";
 
@@ -12,4 +12,9 @@ export const tableHomeworkSelector = createSelector(
 export const filterTeacherHomeworkSelector = createSelector(
   homeworkSelectorFeature,
   (tableDate: Homework[]) => tableDate.filter(HW => HW.idTeacher === JSON.parse(localStorage.getItem("token") as string)?.id)
+);
+
+export const filterStudentHomeworkSelector = createSelector(
+  homeworkSelectorFeature,
+  (tableDate: Homework[]) => tableDate.filter(HW => HW.idStudent === JSON.parse(localStorage.getItem("token") as string)?.id)
 );

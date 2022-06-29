@@ -1,4 +1,4 @@
-<nz-layout class="app-layout">
+<nz-layout class="app-layout" >
   <nz-sider class="menu-sidebar"
             nzCollapsible
             nzWidth="256px"
@@ -17,12 +17,9 @@
           <li nz-menu-item nzMatchRouter>
             <a routerLink="/welcome">Welcome</a>
           </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/login">login-form</a>
 
-          </li>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/home/table-homework">table-homework</a>
+            <a routerLink="/home/table-homework" >table-homework</a>
             Homework
           </li>
           <li nz-menu-item nzMatchRouter>
@@ -30,10 +27,10 @@
             Homework
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Monitor</a>
+            <a routerLink="/home/student-page">student-page</a>
           </li>
           <li nz-menu-item nzMatchRouter>
-            <a>Workplace</a>
+            <a routerLink="/home/home-page"  *ngIf="roleAdmin | role">home-page</a>
           </li>
         </ul>
       </li>

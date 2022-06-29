@@ -6,7 +6,7 @@ import {
   HomeworkActions,
   SuccessCreateHomeworkActions,
   SuccessCreateTableHomeworkActions, SuccessDelletHomeworkActions,
-  SuccessEditHomeworkActions
+  SuccessEditHomeworkActions, SuccessEditStatusHomeworkActions
 } from "./homework.action";
 
 @Injectable()
@@ -56,6 +56,18 @@ export class HomeworkEffects {
         // @ts-ignore
 
         return this.loginservice.deleteHW(action.payload).pipe(map(() => new SuccessDelletHomeworkActions(action.payload)))
+      })
+    )
+  );
+
+
+  editStatusHWEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(HomeworkActions.taskEditStatusHomeworkActions),
+      switchMap((action) => {
+        // @ts-ignore
+
+        return this.loginservice.addEditStatusHomework(action.payload).pipe(map(() => new SuccessEditStatusHomeworkActions(action.payload)))
       })
     )
   );

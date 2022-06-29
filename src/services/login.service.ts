@@ -16,6 +16,13 @@ export interface Homework {
   startDate: number;
   endDate: number;
   wishes: string;
+  status_HW?: string;
+  nameTeacher?: string;
+  surnameTeacher?: string;
+  patronymicTeacher?: string;
+  studyTeacher?: string;
+  emailTeacher?: string;
+  idStudent?: string;
 }
 
 @Injectable({
@@ -29,15 +36,40 @@ export class LoginService {
   modelUserStudent: Student[] = [
     {
       id: "1", email: "Dr Nice", login: "fff", password: "4545", name: "fdf", surname: "Faust", patronymic: "ff",
-      dateBirth: 4444, studyGroup: "1"
+      dateBirth: 4444, studyGroup: "1", role: "STUDENT",
     },
   ];
 
   addData(user: Student): Observable<void> {
     this.modelUserStudent.push(user);
     const body = {
-      id: uuidv4(), email: user.email, login: user.login, password: user.password, name: user.name,
-      surname: user.surname, patronymic: user.patronymic, dateBirth: user.dateBirth, studyGroup: user.studyGroup
+      id: uuidv4(),
+      email: user.email,
+      login: user.login,
+      password: user.password,
+      name: user.name,
+      surname: user.surname,
+      patronymic: user.patronymic,
+      dateBirth: user.dateBirth,
+      studyGroup: user.studyGroup,
+      role: "STUDENT",
+    };
+    return this.http.post<void>('http://localhost:3000/user', body);
+  }
+
+  addDataTeacher(user: Student): Observable<void> {
+    this.modelUserStudent.push(user);
+    const body = {
+      id: uuidv4(),
+      email: user.email,
+      login: user.login,
+      password: user.password,
+      name: user.name,
+      surname: user.surname,
+      patronymic: user.patronymic,
+      dateBirth: user.dateBirth,
+      studyGroup: user.studyGroup,
+      role: "TEACHER",
     };
     return this.http.post<void>('http://localhost:3000/user', body);
   }
@@ -108,22 +140,53 @@ export class LoginService {
 
   modelEditHomework: Homework[] = [];
 
-  addHomework(user: Homework): Observable<void>{
+  addHomework(user: Homework): Observable<void> {
     this.modelHomework.push(user);
     const body = {
       id: user.id,
-      idTeacher: user.idTeacher, nicknameStudent: user.nicknameStudent,
-      homework: user.homework, description: user.description,
-
-      startDate: user.startDate, endDate: user.endDate,
-
-      wishes: user.wishes
-        };
+      idTeacher: user.idTeacher,
+      nicknameStudent: user.nicknameStudent,
+      homework: user.homework,
+      description: user.description,
+      startDate: user.startDate,
+      endDate: user.endDate,
+      wishes: user.wishes,
+      status_HW: "Задано",
+      nameTeacher: user.nameTeacher,
+      idStudent: user.idStudent,
+      surnameTeacher: user.surnameTeacher,
+      patronymicTeacher: user.patronymicTeacher,
+      studyTeacher: user.studyTeacher,
+      emailTeacher: user.emailTeacher,
+    };
 
     return this.http.post<void>("http://localhost:3000/homework", body);
   }
 
-  addEditHomework  (user: Homework): Observable<void>{
+  addEditHomework(user: Homework): Observable<void> {
+    this.modelEditHomework.push(user);
+    const body = {
+      id: user.id,
+      idTeacher: user.idTeacher,
+      nicknameStudent: user.nicknameStudent,
+      homework: user.homework,
+      description: user.description,
+      startDate: user.startDate,
+      endDate: user.endDate,
+      wishes: user.wishes,
+      status_HW: "Задано",
+      nameTeacher: user.nameTeacher,
+      idStudent: user.idStudent,
+      surnameTeacher: user.surnameTeacher,
+      patronymicTeacher: user.patronymicTeacher,
+      studyTeacher: user.studyTeacher,
+      emailTeacher: user.emailTeacher,
+    };
+
+    return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);
+  }
+
+  addEditStatusHomework(user: Homework): Observable<void> {
     this.modelEditHomework.push(user);
     const body = {
       id: user.id,
@@ -132,24 +195,17 @@ export class LoginService {
 
       startDate: user.startDate, endDate: user.endDate,
 
-      wishes: user.wishes
+      wishes: user.wishes, status_HW: "Выполнено",
     };
 
     return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);
   }
 
-  deleteHW(HW: Homework){
+
+  deleteHW(HW: Homework) {
     console.log("cach")
     return this.http.delete<void>("http://localhost:3000/homework/" + HW.id);
   }
 
-  // addData(user: Student): Observable<void> {
-  //   this.modelUserStudent.push(user);
-  //   const body = {
-  //     id: uuidv4(), email: user.email, login: user.login, password: user.password, name: user.name,
-  //     surname: user.surname, patronymic: user.patronymic, dateBirth: user.dateBirth, studyGroup: user.studyGroup
-  //   };
-  //   return this.http.post<void>('http://localhost:3000/user', body);
-  // }
 }
 

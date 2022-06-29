@@ -1,5 +1,5 @@
-<nz-table #basicTable [nzData]="listOfData">
-  <thead>
+<nz-table #basicTable [nzData]="listOfData" *ngIf="roleTeacher | role">
+  <thead >
   <tr>
     <th>Teacher</th>
     <th>Student</th>
@@ -18,7 +18,7 @@
     <td>{{ data.homework }}</td>
     <td>{{ data.startDate | date:'dd.MM.yyyy'}}</td>
     <td>{{ data.endDate | date:'dd.MM.yyyy'}}</td>
-    <td [ngClass]="data.endDate > statusTime ?  'green' : 'red'">Status</td>
+    <td [ngClass]="data.endDate > statusTime ?  'green' : 'red'">{{ data.status_HW }}</td>
     <td>{{ data.description}}</td>
     <td>{{ data.wishes }}</td>
 
@@ -195,7 +195,7 @@
         <nz-form-label
           [nzSm]="6"
           [nzXs]="24"
-          readonly
+
         >Deadline
         </nz-form-label>
         <nz-form-control>

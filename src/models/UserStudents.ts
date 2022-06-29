@@ -8,5 +8,12 @@ export interface Student {
   patronymic: string;
   dateBirth: number;
   studyGroup: string;
+  role?: string;
+}
+
+export enum ROLES {
+  ADMIN = "ADMIN",
+  STUDENT = "STUDENT",
+  TEACHER = "TEACHER",
 }
 
