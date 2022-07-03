@@ -5,79 +5,22 @@
     <th>Surname</th>
     <th>Patronymic</th>
     <th>StudyGroup</th>
-    <!--    <th>DateBirth</th>-->
     <th>HW</th>
     <th>Action</th>
   </tr>
   </thead>
   <tbody>
-  <!--  tableDate$ | async-->
-  <!--listOfData-->
-  <tr *ngFor="let data of tableDate$ | async">
-    <ng-container *ngIf="(data.role)=== roleTeacher">
-      <td>{{ data.name }}</td>
-      <td>{{ data.surname }}</td>
-      <td>{{ data.patronymic }}</td>
-      <td>{{ data.studyGroup }}</td>
-      <td>
-        {{ (filterHW(data.name) | async)?.[0]?.homework}}
-      </td>
+
+  <tr *ngFor="let data of basicTable.data">
+    <ng-container >
+      <td>{{ data?.status_HW }}</td>
+      <td>{{ data?.nicknameStudent }}</td>
+
+      <td>{{ data?.homework }}</td>
+
     </ng-container>
   </tr>
   </tbody>
 </nz-table>
 
-
-<!--<nz-drawer-->
-<!--  [nzBodyStyle]="{ overflow: 'auto' }"-->
-<!--  [nzMaskClosable]="false"-->
-<!--  [nzWidth]="720"-->
-<!--  [nzVisible]="visible"-->
-<!--  nzTitle="Create"-->
-<!--  [nzFooter]="footerTpl"-->
-<!--  (nzOnClose)="close()"-->
-<!--&gt;-->
-<!--  <form nz-form *nzDrawerContent>-->
-<!--    <div nz-row [nzGutter]="8">-->
-<!--      <div nz-col nzSpan="12">-->
-<!--        <nz-form-item>-->
-<!--          <nz-form-label>homework</nz-form-label>-->
-<!--          <nz-form-control>-->
-<!--            <input nz-input placeholder="please enter the student's homework "/>-->
-<!--          </nz-form-control>-->
-<!--        </nz-form-item>-->
-<!--      </div>-->
-
-<!--      <div nz-col nzSpan="12">-->
-<!--        <nz-form-item>-->
-<!--          <nz-form-label>DateTime</nz-form-label>-->
-<!--          <nz-form-control>-->
-<!--            <nz-range-picker></nz-range-picker>-->
-<!--          </nz-form-control>-->
-<!--        </nz-form-item>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <div nz-row [nzGutter]="8">-->
-<!--      <div nz-col nzSpan="24">-->
-<!--        <nz-form-item>-->
-<!--          <nz-form-label>Description</nz-form-label>-->
-<!--          <nz-form-control>-->
-<!--                <textarea-->
-<!--                  nz-input-->
-<!--                  placeholder="please enter url description"-->
-<!--                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"-->
-<!--                ></textarea>-->
-<!--          </nz-form-control>-->
-<!--        </nz-form-item>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </form>-->
-
-<!--  <ng-template #footerTpl>-->
-<!--    <div style="float: right">-->
-<!--      <button nz-button style="margin-right: 8px;" (click)="close()">Cancel</button>-->
-<!--      <button nz-button nzType="primary" (click)="close()">Submit</button>-->
-<!--    </div>-->
-<!--  </ng-template>-->
-<!--</nz-drawer>-->
 

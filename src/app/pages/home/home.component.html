@@ -8,39 +8,27 @@
     <div class="sidebar-logo">
       <a href="https://ng.ant.design/" target="_blank">
         <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
-        <h1>Ant Design Of Angular</h1>
+        <h1>Academic journal</h1>
       </a>
     </div>
     <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/welcome">Welcome</a>
+          <li nz-menu-item nzMatchRouter  *ngIf="roleTeacher | role">
+            <a routerLink="/home/table-homework">Table homework</a>
           </li>
+          <li nz-menu-item nzMatchRouter *ngIf="roleTeacher | role">
+            <a routerLink="/home/table-user">Table user</a>
+          </li>
+          <li nz-menu-item nzMatchRouter *ngIf="roleStudent | role">
+            <a routerLink="/home/student-page" >Student page</a>
+          </li>
+          <li nz-menu-item nzMatchRouter  *ngIf="roleAdmin | role">
+            <a routerLink="/home/home-page" >Home page</a>
+          </li>
+        </ul>
+      </li>
 
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/home/table-homework" >table-homework</a>
-            Homework
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/home/table-user">table-user</a>
-            Homework
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/home/student-page">student-page</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/home/home-page"  *ngIf="roleAdmin | role">home-page</a>
-          </li>
-        </ul>
-      </li>
-      <li nz-submenu nzOpen nzTitle="Form" nzIcon="form">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a>Basic Form</a>
-          </li>
-        </ul>
-      </li>
     </ul>
   </nz-sider>
   <nz-layout>

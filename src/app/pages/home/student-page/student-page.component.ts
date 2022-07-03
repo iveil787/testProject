@@ -67,7 +67,10 @@ export class StudentPageComponent implements OnInit {
 
   selectedValue = null;
 
-  roleStudent = ROLES.STUDENT
+  roleStudent = ROLES.STUDENT;
+
+  teacherList : Student[] = [];
+
 
   // ====================================================== мусор
   listOfData: HomeWork[] = [
@@ -107,6 +110,11 @@ export class StudentPageComponent implements OnInit {
   // ================================== Жизненный цикл ==============================
   ngOnInit(): void {
     this.store$.dispatch(new TaskCreateTableUser())
+
+
+    this.tableTacherDate$.subscribe( (allUser) => this.teacherList = allUser)
+
+
     this.statusTime.getTime()
 
     this.taskTableHomework()
@@ -202,6 +210,8 @@ export class StudentPageComponent implements OnInit {
 
   addEditStatus(): void {
     // this.currentUser();
+
+    const [currentTeacher] = this.teacherList.filter((teacher) => (this.editHwTest.idTeacher === teacher.id))
     const [startDate, endDate] = this.validateFormDetails.getRawValue().deadline
 
     const newEditStatusHomework = {
@@ -214,6 +224,12 @@ export class StudentPageComponent implements OnInit {
       endDate: endDate,
       wishes: this.validateFormDetails.getRawValue().wishes,
       status_HW: "completed",
+      nameTeacher: currentTeacher.name,
+      surnameTeacher: currentTeacher.surname,
+      patronymicTeacher: currentTeacher.patronymic,
+      studyTeacher: currentTeacher.studyGroup,
+      emailTeacher: currentTeacher.email,
+      idStudent: this.validateFormDetailsTeacher.getRawValue().idStudent,
     }
     // this.loginservice.addEditHomework(newEditHomework).subscribe();
 

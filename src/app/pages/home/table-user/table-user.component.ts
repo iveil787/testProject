@@ -7,6 +7,7 @@ import {tableSelector} from "../../../reducers/table-user/table.selector";
 import {map, Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
 import {tableHomeworkSelector} from "../../../reducers/homework/homework.selector";
+import {TaskCreateTableHomeworkActions} from "../../../reducers/homework/homework.action";
 
 
 interface HomeWork {
@@ -41,6 +42,8 @@ export class TableUserComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute, private HomeWorkStore$: Store<HomeWork>) {
   }
 
+  listOfData: Homework[] = [];
+
   public tableHomeworkDate$: Observable<Homework[]> = this.HomeWorkStore$.pipe(select(tableHomeworkSelector));
 
   id: any;
@@ -48,9 +51,12 @@ export class TableUserComponent implements OnInit, OnDestroy {
   roleTeacher = ROLES.TEACHER;
 
   ngOnInit(): void {
+    this.store$.dispatch(new TaskCreateTableHomeworkActions())
     this.taskTableUser()
-    // this.goToServis() зполнить таблицу напрямую из сервиса
-    // this.tableDate$.subscribe((allUser) => console.log(allUser))
+
+    this.tableHomeworkDate$.subscribe((allHomework) => {
+
+      this.listOfData = allHomework})
 
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
@@ -82,49 +88,9 @@ export class TableUserComponent implements OnInit, OnDestroy {
     date: 2222,
   }
 
-  listOfData: StudentTest[] = [
-    {
-      id: 111,
-      email: "yyy@yandex.ru",
-      login: "ww",
-      password: "ww",
-      name: "ww",
-      surname: "ww",
-      patronymic: "ww",
-      dateBirth: 1647373728263,
-      studyGroup: "ww",
-      visiblePopover: false,
-    },
-    {
-      id: 111,
-      email: "yyy@yandex.ru",
-      login: "ww",
-      password: "ww",
-      name: "ww",
-      surname: "ww",
-      patronymic: "ww",
-      dateBirth: 1647373728263,
-      studyGroup: "ww",
-      visiblePopover: false,
-    },
-    {
-      id: 111,
-      email: "yyy@yandex.ru",
-      login: "ww",
-      password: "ww",
-      name: "ww",
-      surname: "ww",
-      patronymic: "ww",
-      dateBirth: 1647373728263,
-      studyGroup: "ww",
-      visiblePopover: false,
-    }
-  ];
 
-  // goToServis(): void {
-  //   console.log(this.loginservice.getAllUser().subscribe((date) => (this.date = date)));
-  //
-  // }
+
+
   visiblePopover: boolean = false;
 
   clickMe(): void {
@@ -151,7 +117,6 @@ export class TableUserComponent implements OnInit, OnDestroy {
   }
 
   filterHW(userID: string) {
-    // this.tableHomeworkDate$.pipe(map((HW) => (HW.filter((item) => (userID === item.idTeacher)))))
 
     return  this.tableHomeworkDate$.pipe(map((HW) => (HW.filter((item) => (userID === item.nicknameStudent)))))
   }

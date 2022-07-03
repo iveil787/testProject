@@ -2,8 +2,7 @@ import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {ROLES, Student} from "../../../../models/UserStudents";
 import {LoginService} from "../../../../services/login.service";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators} from "@angular/forms";
-import {Store} from "@ngrx/store";
-import {CountState} from "../../../reducers/count/count.reducer";
+
 
 
 @Component({
@@ -13,8 +12,7 @@ import {CountState} from "../../../reducers/count/count.reducer";
 })
 export class HomePageComponent implements OnInit ,OnDestroy{
 
-  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService,
-              private store$: Store<CountState>) {
+  constructor(private fb: FormBuilder, @Inject(LoginService) private loginservice: LoginService) {
   }
   currentUser: Student | undefined;
   subscription: any
@@ -100,7 +98,7 @@ export class HomePageComponent implements OnInit ,OnDestroy{
   }
 
 // ==========================================addStudents==========================================
-//   этот метод работает напрямую с сервисом;
+
   addDataTeacher(): void {
     const newStudent = {
       id:  "1",
