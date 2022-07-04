@@ -44,8 +44,6 @@
 
 <!--================================================= formCreate =================================================-->
 
-<!--<button nz-button [nzType]="'primary'" (click)="showModal()"><span>Create</span></button>-->
-
 <nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
@@ -133,7 +131,6 @@
 </nz-modal>
 
 <!--================================================= formEdite =================================================-->
-<!--<button nz-button [nzType]="'primary'" (click)="showModalDetails()"><span>Show Modal</span></button>-->
 <nz-modal [(nzVisible)]="isVisibleDetails" nzTitle="The first Modal" (nzOnCancel)="handleCancelDetails()" (nzOnOk)="handleOkDetails()">
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="validateFormDetails" (ngSubmit)="submitFormDetails()">

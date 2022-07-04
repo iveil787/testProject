@@ -17,8 +17,6 @@ export class HomePageComponent implements OnInit ,OnDestroy{
   currentUser: Student | undefined;
   subscription: any
   roleAdmin = ROLES.ADMIN
-
-
   myForm!: FormGroup;
 
   ngOnInit(): void {
@@ -112,6 +110,7 @@ export class HomePageComponent implements OnInit ,OnDestroy{
       studyGroup: this.myForm.getRawValue().studyGroup,
       role:  "TEACHER",
     }
+    debugger
     this.loginservice.addDataTeacher(newStudent).subscribe();
   };
 

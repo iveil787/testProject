@@ -11,15 +11,12 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of tableHomeworkDate$ | async">
+  <tr *ngFor="let data of basicTable.data ">
     <td>{{ data.nameTeacher }}</td>
     <td>{{ data.nicknameStudent }}</td>
-    <!--    <td>{{ data.startDate | date:'dd.MM.yyyy'}}</td>-->
     <td>{{ data.endDate | date:'dd.MM.yyyy'}}</td>
     <td [ngClass]="data.endDate > statusTime ?  'green' : 'red'">Status</td>
     <td>{{ data.homework}}</td>
-    <!--    <td>{{ (filterHW(data.idTeacher) | async)?.[0]?.id}}</td>-->
-
     <td>
       <button nz-button [nzType]="'primary'" (click)="showModalDetails();  showEditHW(data)">
         <span>Details</span>
@@ -50,7 +47,7 @@
           <span>Nickname</span>
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
-          <input nz-input id="nicknameStudentDetails" formControlName="nicknameStudent"/>
+          <input nz-input id="nicknameStudentDetails" formControlName="nicknameStudent" readonly/>
         </nz-form-control>
       </nz-form-item>
 
@@ -82,7 +79,7 @@
                   nz-input id="descriptionDetails"
                   placeholder="please enter description"
                   formControlName="description"
-                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                  [nzAutosize]="{ minRows: 4, maxRows: 4 }" readonly
                 ></textarea>
         </nz-form-control>
       </nz-form-item>
@@ -95,12 +92,13 @@
         >Deadline
         </nz-form-label>
         <nz-form-control>
-          <nz-range-picker formControlName="deadline"></nz-range-picker>
+          <nz-range-picker nzDisabled formControlName="deadline"  ></nz-range-picker>
         </nz-form-control>
-      </nz-form-item>
+      </nz-form-item >
 
-      <nz-form-item>
+      <nz-form-item >
         <nz-form-label
+
           [nzSm]="6"
           [nzXs]="24"
           nzFor="description"
@@ -138,7 +136,7 @@
           <span>Nickname</span>
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
-          <input nz-input id="nicknameDetailsTeacher" formControlName="nicknameTeacher"/>
+          <input nz-input id="nicknameDetailsTeacher" formControlName="nicknameTeacher" readonly/>
         </nz-form-control>
       </nz-form-item>
 
@@ -150,7 +148,7 @@
           <span>Surname</span>
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
-          <input nz-input id="surnameDetailsTeacher" formControlName="surnameTeacher"/>
+          <input nz-input id="surnameDetailsTeacher" formControlName="surnameTeacher" readonly/>
         </nz-form-control>
       </nz-form-item>
 
@@ -162,7 +160,7 @@
           <span>Patronymic</span>
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
-          <input nz-input id="patronymicDetailsTeacher" formControlName="patronymicTeacher"/>
+          <input nz-input id="patronymicDetailsTeacher" formControlName="patronymicTeacher" readonly/>
         </nz-form-control>
       </nz-form-item>
 
@@ -174,7 +172,7 @@
           <span>Group</span>
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
-          <input nz-input id="studyDetailsTeacher" formControlName="studyTeacher"/>
+          <input nz-input id="studyDetailsTeacher" formControlName="studyTeacher" readonly/>
         </nz-form-control>
       </nz-form-item>
 
@@ -186,7 +184,7 @@
           <span>Email</span>
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
-          <input nz-input id="emailDetailsTeacher" formControlName="emailTeacher"/>
+          <input nz-input id="emailDetailsTeacher" formControlName="emailTeacher" readonly/>
         </nz-form-control>
       </nz-form-item>
 

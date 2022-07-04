@@ -35,13 +35,9 @@ export class StudentPageComponent implements OnInit {
 
   public tableHomeworkDate$: Observable<Homework[]> = this.store$.pipe(select(filterStudentHomeworkSelector));
 
-  validateForm!: FormGroup;
-
   validateFormDetails!: FormGroup;
 
   validateFormDetailsTeacher!: FormGroup;
-
-  validateFormDetailsHomework!: FormGroup;
 
   subscription: any;
 
@@ -68,19 +64,12 @@ export class StudentPageComponent implements OnInit {
   ngOnInit(): void {
     this.store$.dispatch(new TaskCreateTableUser())
     this.tableTacherDate$.subscribe((allUser) => this.teacherList = allUser)
-    this.tableHomeworkDate$.subscribe((allHomework) => console.log(allHomework))
+    this.tableHomeworkDate$.subscribe((allHomework) => {
+      this.listOfData = allHomework
+    })
 
     this.statusTime.getTime()
     this.taskTableHomework()
-
-    this.validateForm = this.fb.group({
-      nicknameStudent: [null, [Validators.required]],
-      homework: [null, [Validators.required]],
-      description: [null, [Validators.required]],
-      deadline: [null],
-      wishes: [null, [Validators.required, Validators.maxLength(10)]],
-    });
-
 
     this.validateFormDetails = this.fb.group({
       nicknameStudent: [null, [Validators.required]],
@@ -90,41 +79,15 @@ export class StudentPageComponent implements OnInit {
       wishes: [null, [Validators.required, Validators.maxLength(10)]],
     });
 
-    this.validateFormDetailsHomework = this.fb.group({
-      nicknameStudent: [null, [Validators.required]],
-      homework: [null, [Validators.required]],
-      description: [null, [Validators.required]],
-      deadline: [null],
-      wishes: [null, [Validators.required, Validators.maxLength(10)]],
-    });
-
     this.validateFormDetailsTeacher = this.fb.group({
-
       nicknameTeacher: [null, [Validators.required]],
       surnameTeacher: [null, [Validators.required]],
       patronymicTeacher: [null, [Validators.required]],
       studyTeacher: [null, [Validators.required]],
       emailTeacher: [null, [Validators.required]],
     });
-
-    this.currentUser();
-
   }
 
-
-  submitForm(): void {
-    if (this.validateForm.valid) {
-
-      console.log('submit', this.validateForm.value);
-    } else {
-      Object.values(this.validateForm.controls).forEach(control => {
-        if (control.invalid) {
-          control.markAsDirty();
-          control.updateValueAndValidity({onlySelf: true});
-        }
-      });
-    }
-  }
 
   submitFormDetails(): void {
     if (this.validateFormDetails.valid) {
@@ -174,7 +137,7 @@ export class StudentPageComponent implements OnInit {
       emailTeacher: currentTeacher.email,
       idStudent: this.validateFormDetailsTeacher.getRawValue().idStudent,
     }
-      this.taskEditStatusHomework(newEditStatusHomework)
+    this.taskEditStatusHomework(newEditStatusHomework)
   };
 
   taskEditStatusHomework(HW: Homework) {
@@ -185,13 +148,6 @@ export class StudentPageComponent implements OnInit {
     this.store$.dispatch(new TaskCreateTableHomeworkActions()
     )
   }
-
-  currentUser() {
-    return this.loginservice.currentUser().subscribe((data: Student[]) => {
-      this.teacher = data
-    })
-  }
-
 
 // ============================== visiblePopoverEdite
 
