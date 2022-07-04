@@ -6,9 +6,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ROLES, Student} from "../../../../models/UserStudents";
 import {select, Store} from "@ngrx/store";
 import {
-  TaskCreateHomeworkActions,
+
   TaskCreateTableHomeworkActions,
-  TaskDelletHomeworkActions,
+
   TaskEditStatusHomeworkActions
 } from "../../../reducers/homework/homework.action";
 import {map, Observable} from "rxjs";
@@ -16,14 +16,6 @@ import {filterStudentHomeworkSelector,} from "../../../reducers/homework/homewor
 import {tableSelector} from "../../../reducers/table-user/table.selector";
 import {TaskCreateTableUser} from "../../../reducers/table-user/table.action";
 
-interface HomeWork {
-  idWomeHork: number;
-  idUser: number;
-  idStudent: number;
-  nameHw: string;
-  case: string;
-  date: number;
-}
 
 // @ts-ignore
 @Component({
@@ -34,16 +26,14 @@ interface HomeWork {
 export class StudentPageComponent implements OnInit {
 
   constructor(@Inject(LoginService) private loginservice: LoginService, private fb: FormBuilder,
-              private store$: Store<HomeWork>, private list$: Store<Student>, private TeacherStore$: Store<Student>) {
+              private store$: Store<Homework>, private list$: Store<Student>, private TeacherStore$: Store<Student>) {
   }
 
-  // ==================================переменные ==============================
   public tableTacherDate$: Observable<Student[]> = this.TeacherStore$.pipe(select(tableSelector));
 
-  filterHW(userID: string) {
+  public allUseList$: Observable<Student[]> = this.list$.pipe(select(tableSelector));
 
-    return this.tableTacherDate$.pipe(map((HW) => (HW.filter((item) => (userID === item.id)))))
-  }
+  public tableHomeworkDate$: Observable<Homework[]> = this.store$.pipe(select(filterStudentHomeworkSelector));
 
   validateForm!: FormGroup;
 
@@ -53,13 +43,9 @@ export class StudentPageComponent implements OnInit {
 
   validateFormDetailsHomework!: FormGroup;
 
-  public tableHomeworkDate$: Observable<Homework[]> = this.store$.pipe(select(filterStudentHomeworkSelector));
-
-  homeWork: any;
-
   subscription: any;
 
-  teacher: any;
+  teacher: Student[] = [];
 
   statusTime: any = new Date;
 
@@ -69,57 +55,23 @@ export class StudentPageComponent implements OnInit {
 
   roleStudent = ROLES.STUDENT;
 
-  teacherList : Student[] = [];
+  teacherList: Student[] = [];
 
+  listOfData: Homework[] = [];
 
-  // ====================================================== мусор
-  listOfData: HomeWork[] = [
-    {
-      idWomeHork: 1,
-      idUser: 11,
-      idStudent: 111,
-      nameHw: "fggffg",
-      case: "string",
-      date: 323,
-    },
-    {
-      idWomeHork: 1,
-      idUser: 11,
-      idStudent: 111,
-      nameHw: "fggffg",
-      case: "string",
-      date: 323,
-    },
-    {
-      idWomeHork: 1,
-      idUser: 11,
-      idStudent: 111,
-      nameHw: "fggffg",
-      case: "string",
-      date: 323,
-    }
-  ];
+  isVisible = false;
 
+  isVisibleDetails = false;
 
-// filterHWforTeacher(userId: String){
-//
-//   return  this.tableHomeworkDate$.pipe(map((all) => (all.filter((item) => ( item.idTeacher === "userId")
-//
-//   ))))
-// }
-  // ================================== Жизненный цикл ==============================
+  isVisibleDetailsTeacher = false;
+
   ngOnInit(): void {
     this.store$.dispatch(new TaskCreateTableUser())
-
-
-    this.tableTacherDate$.subscribe( (allUser) => this.teacherList = allUser)
-
+    this.tableTacherDate$.subscribe((allUser) => this.teacherList = allUser)
+    this.tableHomeworkDate$.subscribe((allHomework) => console.log(allHomework))
 
     this.statusTime.getTime()
-
     this.taskTableHomework()
-    // this.filterHWforTeacher(this.teacher)
-    this.tableHomeworkDate$.subscribe((allHomework) => console.log(allHomework))
 
     this.validateForm = this.fb.group({
       nicknameStudent: [null, [Validators.required]],
@@ -155,8 +107,6 @@ export class StudentPageComponent implements OnInit {
       emailTeacher: [null, [Validators.required]],
     });
 
-
-    // this.currentUser() берёт данные Юзера из токена
     this.currentUser();
 
   }
@@ -178,7 +128,6 @@ export class StudentPageComponent implements OnInit {
 
   submitFormDetails(): void {
     if (this.validateFormDetails.valid) {
-      // отключил изменение формы
       this.addEditStatus();
       console.log('submit', this.validateFormDetails.value);
     } else {
@@ -192,11 +141,7 @@ export class StudentPageComponent implements OnInit {
   }
 
   submitFormDetailsTeacher(): void {
-
     if (this.validateFormDetailsTeacher.valid) {
-
-
-      // console.log('submit', this.validateFormDetailsTeacher.value);
     } else {
       Object.values(this.validateFormDetailsTeacher.controls).forEach(control => {
         if (control.invalid) {
@@ -209,8 +154,6 @@ export class StudentPageComponent implements OnInit {
 
 
   addEditStatus(): void {
-    // this.currentUser();
-
     const [currentTeacher] = this.teacherList.filter((teacher) => (this.editHwTest.idTeacher === teacher.id))
     const [startDate, endDate] = this.validateFormDetails.getRawValue().deadline
 
@@ -231,61 +174,26 @@ export class StudentPageComponent implements OnInit {
       emailTeacher: currentTeacher.email,
       idStudent: this.validateFormDetailsTeacher.getRawValue().idStudent,
     }
-    // this.loginservice.addEditHomework(newEditHomework).subscribe();
-
-    this.taskEditStatusHomework(newEditStatusHomework)
-    // console.log(this.validateForm.getRawValue().deadline);
-    // console.log(newEditStatusHomework);
+      this.taskEditStatusHomework(newEditStatusHomework)
   };
 
   taskEditStatusHomework(HW: Homework) {
     this.store$.dispatch(new TaskEditStatusHomeworkActions(HW))
   }
 
-  // поход на серв без state
-  // goTo(): void {
-  //   this.loginservice.getAllHomework().subscribe((data) => (this.homeWork = data))
-  // }
-  // ====================================================goToService
-  // goInToTheServ() {
-  //   this.tableHomeworkDate$
-  // }
-
   taskTableHomework() {
     this.store$.dispatch(new TaskCreateTableHomeworkActions()
     )
   }
 
-  // ====================================================== попытки получить данные из subscribe
   currentUser() {
     return this.loginservice.currentUser().subscribe((data: Student[]) => {
       this.teacher = data
     })
-
   }
 
-  // ====================================================visiblePopoverCreate
 
-  isVisible = false;
-
-  showModal(): void {
-    this.isVisible = true;
-  }
-
-  handleOk(): void {
-    console.log('Button ok clicked!');
-    this.isVisible = false;
-    this.submitForm()
-  }
-
-  handleCancel(): void {
-    console.log('Button cancel clicked!');
-    this.isVisible = false;
-  }
-
-// ====================================================visiblePopoverEdite
-
-  isVisibleDetails = false;
+// ============================== visiblePopoverEdite
 
   showModalDetails(): void {
     this.isVisibleDetails = true;
@@ -303,9 +211,7 @@ export class StudentPageComponent implements OnInit {
     this.submitFormDetails()
   }
 
-  // ==================================================== visiblePopoverDetailsT ======================
-
-  isVisibleDetailsTeacher = false;
+  // ========================= visiblePopoverDetailsT ======================
 
   showModalDetailsTeacher(): void {
     this.isVisibleDetailsTeacher = true;
@@ -341,26 +247,10 @@ export class StudentPageComponent implements OnInit {
     this.validateFormDetailsTeacher.controls["studyTeacher"].setValue(Hw?.studyTeacher);
     this.validateFormDetailsTeacher.controls["emailTeacher"].setValue(Hw?.emailTeacher);
   }
-// ++++++++++++++++++++++++++++++++++++selector 2
 
-  public allUseList$: Observable<Student[]> = this.list$.pipe(select(tableSelector));
 
-  goToUse() {
-    this.allUseList$
-  }
-
-  taskCreateHWUser(HW: Homework) {
-    this.list$.dispatch(new TaskCreateHomeworkActions(HW)
-    )
-  }
-
-  deleteHW(idHW: Homework) {
-    this.loginservice.deleteHW(idHW).subscribe()
-    console.log(idHW);
-  }
-
-  deleteHWRedux(HW: Homework) {
-    this.list$.dispatch(new TaskDelletHomeworkActions(HW))
+  filterHW(userID: string) {
+    return this.tableTacherDate$.pipe(map((HW) => (HW.filter((item) => (userID === item.id)))))
   }
 
 }

@@ -7,26 +7,20 @@
     <th>Start date</th>
     <th>End date</th>
     <th>Status</th>
-    <th>Description</th>
-    <th>Wishes</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let data of tableHomeworkDate$ | async">
-    <td>{{ data.idTeacher }}</td>
+    <td>{{ data.nameTeacher }}</td>
     <td>{{ data.nicknameStudent }}</td>
     <td>{{ data.homework }}</td>
     <td>{{ data.startDate | date:'dd.MM.yyyy'}}</td>
     <td>{{ data.endDate | date:'dd.MM.yyyy'}}</td>
     <td [ngClass]="data.endDate > statusTime ?  'green' : 'red'">{{ data.status_HW }}</td>
-    <td>{{ data.description}}</td>
-    <td>{{ data.wishes }}</td>
 
-    <!--    <td>-->
-    <!--      <a>Action 一 {{ data.wishes }}</a>-->
-    <!--      <nz-divider nzType="vertical"></nz-divider>-->
-    <!--      <a>Delete</a>-->
-    <!--    </td>-->
     <td>
       <button nz-button [nzType]="'primary'" (click)="showModalDetails(); editHW(data)">
         <span>Edit</span>

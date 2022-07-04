@@ -1,23 +1,21 @@
 <nz-table #basicTable [nzData]="listOfData" *ngIf="roleTeacher | role">
   <thead>
   <tr>
-    <th>Name</th>
-    <th>Surname</th>
-    <th>Patronymic</th>
-    <th>StudyGroup</th>
-    <th>HW</th>
-    <th>Action</th>
+    <th>Status</th>
+    <th>Name Teacher</th>
+    <th>Nickname Student</th>
+    <th>Group</th>
+    <th>Homework</th>
   </tr>
   </thead>
   <tbody>
-
   <tr *ngFor="let data of basicTable.data">
     <ng-container >
       <td>{{ data?.status_HW }}</td>
+      <td>{{ data?.nameTeacher }}</td>
       <td>{{ data?.nicknameStudent }}</td>
-
+      <td>{{ data?.studyTeacher }}</td>
       <td>{{ data?.homework }}</td>
-
     </ng-container>
   </tr>
   </tbody>

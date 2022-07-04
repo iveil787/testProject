@@ -10,27 +10,6 @@ import {tableHomeworkSelector} from "../../../reducers/homework/homework.selecto
 import {TaskCreateTableHomeworkActions} from "../../../reducers/homework/homework.action";
 
 
-interface HomeWork {
-  idWomeHork: number;
-  idUser: number;
-  nameHw: string;
-  case: string;
-  date: number;
-}
-
-export interface StudentTest {
-  id: number;
-  email: string;
-  login: string;
-  password: string;
-  name: string;
-  surname: string;
-  patronymic: string;
-  dateBirth: number;
-  studyGroup: string;
-  visiblePopover: boolean
-}
-
 @Component({
   selector: 'app-table-user',
   templateUrl: './table-user.component.html',
@@ -39,15 +18,23 @@ export interface StudentTest {
 export class TableUserComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(LoginService) private loginservice: LoginService, private store$: Store<Student>,
-              private route: ActivatedRoute, private HomeWorkStore$: Store<HomeWork>) {
+              private route: ActivatedRoute, private HomeWorkStore$: Store<Homework>) {
   }
 
   listOfData: Homework[] = [];
 
   public tableHomeworkDate$: Observable<Homework[]> = this.HomeWorkStore$.pipe(select(tableHomeworkSelector));
 
+  public tableDate$: Observable<Student[]> = this.store$.pipe(select(tableSelector));
+
   id: any;
+
   sub: any;
+
+  visiblePopover: boolean = false;
+
+  visible = false;
+
   roleTeacher = ROLES.TEACHER;
 
   ngOnInit(): void {
@@ -55,8 +42,8 @@ export class TableUserComponent implements OnInit, OnDestroy {
     this.taskTableUser()
 
     this.tableHomeworkDate$.subscribe((allHomework) => {
-
-      this.listOfData = allHomework})
+      this.listOfData = allHomework
+    })
 
     this.sub = this.route.params.subscribe(params => {
       this.id = +params['id']; // (+) converts string 'id' to a number
@@ -67,8 +54,6 @@ export class TableUserComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe();
   }
 
-  public tableDate$: Observable<Student[]> = this.store$.pipe(select(tableSelector));
-
   goInToTheServ() {
     this.tableDate$
   }
@@ -78,47 +63,8 @@ export class TableUserComponent implements OnInit, OnDestroy {
     )
   }
 
-  date: any;
-
-  homeWork: HomeWork = {
-    idWomeHork: 1111,
-    idUser: 2222,
-    nameHw: "aaaa",
-    case: "bbbbbb",
-    date: 2222,
-  }
-
-
-
-
-  visiblePopover: boolean = false;
-
-  clickMe(): void {
-    this.visiblePopover = false;
-  }
-
-  change(value: any): void {
-    console.log(value);
-  }
-
-// ++++++++++++++++++++++++++++++++++
-  visible = false;
-
-  open(): void {
-    this.visible = true;
-  }
-
-  close(): void {
-    this.visible = false;
-  }
-
-  saveHW() {
-    alert("saveHW")
-  }
-
   filterHW(userID: string) {
-
-    return  this.tableHomeworkDate$.pipe(map((HW) => (HW.filter((item) => (userID === item.nicknameStudent)))))
+    return this.tableHomeworkDate$.pipe(map((HW) =>
+      (HW.filter((item) => (userID === item.nicknameStudent)))))
   }
-
 }
