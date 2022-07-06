@@ -77,7 +77,10 @@ export class WelcomeComponent implements OnInit {
       studyGroup: this.myForm.getRawValue().studyGroup,
       role: "STUDENT",
     }
+    debugger
+    console.log(newStudent);
     this.loginservice.addData(newStudent).subscribe();
+
   };
 
   createUserRedux() {
