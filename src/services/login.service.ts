@@ -35,8 +35,16 @@ export class LoginService {
 
   modelUserStudent: Student[] = [
     {
-      id: "1", email: "Dr Nice", login: "fff", password: "4545", name: "fdf", surname: "Faust", patronymic: "ff",
-      dateBirth: 4444, studyGroup: "1", role: "STUDENT",
+      id: "1",
+      email: "Dr Nice",
+      login: "fff",
+      password: "4545",
+      name: "fdf",
+      surname: "Faust",
+      patronymic: "ff",
+      dateBirth: 4444,
+      studyGroup: "1",
+      role: "STUDENT",
     },
   ];
 
