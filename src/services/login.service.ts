@@ -35,8 +35,16 @@ export class LoginService {
 
   modelUserStudent: Student[] = [
     {
-      id: "1", email: "Dr Nice", login: "fff", password: "4545", name: "fdf", surname: "Faust", patronymic: "ff",
-      dateBirth: 4444, studyGroup: "1", role: "STUDENT",
+      id: "1",
+      email: "Dr Nice",
+      login: "fff",
+      password: "4545",
+      name: "fdf",
+      surname: "Faust",
+      patronymic: "ff",
+      dateBirth: 4444,
+      studyGroup: "1",
+      role: "STUDENT",
     },
   ];
 
@@ -190,12 +198,20 @@ export class LoginService {
     this.modelEditHomework.push(user);
     const body = {
       id: user.id,
-      idTeacher: user.idTeacher, nicknameStudent: user.nicknameStudent,
-      homework: user.homework, description: user.description,
-
-      startDate: user.startDate, endDate: user.endDate,
-
-      wishes: user.wishes, status_HW: "Выполнено",
+      idTeacher: user.idTeacher,
+      nicknameStudent: user.nicknameStudent,
+      homework: user.homework,
+      description: user.description,
+      startDate: user.startDate,
+      endDate: user.endDate,
+      wishes: user.wishes,
+      status_HW: "Выполнено",
+      nameTeacher: user.nameTeacher,
+      idStudent: user.idStudent,
+      surnameTeacher: user.surnameTeacher,
+      patronymicTeacher: user.patronymicTeacher,
+      studyTeacher: user.studyTeacher,
+      emailTeacher: user.emailTeacher,
     };
 
     return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);

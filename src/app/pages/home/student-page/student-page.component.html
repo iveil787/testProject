@@ -1,32 +1,28 @@
 <nz-table #basicTable [nzData]="listOfData" *ngIf="roleStudent | role">
-  <thead >
+  <thead>
   <tr>
     <th>Teacher</th>
     <th>Student</th>
-    <th>Homework</th>
     <th>Start date</th>
-    <th>End date</th>
-    <th>Status</th>
-    <th>Description</th>
-    <th>Wishes</th>
+    <th>Start date</th>
+    <th>Homework</th>
+    <th></th>
+    <th></th>
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let data of tableHomeworkDate$ | async">
+  <tr *ngFor="let data of basicTable.data ">
     <td>{{ data.nameTeacher }}</td>
-<!--    <td>{{ data.nicknameStudent }}</td>-->
     <td>{{ data.nicknameStudent }}</td>
-<!--    <td>{{ data.startDate | date:'dd.MM.yyyy'}}</td>-->
     <td>{{ data.endDate | date:'dd.MM.yyyy'}}</td>
     <td [ngClass]="data.endDate > statusTime ?  'green' : 'red'">Status</td>
-<!--    <td>{{ data.description}}</td>-->
-    <td>{{ (filterHW(data.idTeacher) | async)?.[0]?.id}}</td>
-
+    <td>{{ data.homework}}</td>
     <td>
       <button nz-button [nzType]="'primary'" (click)="showModalDetails();  showEditHW(data)">
         <span>Details</span>
       </button>
-
+    </td>
+    <td>
       <button nz-button [nzType]="'primary'" (click)="showModalDetailsTeacher(); showDetailsTeacher(data)">
         <span>DetailsTeacher</span>
       </button>
@@ -42,17 +38,16 @@
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="validateFormDetails" (ngSubmit)="submitFormDetails()">
 
-      <nz-form-item >
+      <nz-form-item>
         <nz-form-label
           [nzSm]="6"
           [nzXs]="24"
-          nzFor="nicknameStudent"
+          nzFor="nicknameStudent">
 
-        >
           <span>Nickname</span>
-        </nz-form-label >
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!"  >
-          <input  nz-input id="nicknameStudentDetails" formControlName="nicknameStudent" />
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
+          <input nz-input id="nicknameStudentDetails" formControlName="nicknameStudent" readonly/>
         </nz-form-control>
       </nz-form-item>
 
@@ -66,7 +61,7 @@
         </nz-form-label>
         <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Homework!">
 
-          <input nz-input id="homeworkDetails" formControlName="homework" readonly />
+          <input nz-input id="homeworkDetails" formControlName="homework" readonly/>
 
         </nz-form-control>
       </nz-form-item>
@@ -84,7 +79,7 @@
                   nz-input id="descriptionDetails"
                   placeholder="please enter description"
                   formControlName="description"
-                  [nzAutosize]="{ minRows: 4, maxRows: 4 }"
+                  [nzAutosize]="{ minRows: 4, maxRows: 4 }" readonly
                 ></textarea>
         </nz-form-control>
       </nz-form-item>
@@ -97,12 +92,13 @@
         >Deadline
         </nz-form-label>
         <nz-form-control>
-          <nz-range-picker  formControlName="deadline" ></nz-range-picker>
+          <nz-range-picker nzDisabled formControlName="deadline"  ></nz-range-picker>
         </nz-form-control>
-      </nz-form-item>
+      </nz-form-item >
 
-      <nz-form-item>
+      <nz-form-item >
         <nz-form-label
+
           [nzSm]="6"
           [nzXs]="24"
           nzFor="description"
@@ -122,78 +118,75 @@
   </ng-container>
   <div *nzModalFooter>
     <button nz-button nzType="default" (click)="handleCancelDetails()">Cancel</button>
-    <button nz-button nzType="primary" (click)="handleOkDetails()" >Completed</button>
+    <button nz-button nzType="primary" (click)="handleOkDetails()">Completed</button>
   </div>
 </nz-modal>
 
 <!--================================================= formCreate =================================================-->
-<nz-modal [(nzVisible)]="isVisibleDetailsTeacher" nzTitle="The first Modal" (nzOnCancel)="handleCancelDetailsTeacher()" (nzOnOk)="handleOkDetailsTeacher()">
+<nz-modal [(nzVisible)]="isVisibleDetailsTeacher" nzTitle="The first Modal" (nzOnCancel)="handleCancelDetailsTeacher()"
+          (nzOnOk)="handleOkDetailsTeacher()">
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="validateFormDetailsTeacher" (ngSubmit)="submitFormDetailsTeacher()">
 
-      <nz-form-item >
+      <nz-form-item>
         <nz-form-label
           [nzSm]="6"
           [nzXs]="24"
           nzFor="nicknameStudent">
           <span>Nickname</span>
-        </nz-form-label >
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!"  >
-          <input  nz-input id="nicknameDetailsTeacher" formControlName="nicknameTeacher"  />
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
+          <input nz-input id="nicknameDetailsTeacher" formControlName="nicknameTeacher" readonly/>
         </nz-form-control>
       </nz-form-item>
 
-      <nz-form-item >
+      <nz-form-item>
         <nz-form-label
           [nzSm]="6"
           [nzXs]="24"
           nzFor="nicknameStudent">
-          <span>Nickname</span>
-        </nz-form-label >
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!"  >
-          <input  nz-input id="surnameDetailsTeacher" formControlName="surnameTeacher"  />
+          <span>Surname</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
+          <input nz-input id="surnameDetailsTeacher" formControlName="surnameTeacher" readonly/>
         </nz-form-control>
       </nz-form-item>
 
-
-      <nz-form-item >
+      <nz-form-item>
         <nz-form-label
           [nzSm]="6"
           [nzXs]="24"
           nzFor="nicknameStudent">
-          <span>Nickname</span>
-        </nz-form-label >
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!"  >
-          <input  nz-input id="patronymicDetailsTeacher" formControlName="patronymicTeacher"  />
+          <span>Patronymic</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
+          <input nz-input id="patronymicDetailsTeacher" formControlName="patronymicTeacher" readonly/>
         </nz-form-control>
       </nz-form-item>
 
-
-      <nz-form-item >
+      <nz-form-item>
         <nz-form-label
           [nzSm]="6"
           [nzXs]="24"
           nzFor="nicknameStudent">
-          <span>Nickname</span>
-        </nz-form-label >
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!"  >
-          <input  nz-input id="studyDetailsTeacher" formControlName="studyTeacher"  />
+          <span>Group</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
+          <input nz-input id="studyDetailsTeacher" formControlName="studyTeacher" readonly/>
         </nz-form-control>
       </nz-form-item>
 
-
-      <nz-form-item >
+      <nz-form-item>
         <nz-form-label
           [nzSm]="6"
           [nzXs]="24"
           nzFor="nicknameStudent">
-          <span>Nickname</span>
-        </nz-form-label >
-        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!"  >
-          <input  nz-input id="emailDetailsTeacher" formControlName="emailTeacher"  />
+          <span>Email</span>
+        </nz-form-label>
+        <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your nickname Student!">
+          <input nz-input id="emailDetailsTeacher" formControlName="emailTeacher" readonly/>
         </nz-form-control>
       </nz-form-item>
-
 
     </form>
   </ng-container>

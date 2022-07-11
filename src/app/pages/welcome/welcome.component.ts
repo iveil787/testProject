@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, FormBuilder} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {LoginService} from "../../../services/login.service";
 
 import {Store} from "@ngrx/store";
@@ -34,24 +34,9 @@ export class WelcomeComponent implements OnInit {
     });
   }
 
-  limitAge(control: AbstractControl): ValidationErrors | null {
-    const date = new Date();
-    const pastDate = new Date(date.setFullYear(date.getFullYear() - 10));
-    const inputDate = new Date(control.value);
-    if (inputDate > pastDate) {
-      return {
-        "recuiredDate<": pastDate.toLocaleDateString(),
-        "inputedDate": inputDate.toLocaleDateString()
-      };
-    }
-    return null;
-  }
-
   // =====================================сабмитим====submitForm()==========================================
   submitForm(): void {
     if (this.myForm.valid) {
-      console.log('submit', this.myForm.value);
-      // this.addStudents() этот метод работает напрямую с сервисом;
       this.addStudents();
     } else {
       Object.values(this.myForm.controls).forEach(control => {
@@ -65,7 +50,6 @@ export class WelcomeComponent implements OnInit {
 
   // ====================================методы для валидации==============================================
   updateConfirmValidator(): void {
-    /** wait for refresh value */
     Promise.resolve().then(() => this.myForm.controls["checkPassword"].updateValueAndValidity());
   }
 
@@ -78,15 +62,11 @@ export class WelcomeComponent implements OnInit {
     return {};
   };
 
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault();
-  }
-
 // ==========================================addStudents==========================================
 //   этот метод работает напрямую с сервисом;
   addStudents(): void {
     const newStudent = {
-      id:  "1",
+      id: "1",
       email: this.myForm.getRawValue().email,
       login: this.myForm.getRawValue().login,
       password: this.myForm.getRawValue().password,
@@ -95,9 +75,12 @@ export class WelcomeComponent implements OnInit {
       patronymic: this.myForm.getRawValue().userPatronymic,
       dateBirth: this.myForm.getRawValue().userDateBirth.getTime(),
       studyGroup: this.myForm.getRawValue().studyGroup,
-      role:  "STUDENT",
+      role: "STUDENT",
     }
+    debugger
+    console.log(newStudent);
     this.loginservice.addData(newStudent).subscribe();
+
   };
 
   createUserRedux() {
@@ -111,6 +94,7 @@ export class WelcomeComponent implements OnInit {
         patronymic: this.myForm.getRawValue().userPatronymic,
         dateBirth: this.myForm.getRawValue().userDateBirth.getTime(),
         studyGroup: this.myForm.getRawValue().studyGroup,
+        role: "STUDENT",
       })
     )
   }
