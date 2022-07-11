@@ -62,7 +62,7 @@ export class LoginService {
       studyGroup: user.studyGroup,
       role: "STUDENT",
     };
-    return this.http.post<void>('http://localhost:3000/user', body);
+    return this.http.post<void>('https://jsonplaceholder.typicode.com/iveil787/testProject/user', body);
   }
 
   addDataTeacher(user: Student): Observable<void> {
@@ -79,7 +79,7 @@ export class LoginService {
       studyGroup: user.studyGroup,
       role: "TEACHER",
     };
-    return this.http.post<void>('http://localhost:3000/user', body);
+    return this.http.post<void>('https://jsonplaceholder.typicode.com/iveil787/testProject/user', body);
   }
 
   checkToken(): void {
@@ -106,7 +106,7 @@ export class LoginService {
 
   checkTokenID(): void {
     let tokenObj = JSON.parse(localStorage.getItem("token") as string);
-    this.http.get <Student[]>("http://localhost:3000/user?id=" + tokenObj.id).subscribe((data: Student[]) => {
+    this.http.get <Student[]>("https://jsonplaceholder.typicode.com/iveil787/testProject/user?id=" + tokenObj.id).subscribe((data: Student[]) => {
       if (data[0]?.id === tokenObj.id) {
         console.log("id верный")
       } else {
@@ -118,11 +118,11 @@ export class LoginService {
   }
 
   getLoginService(login: string, password: string): Observable<Student[]> {
-    return this.http.get <Student[]>("http://localhost:3000/user?login=" + login + "&password=" + password)
+    return this.http.get <Student[]>("https://jsonplaceholder.typicode.com/iveil787/testProject/user?login=" + login + "&password=" + password)
   }
 
   getAllUser(): Observable<Student[]> {
-    return this.http.get <Student[]>("http://localhost:3000/user");
+    return this.http.get <Student[]>("https://jsonplaceholder.typicode.com/iveil787/testProject/user");
   }
 
   logOut() {
@@ -136,12 +136,12 @@ export class LoginService {
 
   currentUser(): Observable<Student[]> {
     const tokenObj = JSON.parse(localStorage.getItem("token") as string);
-    return this.http.get <Student[]>("http://localhost:3000/user?id=" + tokenObj.id)
+    return this.http.get <Student[]>("https://jsonplaceholder.typicode.com/iveil787/testProject/user?id=" + tokenObj.id)
   }
 
 // ++++++++++++++++++++++++++++++++++++ servis homework +++++++++++++++++++++++++++++++++++++
   getAllHomework(): Observable<Homework[]> {
-    return this.http.get <Homework[]>("http://localhost:3000/homework");
+    return this.http.get <Homework[]>("https://jsonplaceholder.typicode.com/iveil787/testProject/homework");
   }
 
   modelHomework: Homework[] = [];
@@ -168,7 +168,7 @@ export class LoginService {
       emailTeacher: user.emailTeacher,
     };
 
-    return this.http.post<void>("http://localhost:3000/homework", body);
+    return this.http.post<void>("https://jsonplaceholder.typicode.com/iveil787/testProject/homework", body);
   }
 
   addEditHomework(user: Homework): Observable<void> {
@@ -191,7 +191,7 @@ export class LoginService {
       emailTeacher: user.emailTeacher,
     };
 
-    return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);
+    return this.http.put<void>("https://jsonplaceholder.typicode.com/iveil787/testProject/homework/" + body.id, body);
   }
 
   addEditStatusHomework(user: Homework): Observable<void> {
@@ -214,13 +214,13 @@ export class LoginService {
       emailTeacher: user.emailTeacher,
     };
 
-    return this.http.put<void>("http://localhost:3000/homework/" + body.id, body);
+    return this.http.put<void>("https://jsonplaceholder.typicode.com/iveil787/testProject/homework/" + body.id, body);
   }
 
 
   deleteHW(HW: Homework) {
     console.log("cach")
-    return this.http.delete<void>("http://localhost:3000/homework/" + HW.id);
+    return this.http.delete<void>("https://jsonplaceholder.typicode.com/iveil787/testProject/homework/" + HW.id);
   }
 
 }
