@@ -62,7 +62,7 @@ export class LoginService {
       studyGroup: user.studyGroup,
       role: "STUDENT",
     };
-    return this.http.post<void>('https://jsonplaceholder.typicode.com/iveil787/testProject/user', body);
+    return this.http.post<void>('https://my-json-server.typicode.com/iveil787/testProject/user', body);
   }
 
   addDataTeacher(user: Student): Observable<void> {
@@ -79,7 +79,7 @@ export class LoginService {
       studyGroup: user.studyGroup,
       role: "TEACHER",
     };
-    return this.http.post<void>('https://jsonplaceholder.typicode.com/iveil787/testProject/user', body);
+    return this.http.post<void>('https://my-json-server.typicode.com/iveil787/testProject/user', body);
   }
 
   checkToken(): void {
@@ -88,7 +88,7 @@ export class LoginService {
       this.checkTokenTime()
     } else {
       console.log("токена нет", true)
-      this.router.navigate(['login'])
+      this.router.navigate(['testProject/login'])
     }
   };
 
@@ -106,28 +106,28 @@ export class LoginService {
 
   checkTokenID(): void {
     let tokenObj = JSON.parse(localStorage.getItem("token") as string);
-    this.http.get <Student[]>("https://jsonplaceholder.typicode.com/iveil787/testProject/user?id=" + tokenObj.id).subscribe((data: Student[]) => {
+    this.http.get <Student[]>("https://my-json-server.typicode.com/iveil787/testProject/user?id=" + tokenObj.id).subscribe((data: Student[]) => {
       if (data[0]?.id === tokenObj.id) {
         console.log("id верный")
       } else {
         console.log("id не верный")
         localStorage.clear();
-        this.router.navigate(['login'])
+        this.router.navigate(['testProject/login'])
       }
     });
   }
 
   getLoginService(login: string, password: string): Observable<Student[]> {
-    return this.http.get <Student[]>("https://jsonplaceholder.typicode.com/iveil787/testProject/user?login=" + login + "&password=" + password)
+    return this.http.get <Student[]>("https://my-json-server.typicode.com/iveil787/testProject/user?login=" + login + "&password=" + password)
   }
 
   getAllUser(): Observable<Student[]> {
-    return this.http.get <Student[]>("https://jsonplaceholder.typicode.com/iveil787/testProject/user");
+    return this.http.get <Student[]>("https://my-json-server.typicode.com/iveil787/testProject/user");
   }
 
   logOut() {
     localStorage.clear();
-    this.router.navigate(['login'])
+    this.router.navigate(['testProject/login'])
   }
 
   createMessage(type: string): void {
@@ -136,12 +136,12 @@ export class LoginService {
 
   currentUser(): Observable<Student[]> {
     const tokenObj = JSON.parse(localStorage.getItem("token") as string);
-    return this.http.get <Student[]>("https://jsonplaceholder.typicode.com/iveil787/testProject/user?id=" + tokenObj.id)
+    return this.http.get <Student[]>("https://my-json-server.typicode.com/iveil787/testProject/user?id=" + tokenObj.id)
   }
 
 // ++++++++++++++++++++++++++++++++++++ servis homework +++++++++++++++++++++++++++++++++++++
   getAllHomework(): Observable<Homework[]> {
-    return this.http.get <Homework[]>("https://jsonplaceholder.typicode.com/iveil787/testProject/homework");
+    return this.http.get <Homework[]>("https://my-json-server.typicode.com/iveil787/testProject/homework");
   }
 
   modelHomework: Homework[] = [];
@@ -168,7 +168,7 @@ export class LoginService {
       emailTeacher: user.emailTeacher,
     };
 
-    return this.http.post<void>("https://jsonplaceholder.typicode.com/iveil787/testProject/homework", body);
+    return this.http.post<void>("https://my-json-server.typicode.com/iveil787/testProject/homework", body);
   }
 
   addEditHomework(user: Homework): Observable<void> {
@@ -191,7 +191,7 @@ export class LoginService {
       emailTeacher: user.emailTeacher,
     };
 
-    return this.http.put<void>("https://jsonplaceholder.typicode.com/iveil787/testProject/homework/" + body.id, body);
+    return this.http.put<void>("https://my-json-server.typicode.com/iveil787/testProject/homework/" + body.id, body);
   }
 
   addEditStatusHomework(user: Homework): Observable<void> {
@@ -214,13 +214,13 @@ export class LoginService {
       emailTeacher: user.emailTeacher,
     };
 
-    return this.http.put<void>("https://jsonplaceholder.typicode.com/iveil787/testProject/homework/" + body.id, body);
+    return this.http.put<void>("https://my-json-server.typicode.com/iveil787/testProject/homework/" + body.id, body);
   }
 
 
   deleteHW(HW: Homework) {
     console.log("cach")
-    return this.http.delete<void>("https://jsonplaceholder.typicode.com/iveil787/testProject/homework/" + HW.id);
+    return this.http.delete<void>("https://my-json-server.typicode.com/iveil787/testProject/homework/" + HW.id);
   }
 
 }

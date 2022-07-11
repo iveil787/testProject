@@ -6,12 +6,13 @@ import {TableUserComponent} from "./pages/home/table-user/table-user.component";
 import {TableHomeworkComponent} from "./pages/home/table-homework/table-homework.component";
 import {HomePageComponent} from "./pages/home/home-page/home-page.component";
 import {StudentPageComponent} from "./pages/home/student-page/student-page.component";
+import {WelcomeComponent} from "./pages/welcome/welcome.component";
 
 const routes: Routes = [
 
   {path: 'testProject', pathMatch: 'full', redirectTo: 'testProject/login'},
 
-  {path: 'testProject/welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)},
+  {path: 'testProject/welcome', component: WelcomeComponent},
 
   {path: 'testProject/login', component: LoginFormComponent},
   {

@@ -15,16 +15,16 @@
       <li nz-submenu nzOpen nzTitle="Dashboard" nzIcon="dashboard">
         <ul>
           <li nz-menu-item nzMatchRouter  *ngIf="roleTeacher | role">
-            <a routerLink="/home/table-homework">Table homework</a>
+            <a routerLink="table-homework">Table homework</a>
           </li>
           <li nz-menu-item nzMatchRouter *ngIf="roleTeacher | role">
-            <a routerLink="/home/table-user">Table user</a>
+            <a routerLink="table-user">Table user</a>
           </li>
           <li nz-menu-item nzMatchRouter *ngIf="roleStudent | role">
-            <a routerLink="/home/student-page" >Student page</a>
+            <a routerLink="student-page" >Student page</a>
           </li>
           <li nz-menu-item nzMatchRouter  *ngIf="roleAdmin | role">
-            <a routerLink="/home/home-page" >Admin page</a>
+            <a routerLink="home-page" >Admin page</a>
           </li>
         </ul>
       </li>

@@ -43,6 +43,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   submitForm(): void {
     if (this.validateForm.valid) {
+
       this.loginServiceRedux();
       this.loginservice.checkToken();
     } else {
@@ -65,5 +66,9 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   createMessage(type: string): void {
     this.message.create(type, `This is a message of ${type}`);
+  }
+
+  navigate() {
+    this.router.navigate(["testProject/welcome"])
   }
 }

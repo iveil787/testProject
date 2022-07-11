@@ -29,7 +29,7 @@ export class loginEffects {
 
               if (currentUser) {
                 localStorage.setItem("token", JSON.stringify({id: currentUser.id, time: new Date(), role:currentUser.role}));
-                this.router.navigate(['home']);
+                this.router.navigate(['testProject/home']);
                 return new FindUserAction(currentUser)
               } else {
                 this.loginservice.createMessage('error')
