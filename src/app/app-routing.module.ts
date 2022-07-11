@@ -8,7 +8,9 @@ import {HomePageComponent} from "./pages/home/home-page/home-page.component";
 import {StudentPageComponent} from "./pages/home/student-page/student-page.component";
 
 const routes: Routes = [
+
   {path: '', pathMatch: 'full', redirectTo: '/login'},
+
   {path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)},
 
   {path: 'login', component: LoginFormComponent},
@@ -23,7 +25,7 @@ const routes: Routes = [
   },
 
   {path: '', pathMatch: 'full', redirectTo: '/login'},
-
+  { path: '**', component: LoginFormComponent },
 ];
 
 // const appRoutes : Routes = [
