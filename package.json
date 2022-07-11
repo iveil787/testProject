@@ -4,10 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
-    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "server": "json-server --watch db.json"
+    "server": "json-server --watch db.json",
+    "build": "ng build --prod"
   },
   "private": true,
   "dependencies": {
