@@ -9,13 +9,13 @@ import {StudentPageComponent} from "./pages/home/student-page/student-page.compo
 
 const routes: Routes = [
 
-  {path: '', pathMatch: 'full', redirectTo: '/login'},
+  {path: 'testProject', pathMatch: 'full', redirectTo: 'testProject/login'},
 
-  {path: 'welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)},
+  {path: 'testProject/welcome', loadChildren: () => import('./pages/welcome/welcome.module').then(m => m.WelcomeModule)},
 
-  {path: 'login', component: LoginFormComponent},
+  {path: 'testProject/login', component: LoginFormComponent},
   {
-    path: 'home', component: HomeComponent, children: [
+    path: 'testProject/home', component: HomeComponent, children: [
       {path: '', redirectTo: 'table-user', pathMatch: 'full'},
       {path: 'table-user', component: TableUserComponent},
       {path: 'table-homework', component: TableHomeworkComponent},
@@ -24,7 +24,7 @@ const routes: Routes = [
     ]
   },
 
-  {path: '', pathMatch: 'full', redirectTo: '/login'},
+  {path: '', pathMatch: 'full', redirectTo: 'testProject/login'},
   { path: '**', component: LoginFormComponent },
 ];
 
