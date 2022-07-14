@@ -8,7 +8,6 @@ export class CountEffects {
   constructor(private actions$: Actions) {
   }
 
-  // Срать его на оборот в три прогиба блять ! Юзай createEffect
   @Effect()
   updatedAt$() {
     return this.actions$.pipe(

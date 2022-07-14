@@ -129,7 +129,7 @@ export class StudentPageComponent implements OnInit {
       startDate: startDate,
       endDate: endDate,
       wishes: this.validateFormDetails.getRawValue().wishes,
-      status_HW: "completed",
+      status_HW: "Сompleted",
       nameTeacher: currentTeacher.name,
       surnameTeacher: currentTeacher.surname,
       patronymicTeacher: currentTeacher.patronymic,

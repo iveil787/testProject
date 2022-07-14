@@ -34,12 +34,4 @@ export class TableUserEffects {
     )
   );
 
-  // effectName$ = createEffect(
-  //   () => this.actions$.pipe(
-  //     ofType(tableUserActions.taskCreateTableUser),
-  //     map((users:any) =>  new SuccessCreateTableUserAction(users))
-  //   )
-  // );
-  //
-
 }

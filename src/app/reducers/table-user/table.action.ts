@@ -1,6 +1,5 @@
 import {Action} from "@ngrx/store";
 import {Student} from "../../../models/UserStudents";
-// import {registerUserActions} from "../redux-welcome/register.actions";
 
 export enum UserActions {
   taskCreateTableUser = "[table] taskCreateTableUser",
@@ -26,11 +25,10 @@ export class SuccessCreateUserAction implements Action {
 
   readonly type = UserActions.successCreateUser;
 }
+
 // ========================================Create Table User========================================
 export class TaskCreateTableUser implements Action {
-  // constructor(public payload: Student) {
-  //
-  // }
+
 
   readonly type = UserActions.taskCreateTableUser;
 }

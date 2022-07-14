@@ -17,14 +17,6 @@ export class TaskloginUserAction implements Action {
   readonly type = loginUserActions.taskloginUserRedux;
 }
 
-// export class ErrorCreateUserAction implements Action {
-//   constructor(public payload: Student) {
-//
-//   }
-//
-//   readonly type = registerUserActions.errorCreateUser;
-// }
-//
 export class FindUserAction implements Action {
   constructor(public payload: Student) {
   }
@@ -39,4 +31,3 @@ export class ErrorAuthUserAction implements Action {
   readonly type = loginUserActions.errorAuthUserAction;
 }
 
-// потом допиши ещё экшики и хранилища не зубудь
