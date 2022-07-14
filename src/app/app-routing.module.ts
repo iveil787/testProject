@@ -26,14 +26,8 @@ const routes: Routes = [
   },
 
   {path: '', pathMatch: 'full', redirectTo: 'testProject/login'},
-  { path: '**', component: LoginFormComponent },
+  {path: '**', redirectTo: 'testProject/login'},
 ];
-
-// const appRoutes : Routes = [
-//   {path: 'home' component: HomeComponent children: routes
-//   }
-//
-// ];
 
 
 @NgModule({

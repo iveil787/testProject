@@ -34,7 +34,7 @@
 </nz-table>
 
 <!--================================================= formEdite =================================================-->
-<nz-modal [(nzVisible)]="isVisibleDetails" nzTitle="Custom Modal Title" (nzOnCancel)="handleCancelDetails()">
+<nz-modal [(nzVisible)]="isVisibleDetails" nzTitle="Details homework" (nzOnCancel)="handleCancelDetails()">
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="validateFormDetails" (ngSubmit)="submitFormDetails()">
 
@@ -123,7 +123,7 @@
 </nz-modal>
 
 <!--================================================= formCreate =================================================-->
-<nz-modal [(nzVisible)]="isVisibleDetailsTeacher" nzTitle="The first Modal" (nzOnCancel)="handleCancelDetailsTeacher()"
+<nz-modal [(nzVisible)]="isVisibleDetailsTeacher" nzTitle="Details teacher" (nzOnCancel)="handleCancelDetailsTeacher()"
           (nzOnOk)="handleOkDetailsTeacher()">
   <ng-container *nzModalContent>
     <form nz-form [formGroup]="validateFormDetailsTeacher" (ngSubmit)="submitFormDetailsTeacher()">
